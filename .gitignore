@@ -1,0 +1,12 @@
+# Abaikan file sistem operasi
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Abaikan folder editor
+.vscode/
+.idea/
+
+# File upload jangan masukin gambar beneran orang, tapi tetep simpan foldernya
+uploads/avatars/*
+!uploads/avatars/.gitkeep

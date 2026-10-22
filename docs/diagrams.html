@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TukarSkill — System Design Diagrams</title>
+  <!--
+    Halaman ini merender semua diagram system design (ERD, flowchart, page map)
+    menggunakan Mermaid, dan menyediakan tombol unduh PNG/SVG untuk laporan.
+    Butuh koneksi internet (Mermaid & font dimuat dari CDN).
+  -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blue-400: #4DA3FF; --blue-500: #3B82F6; --blue-600: #2563EB; --blue-50: #EEF5FF;
+      --ink: #0B0B0F; --gray: #94A3B8; --lime: #E8FB8C; --mint: #DCEFD6; --star: #FFD43B;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; background: var(--blue-50); color: var(--ink); }
+
+    header {
+      background: linear-gradient(180deg, var(--blue-400), var(--blue-600));
+      color: #fff; text-align: center; padding: 56px 24px 72px;
+      border-radius: 0 0 40px 40px; position: relative; overflow: hidden;
+    }
+    header::before, header::after {
+      content: ""; position: absolute; left: 50%; bottom: -260px; transform: translateX(-50%);
+      width: 620px; height: 620px; border-radius: 50%; background: rgba(255,255,255,.08);
+    }
+    header::after { width: 420px; height: 420px; bottom: -170px; }
+    .chip { display: inline-block; background: #fff; color: var(--ink); font-size: 13px; font-weight: 600;
+            padding: 6px 14px; border-radius: 999px; margin-bottom: 18px; position: relative; z-index: 1; }
+    header h1 { font-size: clamp(28px, 5vw, 46px); font-weight: 800; position: relative; z-index: 1; }
+    header p { opacity: .9; margin-top: 10px; position: relative; z-index: 1; }
+
+    nav { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin: -24px auto 32px;
+          position: relative; z-index: 2; max-width: 1100px; padding: 0 16px; }
+    nav a { background: #fff; color: var(--ink); text-decoration: none; font-size: 14px; font-weight: 500;
+            padding: 10px 16px; border-radius: 999px; box-shadow: 0 10px 30px rgba(37,99,235,.10); }
+    nav a:hover { background: var(--blue-500); color: #fff; }
+
+    main { max-width: 1100px; margin: 0 auto; padding: 0 16px 64px; display: grid; gap: 28px; }
+    .card { background: #fff; border-radius: 28px; padding: 28px; box-shadow: 0 10px 30px rgba(37,99,235,.08); }
+    .card-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 18px; }
+    .card-head h2 { font-size: 22px; }
+    .card-head small { color: var(--gray); display: block; font-weight: 500; margin-top: 4px; }
+    .btns { display: flex; gap: 8px; }
+    button { font-family: inherit; font-size: 13px; font-weight: 600; border: 0; cursor: pointer;
+             padding: 10px 16px; border-radius: 999px; }
+    .btn-dark { background: var(--ink); color: #fff; }
+    .btn-light { background: var(--blue-50); color: var(--blue-600); }
+    .diagram { overflow-x: auto; text-align: center; }
+    .diagram svg { max-width: 100%; height: auto; }
+    footer { text-align: center; color: var(--gray); font-size: 13px; padding-bottom: 40px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <span class="chip">✦ Phase 1 · System Design</span>
+  <h1>TukarSkill — Diagram Sistem</h1>
+  <p>Tukar Skill. Dapat Skill. · Kelompok 3 · COSC6050</p>
+</header>
+
+<nav>
+  <a href="#erd">ERD</a>
+  <a href="#flow-main">Alur Utama</a>
+  <a href="#flow-auth">Login & Role</a>
+  <a href="#flow-exchange">Exchange Request</a>
+  <a href="#flow-state">Status Exchange</a>
+  <a href="#flow-match">SkillMatch</a>
+  <a href="#flow-points">Poin & Badge</a>
+  <a href="#pagemap">Page Map</a>
+</nav>
+
+<main>
+
+<section class="card" id="erd">
+  <div class="card-head"><div><h2>Entity Relationship Diagram</h2><small>12 tabel · database tukarskill</small></div></div>
+  <pre class="mermaid">
+erDiagram
+    users ||--o{ user_skills : memiliki
+    categories ||--o{ skills : mengelompokkan
+    skills ||--o{ user_skills : dipakai
+    users ||--o{ availabilities : mengatur
+    users ||--o{ exchanges : mengirim
+    users ||--o{ exchanges : menerima
+    skills ||--o{ exchanges : diminta
+    skills |o--o{ exchanges : ditawarkan
+    exchanges ||--o{ reviews : dinilai
+    users ||--o{ reviews : menulis
+    users ||--o{ reviews : menerima
+    users ||--o{ point_transactions : mencatat
+    exchanges |o--o{ point_transactions : terkait
+    users ||--o{ user_badges : mendapat
+    badges ||--o{ user_badges : diberikan
+    users ||--o{ notifications : menerima
+
+    users {
+        int id PK
+        varchar name
+        char nim UK
+        varchar email UK
+        varchar password
+        varchar major
+        year batch_year
+        text bio
+        varchar photo
+        varchar whatsapp
+        enum role
+        int points
+        int total_points
+        tinyint profile_bonus_given
+        tinyint is_active
+        varchar remember_token
+        datetime created_at
+        datetime updated_at
+    }
+    categories {
+        int id PK
+        varchar name UK
+        varchar icon
+        datetime created_at
+    }
+    skills {
+        int id PK
+        int category_id FK
+        varchar name UK
+        datetime created_at
+    }
+    user_skills {
+        int id PK
+        int user_id FK
+        int skill_id FK
+        enum type
+        enum level
+        varchar description
+        datetime created_at
+    }
+    availabilities {
+        int id PK
+        int user_id FK
+        enum day
+        time start_time
+        time end_time
+    }
+    exchanges {
+        int id PK
+        int requester_id FK
+        int receiver_id FK
+        enum type
+        int requested_skill_id FK
+        int offered_skill_id FK
+        int points_cost
+        text message
+        datetime scheduled_at
+        enum mode
+        varchar location
+        enum status
+        tinyint requester_confirmed
+        tinyint receiver_confirmed
+        varchar reject_reason
+        datetime created_at
+        datetime updated_at
+        datetime completed_at
+    }
+    reviews {
+        int id PK
+        int exchange_id FK
+        int reviewer_id FK
+        int reviewee_id FK
+        tinyint rating
+        text comment
+        tinyint is_hidden
+        datetime created_at
+        datetime updated_at
+    }
+    point_transactions {
+        int id PK
+        int user_id FK
+        int exchange_id FK
+        int amount
+        enum type
+        varchar description
+        datetime created_at
+    }
+    badges {
+        int id PK
+        varchar name UK
+        varchar icon
+        varchar description
+        int min_points
+    }
+    user_badges {
+        int user_id PK
+        int badge_id PK
+        datetime earned_at
+    }
+    notifications {
+        int id PK
+        int user_id FK
+        varchar message
+        varchar link
+        tinyint is_read
+        datetime created_at
+    }
+  </pre>
+</section>
+
+<section class="card" id="flow-main">
+  <div class="card-head"><div><h2>Flowchart — Alur Utama Pengguna</h2><small>Create Profile → Add Skills → Discover → Match → Request → Exchange → Complete → Review</small></div></div>
+  <pre class="mermaid">
+flowchart TD
+    A(["Mulai"]) --> B["Buka Landing Page"]
+    B --> C{"Sudah punya akun?"}
+    C -- Belum --> D["Register"]
+    D --> E["Dapat +20 poin selamat datang"]
+    E --> F["Login"]
+    C -- Sudah --> F
+    F --> G["Lengkapi profil & tambah skill Bisa / Ingin belajar"]
+    G --> H{"Profil lengkap?"}
+    H -- Ya --> I["Dapat +10 poin, sekali saja"]
+    H -- Belum --> G
+    I --> J["Cari partner lewat Discover atau SkillMatch"]
+    J --> K["Lihat profil, rating, dan review partner"]
+    K --> L["Kirim Exchange Request"]
+    L --> M{"Partner menerima?"}
+    M -- Tidak --> J
+    M -- Ya --> N["Sesi pertukaran skill sesuai jadwal"]
+    N --> O["Kedua pihak konfirmasi selesai"]
+    O --> P["Poin diberikan, badge dicek"]
+    P --> Q["Beri rating & review"]
+    Q --> R(["Selesai, siap tukar skill lagi"])
+  </pre>
+</section>
+
+<section class="card" id="flow-auth">
+  <div class="card-head"><div><h2>Flowchart — Register, Login & Role Check</h2><small>Session, cookie Ingat Saya, dan role guard</small></div></div>
+  <pre class="mermaid">
+flowchart TD
+    A(["Akses halaman"]) --> B{"Session login ada?"}
+    B -- Ya --> H{"Role user?"}
+    B -- Tidak --> C{"Cookie Ingat Saya ada?"}
+    C -- Ya --> D{"Token cocok di database?"}
+    D -- Ya --> E["Buat session baru"] --> H
+    D -- Tidak --> F["Hapus cookie"] --> G["Redirect ke Login"]
+    C -- Tidak --> G
+    G --> I["Isi email & password"]
+    I --> J{"Validasi lolos dan password cocok?"}
+    J -- Tidak --> K["Tampilkan pesan error"] --> I
+    J -- Ya --> L{"Akun aktif?"}
+    L -- Tidak --> M["Tampilkan: akun dinonaktifkan"] --> I
+    L -- Ya --> N["session_regenerate_id dan simpan session"]
+    N --> O{"Centang Ingat Saya?"}
+    O -- Ya --> P["Buat token acak, simpan hash di DB, set cookie 30 hari"] --> H
+    O -- Tidak --> H
+    H -- admin --> Q["Admin Dashboard"]
+    H -- user --> R["User Dashboard"]
+  </pre>
+</section>
+
+<section class="card" id="flow-exchange">
+  <div class="card-head"><div><h2>Flowchart — Exchange Request</h2><small>Swap skill ↔ skill atau request Poin (15 poin ditahan)</small></div></div>
+  <pre class="mermaid">
+flowchart TD
+    A(["Buka profil partner"]) --> B["Pilih skill yang ingin dipelajari"]
+    B --> C{"Tipe request?"}
+    C -- Swap --> D["Pilih skill milikmu sebagai gantinya"]
+    C -- Poin --> E{"Saldo poin >= 15?"}
+    E -- Tidak --> F["Tampilkan: poin tidak cukup"] --> C
+    E -- Ya --> G["Tahan 15 poin"]
+    D --> H["Isi jadwal, mode, lokasi, pesan"]
+    G --> H
+    H --> I{"Validasi lolos?"}
+    I -- Tidak --> J["Tampilkan pesan error"] --> H
+    I -- Ya --> K["Simpan request, status pending, kirim notifikasi"]
+    K --> L{"Respon partner"}
+    L -- Tolak --> M["Status rejected"]
+    L -- Requester batal --> N["Status cancelled"]
+    M --> O{"Tipe Poin?"}
+    N --> O
+    O -- Ya --> P["Kembalikan 15 poin"] --> Z(["Selesai"])
+    O -- Tidak --> Z
+    L -- Terima --> Q["Status accepted, nomor WhatsApp ditampilkan"]
+    Q --> R["Sesi berlangsung"]
+    R --> S["Masing-masing konfirmasi selesai"]
+    S --> T{"Keduanya sudah konfirmasi?"}
+    T -- Belum --> S
+    T -- Ya --> U["Status completed"]
+    U --> V["Pengajar +20 poin; tipe Poin: receiver +15 poin"]
+    V --> W["Cek badge dan buka form review"] --> Z
+  </pre>
+</section>
+
+<section class="card" id="flow-state">
+  <div class="card-head"><div><h2>State Diagram — Status Exchange</h2><small>pending · accepted · rejected · cancelled · completed</small></div></div>
+  <pre class="mermaid">
+stateDiagram-v2
+    [*] --> pending : Requester mengirim request
+    pending --> accepted : Receiver menerima
+    pending --> rejected : Receiver menolak
+    pending --> cancelled : Requester membatalkan
+    accepted --> cancelled : Salah satu pihak membatalkan
+    accepted --> completed : Kedua pihak konfirmasi selesai
+    rejected --> [*]
+    cancelled --> [*]
+    completed --> [*]
+  </pre>
+</section>
+
+<section class="card" id="flow-match">
+  <div class="card-head"><div><h2>Flowchart — Algoritma SkillMatch</h2><small>Skor 0–100: saling melengkapi 40 + 30, jadwal 15, reputasi 15</small></div></div>
+  <pre class="mermaid">
+flowchart TD
+    A(["Buka halaman SkillMatch"]) --> B["Ambil skill offer, want, dan jadwal saya"]
+    B --> C["Ambil semua user aktif selain saya dan admin"]
+    C --> D["Untuk setiap kandidat, skor = 0"]
+    D --> E{"Dia bisa skill yang saya ingin?"}
+    E -- Ya --> F["skor + 40"] --> G
+    E -- Tidak --> G{"Dia ingin skill yang saya bisa?"}
+    G -- Ya --> H["skor + 30"] --> I
+    G -- Tidak --> I{"Jadwal beririsan?"}
+    I -- Ya --> J["skor + 15"] --> K
+    I -- Tidak --> K["skor + 15 x rating / 5, tanpa rating = 7.5"]
+    K --> L{"skor >= 30?"}
+    L -- Ya --> M["Masukkan ke daftar rekomendasi"]
+    L -- Tidak --> N["Lewati"]
+    M --> O{"Masih ada kandidat?"}
+    N --> O
+    O -- Ya --> D
+    O -- Tidak --> P["Urutkan dari skor tertinggi, beri label"]
+    P --> Q(["Tampilkan Swap Card"])
+  </pre>
+</section>
+
+<section class="card" id="flow-points">
+  <div class="card-head"><div><h2>Flowchart — Pemberian Poin & Badge</h2><small>Badge berdasarkan total_points (tidak hilang saat poin dipakai)</small></div></div>
+  <pre class="mermaid">
+flowchart TD
+    A(["Kejadian yang memberi poin"]) --> B["Tambah points dan total_points user"]
+    B --> C["Catat di point_transactions"]
+    C --> D["Ambil badge dengan min_points <= total_points"]
+    D --> E{"Ada badge yang belum dimiliki?"}
+    E -- Ya --> F["Simpan di user_badges"] --> G["Kirim notifikasi badge baru"] --> H(["Selesai"])
+    E -- Tidak --> H
+  </pre>
+</section>
+
+<section class="card" id="pagemap">
+  <div class="card-head"><div><h2>Page Map</h2><small>Publik · Mahasiswa · Admin</small></div></div>
+  <pre class="mermaid">
+flowchart TD
+    subgraph PUBLIC["Publik / Guest"]
+        L["index.php - Landing"]
+        R["register.php"]
+        LG["login.php"]
+        DC["discover.php - Cari Skill"]
+        UP["user.php?id= - Profil Publik"]
+    end
+    subgraph USER["Mahasiswa - wajib login"]
+        D["dashboard.php"]
+        PR["profile.php - Edit Profil"]
+        MS["my-skills.php - Skill & Jadwal"]
+        SM["skillmatch.php"]
+        RQ["request.php - Form Request"]
+        EX["exchanges.php - Daftar Pertukaran"]
+        ED["exchange-detail.php?id= - Detail & Review"]
+        PT["points.php - Poin & Badge"]
+        LB["leaderboard.php"]
+        NT["notifications.php"]
+        LO["logout.php"]
+    end
+    subgraph ADMIN["Admin - role admin"]
+        AD["admin/index.php - Statistik"]
+        AU["admin/users.php"]
+        AC["admin/categories.php"]
+        AS["admin/skills.php"]
+        AE["admin/exchanges.php"]
+        AR["admin/reviews.php"]
+    end
+    L --> R
+    L --> LG
+    L --> DC
+    R --> LG
+    DC --> UP
+    LG --> D
+    LG --> AD
+    D --> PR
+    D --> MS
+    D --> SM
+    D --> EX
+    D --> PT
+    D --> LB
+    D --> NT
+    SM --> UP
+    UP --> RQ
+    RQ --> EX
+    EX --> ED
+    AD --> AU
+    AD --> AC
+    AD --> AS
+    AD --> AE
+    AD --> AR
+  </pre>
+</section>
+
+</main>
+
+<footer>TukarSkill · Kelompok 3 · SDG 4 Quality Education</footer>
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+
+  // Tema diagram disesuaikan dengan design system TukarSkill.
+  // htmlLabels: false -> label berupa teks SVG murni supaya bisa diekspor ke PNG.
+  mermaid.initialize({
+    startOnLoad: false,
+    theme: 'base',
+    htmlLabels: false,
+    flowchart: { htmlLabels: false, curve: 'basis' },
+    themeVariables: {
+      fontFamily: 'Inter, sans-serif',
+      primaryColor: '#EEF5FF',
+      primaryBorderColor: '#3B82F6',
+      primaryTextColor: '#0B0B0F',
+      lineColor: '#2563EB',
+      secondaryColor: '#E8FB8C',
+      tertiaryColor: '#DCEFD6'
+    }
+  });
+
+  // Render satu per satu dengan id unik, supaya node dengan nama sama
+  // (A, B, C, ...) di diagram berbeda tidak saling bertabrakan.
+  const blocks = [...document.querySelectorAll('pre.mermaid')];
+  for (let i = 0; i < blocks.length; i++) {
+    const pre = blocks[i];
+    const code = pre.textContent;
+    const { svg } = await mermaid.render('diagram-' + i, code);
+    const wrap = document.createElement('div');
+    wrap.className = 'diagram';
+    wrap.innerHTML = svg;
+    pre.replaceWith(wrap);
+  }
+
+  // Tambahkan tombol unduh PNG/SVG di setiap kartu diagram.
+  document.querySelectorAll('section.card').forEach((card) => {
+    const svg = card.querySelector('svg');
+    if (!svg) return;
+    const name = 'tukarskill-' + card.id;
+    const btns = document.createElement('div');
+    btns.className = 'btns';
+    btns.innerHTML = '<button class="btn-light">Unduh SVG</button><button class="btn-dark">Unduh PNG</button>';
+    card.querySelector('.card-head').appendChild(btns);
+    const [svgBtn, pngBtn] = btns.querySelectorAll('button');
+    svgBtn.onclick = () => downloadSvg(svg, name);
+    pngBtn.onclick = () => downloadPng(svg, name);
+  });
+
+  function serialize(svg) {
+    const clone = svg.cloneNode(true);
+    const box = svg.getBBox ? svg.viewBox.baseVal : null;
+    const w = (box && box.width) || svg.getBoundingClientRect().width;
+    const h = (box && box.height) || svg.getBoundingClientRect().height;
+    clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+    clone.setAttribute('width', w);
+    clone.setAttribute('height', h);
+    clone.style.maxWidth = 'none';
+    return { xml: new XMLSerializer().serializeToString(clone), w, h };
+  }
+
+  function trigger(href, filename) {
+    const a = document.createElement('a');
+    a.href = href; a.download = filename; a.click();
+  }
+
+  function downloadSvg(svg, name) {
+    const { xml } = serialize(svg);
+    trigger(URL.createObjectURL(new Blob([xml], { type: 'image/svg+xml' })), name + '.svg');
+  }
+
+  function downloadPng(svg, name) {
+    const { xml, w, h } = serialize(svg);
+    const scale = 3; // resolusi tinggi untuk laporan
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = w * scale; canvas.height = h * scale;
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#ffffff';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      trigger(canvas.toDataURL('image/png'), name + '.png');
+    };
+    img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(xml);
+  }
+</script>
+</body>
+</html>

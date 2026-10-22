@@ -1,0 +1,1347 @@
+/* ==============================================================
+   assets/css/style.css
+   Desain sistem TukarSkill terinspirasi dari referensi LearnNix
+   Warna: Inter font, Biru #3B82F6, Lime #E8FB8C, Mint #DCEFD6, Hitam Ink
+   ============================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+  /* palet warna utama */
+  --blue-600: #2563eb;
+  --blue-500: #3b82f6;
+  --blue-400: #60a5fa;
+  --blue-100: #dbeafe;
+  --blue-50:  #eef5ff;
+
+  --ink:      #0b0b0f;
+  --ink-soft: #1e293b;
+  --gray-600: #475569;
+  --gray-400: #94a3b8;
+  --gray-200: #e2e8f0;
+  --gray-100: #f8fafc;
+  --white:    #ffffff;
+
+  /* aksen bento ala LearnNix */
+  --lime:     #e8fb8c;
+  --lime-dark:#3f4900;
+  --mint:     #dcefd6;
+  --mint-dark:#143e11;
+  --star:     #facc15;
+  --danger:   #ef4444;
+
+  /* radius membulat modern */
+  --radius-sm:  8px;
+  --radius-md:  14px;
+  --radius-lg:  24px;
+  --radius-xl:  36px;
+  --radius-pill: 999px;
+
+  /* bayangan halus */
+  --shadow-sm:  0 4px 12px rgba(15, 23, 42, 0.05);
+  --shadow-md:  0 10px 25px rgba(37, 99, 235, 0.08);
+  --shadow-lg:  0 20px 40px rgba(37, 99, 235, 0.12);
+  --shadow-float: 0 16px 36px rgba(11, 11, 15, 0.14);
+
+  --container: 1200px;
+}
+
+/* Reset dasar & typography */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--blue-50);
+  color: var(--ink);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Container pembungkus tengah */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ==============================================================
+   NAVBAR (Header Atas)
+   ============================================================== */
+.navbar {
+  position: sticky;
+  top: 16px;
+  z-index: 100;
+  margin: 0 auto;
+  max-width: calc(var(--container) + 16px);
+  padding: 0 16px;
+}
+
+.nav-pill {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-pill);
+  padding: 10px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 20px;
+  color: var(--blue-600);
+  letter-spacing: -0.5px;
+}
+
+.brand-logo span {
+  color: var(--ink);
+}
+
+.brand-logo .logo-icon {
+  width: 36px;
+  height: 36px;
+  background: linear-gradient(135deg, var(--blue-500), var(--blue-600));
+  color: var(--white);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--gray-600);
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--blue-600);
+  background: var(--blue-50);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* Tombol-tombol pill */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: var(--radius-pill);
+  border: none;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: var(--blue-500);
+  color: var(--white);
+  box-shadow: 0 6px 16px rgba(59, 130, 246, 0.3);
+}
+
+.btn-primary:hover {
+  background: var(--blue-600);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.35);
+}
+
+.btn-dark {
+  background: var(--ink);
+  color: var(--white);
+}
+
+.btn-dark:hover {
+  background: var(--ink-soft);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid var(--gray-200);
+  color: var(--ink);
+}
+
+.btn-outline:hover {
+  background: var(--white);
+  border-color: var(--gray-400);
+}
+
+.btn-white {
+  background: var(--white);
+  color: var(--ink);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-white:hover {
+  background: var(--blue-50);
+  color: var(--blue-600);
+}
+
+.btn-sm {
+  padding: 7px 14px;
+  font-size: 13px;
+}
+
+.btn-arrow {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 2px;
+  font-size: 12px;
+}
+
+/* User pill avatar pas udah login */
+.user-menu-pill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 5px 14px 5px 6px;
+  background: var(--blue-50);
+  border: 1px solid var(--blue-100);
+  border-radius: var(--radius-pill);
+}
+
+.user-menu-pill .avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--blue-500);
+  color: var(--white);
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+}
+
+.user-menu-pill .points-badge {
+  background: var(--lime);
+  color: var(--lime-dark);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+}
+
+/* Tombol hamburger buat hp */
+.mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--ink);
+}
+
+/* ==============================================================
+   HERO SECTION (Cincin Konsentris Biru Ala LearnNix)
+   ============================================================== */
+.hero-wrapper {
+  padding: 24px 0 60px;
+}
+
+.hero-card {
+  position: relative;
+  background: linear-gradient(180deg, #4da3ff 0%, #2563eb 100%);
+  border-radius: var(--radius-xl);
+  color: var(--white);
+  padding: 60px 40px 80px;
+  overflow: hidden;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(37, 99, 235, 0.25);
+}
+
+/* Efek cincin konsentris di background */
+.hero-rings {
+  position: absolute;
+  left: 50%;
+  bottom: -280px;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 800px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  pointer-events: none;
+}
+
+.hero-rings::before {
+  content: "";
+  position: absolute;
+  top: 100px;
+  left: 100px;
+  right: 100px;
+  bottom: 100px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.hero-rings::after {
+  content: "";
+  position: absolute;
+  top: 200px;
+  left: 200px;
+  right: 200px;
+  bottom: 200px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* Sparkle hiasan */
+.sparkle {
+  position: absolute;
+  color: var(--star);
+  font-size: 24px;
+  pointer-events: none;
+  animation: pulse 3s infinite ease-in-out;
+}
+
+.sparkle-1 { top: 80px; left: 15%; }
+.sparkle-2 { top: 120px; right: 18%; animation-delay: 1.5s; font-size: 32px; }
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.8; }
+  50% { transform: scale(1.2) rotate(15deg); opacity: 1; }
+}
+
+.hero-chip-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--blue-600);
+  font-weight: 700;
+  font-size: 13px;
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+  margin-bottom: 24px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
+}
+
+.hero-title {
+  font-size: clamp(34px, 5vw, 56px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -1.5px;
+  max-width: 820px;
+  margin: 0 auto 16px;
+}
+
+.hero-subtitle {
+  font-size: 16px;
+  max-width: 620px;
+  margin: 0 auto 36px;
+  opacity: 0.92;
+  font-weight: 400;
+}
+
+/* Search bar pill di tengah hero */
+.hero-search-box {
+  max-width: 540px;
+  margin: 0 auto 50px;
+  background: var(--white);
+  border-radius: var(--radius-pill);
+  padding: 6px 8px 6px 20px;
+  display: flex;
+  align-items: center;
+  box-shadow: var(--shadow-float);
+  position: relative;
+  z-index: 10;
+}
+
+.hero-search-box input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-family: inherit;
+  font-size: 15px;
+  color: var(--ink);
+}
+
+.hero-search-box input::placeholder {
+  color: var(--gray-400);
+}
+
+/* Area visual mahasiswa & kartu melayang */
+.hero-showcase {
+  position: relative;
+  max-width: 760px;
+  margin: 0 auto;
+  min-height: 380px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 5;
+}
+
+.hero-student-img {
+  width: 320px;
+  max-width: 85%;
+  height: auto;
+  border-radius: 20px 20px 0 0;
+  position: relative;
+  z-index: 6;
+  filter: drop-shadow(0 20px 30px rgba(0,0,0,0.25));
+}
+
+/* Floating Card Kiri (Rating) */
+.float-card-left {
+  position: absolute;
+  left: 20px;
+  top: 40px;
+  background: var(--white);
+  color: var(--ink);
+  padding: 18px 22px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-float);
+  text-align: left;
+  z-index: 8;
+  max-width: 220px;
+  animation: floatSlow 5s ease-in-out infinite;
+}
+
+.float-card-left .rating-number {
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--ink);
+}
+
+.float-card-left .stars {
+  color: var(--star);
+  font-size: 14px;
+  margin: 4px 0 6px;
+}
+
+.float-card-left p {
+  font-size: 12px;
+  color: var(--gray-600);
+  line-height: 1.35;
+}
+
+/* Floating Card Kanan (Komunitas) */
+.float-card-right {
+  position: absolute;
+  right: 20px;
+  top: 60px;
+  background: var(--white);
+  color: var(--ink);
+  padding: 18px 22px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-float);
+  text-align: left;
+  z-index: 8;
+  max-width: 230px;
+  animation: floatSlow 5s ease-in-out infinite 2.5s;
+}
+
+.avatar-stack {
+  display: flex;
+  margin-bottom: 8px;
+}
+
+.avatar-stack .mini-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid var(--white);
+  margin-left: -8px;
+  background: var(--blue-500);
+  color: var(--white);
+  font-size: 11px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar-stack .mini-avatar:first-child {
+  margin-left: 0;
+}
+
+.float-card-right .stat-title {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1;
+}
+
+.float-card-right p {
+  font-size: 12px;
+  color: var(--gray-600);
+  line-height: 1.35;
+  margin-top: 4px;
+}
+
+/* Swap Chip Animasi di bagian bawah */
+.swap-chip-interactive {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--lime);
+  color: var(--lime-dark);
+  font-weight: 700;
+  font-size: 13px;
+  padding: 8px 20px;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+/* ==============================================================
+   SECTION UMUM
+   ============================================================== */
+.section {
+  padding: 60px 0;
+}
+
+.section-head {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 40px;
+}
+
+.section-tag {
+  display: inline-block;
+  background: var(--blue-100);
+  color: var(--blue-600);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 5px 14px;
+  border-radius: var(--radius-pill);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+}
+
+.section-title {
+  font-size: clamp(26px, 3.5vw, 38px);
+  font-weight: 800;
+  color: var(--ink);
+  line-height: 1.25;
+  letter-spacing: -0.5px;
+}
+
+.section-desc {
+  font-size: 15px;
+  color: var(--gray-600);
+  margin-top: 10px;
+}
+
+/* ==============================================================
+   KATEGORI SKILL (Grid Kotak Membulat Modern)
+   ============================================================== */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 18px;
+}
+
+.category-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 24px 20px;
+  text-align: center;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(226, 232, 240, 0.7);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.category-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--blue-400);
+}
+
+.category-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 18px;
+  background: var(--blue-50);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+  transition: transform 0.3s ease;
+}
+
+.category-card:hover .category-icon {
+  transform: scale(1.1);
+  background: var(--blue-100);
+}
+
+.category-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.category-count {
+  font-size: 12px;
+  color: var(--gray-400);
+  font-weight: 500;
+}
+
+/* ==============================================================
+   BENTO PROBLEM & SOLUTION (Lime & Mint ala LearnNix Case Study)
+   ============================================================== */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+
+.bento-card {
+  border-radius: var(--radius-xl);
+  padding: 40px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 280px;
+  transition: transform 0.3s ease;
+}
+
+.bento-card:hover {
+  transform: translateY(-4px);
+}
+
+.bento-problem {
+  background: var(--lime);
+  color: var(--lime-dark);
+}
+
+.bento-solution {
+  background: var(--mint);
+  color: var(--mint-dark);
+}
+
+.bento-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.bento-header h3 {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.bento-arrow-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.bento-card p {
+  font-size: 15px;
+  line-height: 1.6;
+  opacity: 0.95;
+}
+
+.bento-stats {
+  display: flex;
+  gap: 24px;
+  margin-top: 30px;
+}
+
+.bento-stat-box {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(8px);
+  padding: 12px 20px;
+  border-radius: var(--radius-md);
+}
+
+.bento-stat-box .num {
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.bento-stat-box .lbl {
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 4px;
+  opacity: 0.8;
+}
+
+/* ==============================================================
+   CARDS SKILL PALING DICARI (Course-Style Cards dari LearnNix)
+   ============================================================== */
+.filter-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 36px;
+}
+
+.filter-pill {
+  background: var(--white);
+  border: 1px solid var(--gray-200);
+  color: var(--gray-600);
+  font-size: 13px;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-pill:hover,
+.filter-pill.active {
+  background: var(--blue-500);
+  color: var(--white);
+  border-color: var(--blue-500);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.skill-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.skill-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-md);
+}
+
+.skill-card-top {
+  position: relative;
+  height: 140px;
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: var(--white);
+}
+
+.skill-card-top.art-blue {
+  background: linear-gradient(135deg, #2563eb, #1d4ed8);
+}
+
+.skill-card-top.art-purple {
+  background: linear-gradient(135deg, #7c3aed, #4c1d95);
+}
+
+.skill-card-top.art-green {
+  background: linear-gradient(135deg, #059669, #064e3b);
+}
+
+.skill-card-top.art-orange {
+  background: linear-gradient(135deg, #ea580c, #9a3412);
+}
+
+.skill-card-badges {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.badge-tag {
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(8px);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+}
+
+.rating-badge {
+  background: var(--white);
+  color: var(--ink);
+  font-size: 11px;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.rating-badge .star {
+  color: var(--star);
+}
+
+.skill-card-title-preview {
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.skill-card-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.mentor-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.mentor-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--blue-100);
+  color: var(--blue-600);
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+.mentor-info h4 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.mentor-info span {
+  font-size: 12px;
+  color: var(--gray-400);
+}
+
+.skill-want-box {
+  background: var(--blue-50);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  font-size: 12px;
+  margin: 12px 0 18px;
+  border-left: 3px solid var(--blue-500);
+}
+
+.skill-want-box strong {
+  color: var(--blue-600);
+  display: block;
+  margin-bottom: 2px;
+}
+
+.skill-card-footer {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid var(--gray-200);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.exchange-mode {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--gray-600);
+}
+
+/* ==============================================================
+   SKILLMATCH CONSTELLATION PREVIEW
+   ============================================================== */
+.constellation-wrapper {
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  padding: 48px;
+  box-shadow: var(--shadow-md);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.constellation-graphic {
+  position: relative;
+  width: 100%;
+  max-width: 500px;
+  height: 280px;
+  margin: 30px auto;
+}
+
+.center-user-node {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: var(--blue-500);
+  color: var(--white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 12px;
+  box-shadow: 0 0 0 10px rgba(59, 130, 246, 0.15), 0 0 0 20px rgba(59, 130, 246, 0.08);
+  z-index: 5;
+}
+
+.satellite-node {
+  position: absolute;
+  background: var(--white);
+  border: 2px solid var(--blue-400);
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.node-1 { top: 10%; left: 10%; }
+.node-2 { top: 15%; right: 10%; }
+.node-3 { bottom: 15%; left: 15%; }
+.node-4 { bottom: 10%; right: 15%; }
+
+.node-match-score {
+  background: var(--lime);
+  color: var(--lime-dark);
+  font-size: 10px;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: var(--radius-pill);
+}
+
+/* ==============================================================
+   TESTIMONIAL STORIES (Cerita Mahasiswa)
+   ============================================================== */
+.stories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.story-card {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  padding: 28px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid rgba(226, 232, 240, 0.7);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.story-quote {
+  font-size: 15px;
+  color: var(--ink);
+  font-style: italic;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.story-author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.story-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--blue-100);
+  color: var(--blue-600);
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.story-details h4 {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.story-details span {
+  font-size: 12px;
+  color: var(--gray-400);
+}
+
+/* ==============================================================
+   FAQ ACCORDION
+   ============================================================== */
+.faq-list {
+  max-width: 760px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.faq-item {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--gray-200);
+  transition: all 0.25s ease;
+}
+
+.faq-question {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 22px 26px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--ink);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.faq-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--blue-50);
+  color: var(--blue-600);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.faq-item.active .faq-icon {
+  transform: rotate(180deg);
+  background: var(--blue-500);
+  color: var(--white);
+}
+
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), padding 0.35s ease;
+  padding: 0 26px;
+  color: var(--gray-600);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.faq-item.active .faq-answer {
+  max-height: 200px;
+  padding-bottom: 22px;
+}
+
+/* ==============================================================
+   CTA SECTION (Cincin Konsentris Biru Penutup)
+   ============================================================== */
+.cta-box {
+  background: linear-gradient(180deg, #4da3ff 0%, #2563eb 100%);
+  border-radius: var(--radius-xl);
+  color: var(--white);
+  padding: 60px 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(37, 99, 235, 0.2);
+  margin: 40px 0 80px;
+}
+
+.cta-box .hero-rings {
+  bottom: -400px;
+}
+
+.cta-box h2 {
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 800;
+  margin-bottom: 14px;
+  position: relative;
+  z-index: 5;
+}
+
+.cta-box p {
+  font-size: 16px;
+  max-width: 580px;
+  margin: 0 auto 30px;
+  opacity: 0.95;
+  position: relative;
+  z-index: 5;
+}
+
+.cta-actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  position: relative;
+  z-index: 5;
+}
+
+/* ==============================================================
+   FOOTER (Hitam Gelap Modern Ala LearnNix)
+   ============================================================== */
+.footer {
+  background: var(--ink);
+  color: var(--white);
+  padding: 70px 0 30px;
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1.5fr;
+  gap: 40px;
+  margin-bottom: 50px;
+}
+
+.footer-brand .brand-logo {
+  color: var(--white);
+  margin-bottom: 16px;
+}
+
+.footer-brand p {
+  color: var(--gray-400);
+  font-size: 14px;
+  line-height: 1.6;
+  max-width: 320px;
+}
+
+.footer-col h4 {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 18px;
+  color: var(--white);
+}
+
+.footer-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-col ul a {
+  color: var(--gray-400);
+  font-size: 14px;
+}
+
+.footer-col ul a:hover {
+  color: var(--white);
+  padding-left: 4px;
+}
+
+.footer-sdg-tag {
+  display: inline-block;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--lime);
+  margin-bottom: 6px;
+}
+
+.footer-bottom {
+  padding-top: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--gray-400);
+  font-size: 13px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+/* ==============================================================
+   FLASH TOAST NOTIFICATIONS
+   ============================================================== */
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.toast {
+  background: var(--white);
+  color: var(--ink);
+  padding: 14px 20px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-float);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  border-left: 4px solid var(--blue-500);
+  animation: slideIn 0.3s ease forwards;
+}
+
+.toast.toast-success { border-left-color: #10b981; }
+.toast.toast-danger  { border-left-color: var(--danger); }
+.toast.toast-warning { border-left-color: #f59e0b; }
+
+@keyframes slideIn {
+  from { transform: translateX(100%); opacity: 0; }
+  to   { transform: translateX(0); opacity: 1; }
+}
+
+/* ==============================================================
+   RESPONSIVE DESIGN (Media Queries)
+   ============================================================== */
+@media (max-width: 992px) {
+  .hero-showcase {
+    min-height: 480px;
+  }
+  .float-card-left {
+    left: 0;
+    top: 20px;
+  }
+  .float-card-right {
+    right: 0;
+    top: 30px;
+  }
+  .bento-grid {
+    grid-template-columns: 1fr;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 70px;
+    left: 16px;
+    right: 16px;
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-float);
+    flex-direction: column;
+    padding: 20px;
+    gap: 14px;
+  }
+  .nav-links.show {
+    display: flex;
+  }
+  .mobile-toggle {
+    display: block;
+  }
+  .hero-card {
+    padding: 40px 20px 60px;
+  }
+  .hero-showcase {
+    min-height: auto;
+    flex-direction: column;
+    align-items: center;
+  }
+  .float-card-left, .float-card-right {
+    position: static;
+    margin: 10px auto;
+    width: 100%;
+    max-width: 280px;
+    animation: none;
+  }
+  .swap-chip-interactive {
+    position: static;
+    transform: none;
+    margin: 16px auto 0;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+}
