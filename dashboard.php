@@ -134,6 +134,7 @@ if (is_db_connected()) {
         </div>
         
         <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <a href="ai-planner.php" class="btn btn-outline btn-sm" style="background: linear-gradient(135deg, #eff6ff 0%, #ede9fe 100%); border-color: #c7d2fe; color: #4338ca; font-weight: 700;">✨ AI Study Planner</a>
             <a href="my-skills.php" class="btn btn-outline btn-sm">+ Tambah Skill Saya</a>
             <a href="discover.php" class="btn btn-primary btn-sm">Cari Partner Baru <span class="btn-arrow">↗</span></a>
         </div>

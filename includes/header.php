@@ -60,23 +60,46 @@ $unread_notifs = $logged_user ? get_unread_notifications_count($logged_user['id'
         <ul class="nav-links">
             <li><a href="index.php" class="<?= ($current_page === 'index.php') ? 'active' : '' ?>">Beranda</a></li>
             <li><a href="discover.php" class="<?= ($current_page === 'discover.php') ? 'active' : '' ?>">Cari Skill</a></li>
-            <li><a href="index.php#cara-kerja">Cara Kerja</a></li>
-            <li><a href="index.php#faq">FAQ</a></li>
+            <li><a href="leaderboard.php" class="<?= ($current_page === 'leaderboard.php') ? 'active' : '' ?>">🏆 Leaderboard</a></li>
             <?php if (is_logged_in()): ?>
                 <li><a href="skillmatch.php" class="<?= ($current_page === 'skillmatch.php') ? 'active' : '' ?>">✨ SkillMatch</a></li>
+                <li><a href="ai-planner.php" class="<?= ($current_page === 'ai-planner.php') ? 'active' : '' ?>">💡 AI Planner</a></li>
+                <li><a href="exchanges.php" class="<?= ($current_page === 'exchanges.php') ? 'active' : '' ?>">Barter Saya</a></li>
+            <?php else: ?>
+                <li><a href="index.php#cara-kerja">Cara Kerja</a></li>
+                <li><a href="index.php#faq">FAQ</a></li>
             <?php endif; ?>
         </ul>
 
         <!-- Aksi Kanan: Tombol Masuk / Profil Pengguna -->
         <div class="nav-actions">
             <?php if (is_logged_in() && $logged_user): ?>
+                
+                <?php if ($logged_user['role'] === 'admin'): ?>
+                    <a href="admin/index.php" class="btn btn-outline btn-sm" style="background: #fef08a; border-color: #eab308; color: #854d0e; font-weight: 700;">
+                        ⚙️ Admin Panel
+                    </a>
+                <?php endif; ?>
+
+                <!-- Lonceng Notifikasi In-App -->
+                <a href="notifications.php" class="btn btn-outline btn-sm" style="padding: 6px 10px; position: relative;" title="Notifikasi">
+                    🔔
+                    <?php if ($unread_notifs > 0): ?>
+                        <span style="position: absolute; top: -5px; right: -5px; background: #ef4444; color: white; border-radius: 999px; font-size: 10px; font-weight: 800; padding: 1px 5px; min-width: 16px; text-align: center;">
+                            <?= $unread_notifs > 99 ? '99+' : $unread_notifs ?>
+                        </span>
+                    <?php endif; ?>
+                </a>
+
                 <!-- Kalo udah login, tampilin info ringkas poin & tombol ke dashboard -->
                 <a href="dashboard.php" class="user-menu-pill">
                     <div class="avatar">
                         <?= strtoupper(substr($logged_user['name'], 0, 1)) ?>
                     </div>
                     <span style="font-weight: 700; font-size: 13px;"><?= e(explode(' ', $logged_user['name'])[0]) ?></span>
-                    <span class="points-badge">🌱 <?= (int)$logged_user['points'] ?> Poin</span>
+                    <a href="points.php" class="points-badge" style="text-decoration: none;" title="Buka Dompet Poin">
+                        🪙 <?= (int)$logged_user['points'] ?> Poin
+                    </a>
                 </a>
                 <a href="logout.php" class="btn btn-outline btn-sm" title="Keluar akun">Keluar</a>
             <?php else: ?>
