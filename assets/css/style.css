@@ -95,17 +95,18 @@ img {
 }
 
 .nav-pill {
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
   border-radius: var(--radius-pill);
-  padding: 10px 20px;
+  padding: 8px 18px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
+  gap: 12px;
+  width: 100%;
 }
 
 .brand-logo {
@@ -113,9 +114,11 @@ img {
   align-items: center;
   gap: 10px;
   font-weight: 800;
-  font-size: 20px;
+  font-size: 19px;
   color: var(--blue-600);
   letter-spacing: -0.5px;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 .brand-logo span {
@@ -123,31 +126,37 @@ img {
 }
 
 .brand-logo .logo-icon {
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
   background: linear-gradient(135deg, var(--blue-500), var(--blue-600));
   color: var(--white);
-  border-radius: 12px;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
-  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+  font-size: 17px;
+  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
 }
 
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 4px;
   list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-shrink: 1;
 }
 
 .nav-links a {
-  font-size: 14px;
+  font-size: 13.5px;
   font-weight: 600;
   color: var(--gray-600);
   padding: 6px 12px;
   border-radius: var(--radius-pill);
+  white-space: nowrap;
+  display: inline-block;
+  transition: all 0.2s ease;
 }
 
 .nav-links a:hover,
@@ -159,7 +168,9 @@ img {
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 /* Tombol-tombol pill */
@@ -771,156 +782,312 @@ img {
 
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
   gap: 24px;
 }
 
+/* ==============================================================
+   KARTU SKILL BARTER DENGAN SENTUHAN HUMANIS & SOUL
+   Terinspirasi dari desain modern LearnNix: 
+   Bersih, tipografi tajam, widget barter dua arah, tanpa gradien blok kaku
+   ============================================================== */
 .skill-card {
   background: var(--white);
-  border-radius: var(--radius-lg);
-  overflow: hidden;
-  box-shadow: var(--shadow-sm);
-  border: 1px solid rgba(226, 232, 240, 0.8);
+  border-radius: 22px;
+  padding: 24px;
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  box-shadow: 0 4px 18px -2px rgba(15, 23, 42, 0.04);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  position: relative;
 }
 
 .skill-card:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-md);
+  transform: translateY(-5px);
+  box-shadow: 0 20px 38px -10px rgba(15, 23, 42, 0.09);
+  border-color: #cbd5e1;
 }
 
-.skill-card-top {
-  position: relative;
-  height: 140px;
-  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  color: var(--white);
-}
-
-.skill-card-top.art-blue {
-  background: linear-gradient(135deg, #2563eb, #1d4ed8);
-}
-
-.skill-card-top.art-purple {
-  background: linear-gradient(135deg, #7c3aed, #4c1d95);
-}
-
-.skill-card-top.art-green {
-  background: linear-gradient(135deg, #059669, #064e3b);
-}
-
-.skill-card-top.art-orange {
-  background: linear-gradient(135deg, #ea580c, #9a3412);
-}
-
-.skill-card-badges {
+/* Baris Kategori & Rating Atas */
+.card-meta-bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-}
-
-.badge-tag {
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(8px);
-  font-size: 11px;
-  font-weight: 700;
-  padding: 4px 10px;
-  border-radius: var(--radius-pill);
-}
-
-.rating-badge {
-  background: var(--white);
-  color: var(--ink);
-  font-size: 11px;
-  font-weight: 800;
-  padding: 3px 8px;
-  border-radius: var(--radius-pill);
-  display: flex;
-  align-items: center;
-  gap: 3px;
-}
-
-.rating-badge .star {
-  color: var(--star);
-}
-
-.skill-card-title-preview {
-  font-size: 18px;
-  font-weight: 800;
-  line-height: 1.25;
-}
-
-.skill-card-body {
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-
-.mentor-profile {
-  display: flex;
-  align-items: center;
-  gap: 12px;
+  gap: 8px;
   margin-bottom: 12px;
 }
 
-.mentor-avatar {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: var(--blue-100);
-  color: var(--blue-600);
+.cat-pill {
+  font-size: 11.5px;
+  font-weight: 700;
+  padding: 4px 11px;
+  border-radius: var(--radius-pill);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  letter-spacing: 0.2px;
+}
+
+.cat-tech { background: #eff6ff; color: #1d4ed8; }
+.cat-design { background: #fff7ed; color: #c2410c; }
+.cat-lang { background: #f0fdf4; color: #15803d; }
+.cat-biz { background: #fefce8; color: #a16207; }
+.cat-academic { background: #f5f3ff; color: #6d28d9; }
+.cat-media { background: #fdf2f8; color: #be185d; }
+.cat-default { background: #f1f5f9; color: #475569; }
+
+.card-rating-pill {
+  background: #fffbeb;
+  color: #b45309;
+  border: 1px solid #fef08a;
+  font-size: 11.5px;
   font-weight: 800;
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.card-rating-pill .star-icon {
+  color: #eab308;
+  font-size: 12px;
+}
+
+.card-rating-pill .count {
+  color: #94a3b8;
+  font-weight: 600;
+  font-size: 10.5px;
+}
+
+/* Judul Skill Utama */
+.skill-main-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.35;
+  margin: 0 0 14px;
+  min-height: 48px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Profil Mahasiswa Pengajar */
+.mentor-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+  padding-bottom: 14px;
+  border-bottom: 1px dashed #e2e8f0;
+}
+
+.mentor-avatar-letter {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+  color: #1e40af;
+  font-weight: 800;
+  font-size: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 14px;
+  flex-shrink: 0;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
 }
 
-.mentor-info h4 {
-  font-size: 14px;
+.mentor-img {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+  border: 2px solid #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.mentor-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.mentor-name {
+  font-size: 13.5px;
   font-weight: 700;
-  color: var(--ink);
+  color: #0f172a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.mentor-info span {
-  font-size: 12px;
-  color: var(--gray-400);
+.mentor-badge-sub {
+  font-size: 11.5px;
+  color: #64748b;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.skill-want-box {
-  background: var(--blue-50);
-  border-radius: var(--radius-md);
-  padding: 10px 14px;
-  font-size: 12px;
-  margin: 12px 0 18px;
-  border-left: 3px solid var(--blue-500);
+.mentor-badge-sub .level-tag {
+  color: #2563eb;
+  font-weight: 700;
 }
 
-.skill-want-box strong {
-  color: var(--blue-600);
-  display: block;
-  margin-bottom: 2px;
+/* WIDGET PERTUKARAN BARTER DUA ARAH (THE SOUL OF TUKARSKILL) */
+.barter-flow-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 11px 13px;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  position: relative;
 }
 
-.skill-card-footer {
-  margin-top: auto;
-  padding-top: 14px;
-  border-top: 1px solid var(--gray-200);
+.barter-direction {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 8px;
+  font-size: 12px;
 }
 
-.exchange-mode {
+.barter-role-tag {
+  font-size: 10px;
+  font-weight: 700;
+  color: #166534;
+  background: #dcfce7;
+  padding: 2px 8px;
+  border-radius: 999px;
+  flex-shrink: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.barter-role-tag.want-role {
+  color: #1e40af;
+  background: #dbeafe;
+}
+
+.barter-skill-highlight {
+  font-weight: 700;
+  color: #0f172a;
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   font-size: 12px;
+}
+
+.barter-skill-highlight.want-highlight {
+  color: #2563eb;
+}
+
+.barter-connector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 4px;
+}
+
+.barter-connector::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 1px;
+  background: #e2e8f0;
+}
+
+.swap-circle {
+  position: relative;
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: #64748b;
+  font-weight: 700;
+}
+
+.skill-brief-desc {
+  font-size: 12px;
+  color: #64748b;
+  line-height: 1.45;
+  margin-bottom: 14px;
+  font-style: italic;
+}
+
+/* Footer Aksi */
+.card-action-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid #f1f5f9;
+}
+
+.swap-method-badge {
+  font-size: 11.5px;
   font-weight: 600;
-  color: var(--gray-600);
+  color: #64748b;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 0 2px rgba(34, 197, 94, 0.2);
+}
+
+.btn-swap-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #0f172a;
+  color: #ffffff;
+  font-size: 12.5px;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.btn-swap-cta:hover {
+  background: #2563eb;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(37, 99, 235, 0.25);
+  color: #ffffff;
+}
+
+.btn-swap-cta .cta-arrow {
+  font-size: 12px;
+  transition: transform 0.2s ease;
+}
+
+.btn-swap-cta:hover .cta-arrow {
+  transform: translate(2px, -2px);
 }
 
 /* ==============================================================
@@ -1281,7 +1448,42 @@ img {
 /* ==============================================================
    RESPONSIVE DESIGN (Media Queries)
    ============================================================== */
-@media (max-width: 992px) {
+@media (max-width: 1200px) {
+  .nav-links {
+    gap: 2px;
+  }
+  .nav-links a {
+    font-size: 12.5px;
+    padding: 5px 8px;
+  }
+  .user-menu-pill span:not(.points-badge) {
+    max-width: 70px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+@media (max-width: 1024px) {
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 70px;
+    left: 16px;
+    right: 16px;
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-float);
+    flex-direction: column;
+    padding: 20px;
+    gap: 12px;
+    z-index: 200;
+  }
+  .nav-links.show {
+    display: flex;
+  }
+  .mobile-toggle {
+    display: block;
+  }
   .hero-showcase {
     min-height: 480px;
   }
@@ -1302,25 +1504,6 @@ img {
 }
 
 @media (max-width: 768px) {
-  .nav-links {
-    display: none;
-    position: absolute;
-    top: 70px;
-    left: 16px;
-    right: 16px;
-    background: var(--white);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-float);
-    flex-direction: column;
-    padding: 20px;
-    gap: 14px;
-  }
-  .nav-links.show {
-    display: flex;
-  }
-  .mobile-toggle {
-    display: block;
-  }
   .hero-card {
     padding: 40px 20px 60px;
   }

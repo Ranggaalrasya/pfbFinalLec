@@ -41,6 +41,7 @@ if (is_db_connected()) {
             s.name AS skill_name,
             c.id AS category_id,
             c.name AS category_name,
+            c.slug AS category_slug,
             c.icon AS category_icon,
             COALESCE(AVG(r.rating), 5.0) AS avg_rating,
             COUNT(DISTINCT r.id) AS review_count,
@@ -216,66 +217,85 @@ if (is_db_connected()) {
         </div>
     <?php else: ?>
         <div class="skills-grid">
-            <?php 
-            $colors = ['art-blue', 'art-purple', 'art-green', 'art-orange'];
-            $idx = 0;
-            foreach ($results as $item): 
-                $color_class = $colors[$idx % count($colors)];
-                $idx++;
+            <?php foreach ($results as $item): 
+                $cat_slug = strtolower($item['category_slug'] ?? '');
+                $cat_class = 'cat-default';
+                if (strpos($cat_slug, 'tekno') !== false || strpos($cat_slug, 'program') !== false) $cat_class = 'cat-tech';
+                elseif (strpos($cat_slug, 'desain') !== false || strpos($cat_slug, 'kreatif') !== false) $cat_class = 'cat-design';
+                elseif (strpos($cat_slug, 'bahasa') !== false) $cat_class = 'cat-lang';
+                elseif (strpos($cat_slug, 'bisnis') !== false || strpos($cat_slug, 'karir') !== false) $cat_class = 'cat-biz';
+                elseif (strpos($cat_slug, 'akademik') !== false) $cat_class = 'cat-academic';
+                elseif (strpos($cat_slug, 'media') !== false || strpos($cat_slug, 'audio') !== false) $cat_class = 'cat-media';
             ?>
                 <div class="skill-card">
-                    <!-- Bagian Atas Kartu (Banner Warna) -->
-                    <div class="skill-card-top <?= $color_class ?>">
-                        <div class="skill-card-badges">
-                            <span class="badge-tag"><?= e($item['category_icon']) ?> <?= e($item['category_name']) ?></span>
-                            <div class="rating-badge">
-                                <span class="star">★</span>
-                                <span><?= number_format((float)$item['avg_rating'], 1) ?></span>
-                                <small style="color: var(--gray-400); font-size: 10px;">(<?= (int)$item['review_count'] ?>)</small>
-                            </div>
-                        </div>
-                        <div class="skill-card-title-preview">
-                            <?= e($item['skill_name']) ?>
+                    <!-- Baris Atas: Kategori Tag & Rating Bintang -->
+                    <div class="card-meta-bar">
+                        <span class="cat-pill <?= $cat_class ?>">
+                            <?= e($item['category_icon'] ?? '💡') ?> <?= e($item['category_name']) ?>
+                        </span>
+                        <div class="card-rating-pill" title="Rating Ulasan Partner">
+                            <span class="star-icon">★</span>
+                            <span><?= number_format((float)$item['avg_rating'], 1) ?></span>
+                            <span class="count">(<?= (int)$item['review_count'] ?>)</span>
                         </div>
                     </div>
 
-                    <!-- Bagian Isi Kartu -->
-                    <div class="skill-card-body">
-                        <!-- Profil Mahasiswa Penawar -->
-                        <div class="mentor-profile">
-                            <?php if (!empty($item['photo']) && file_exists(__DIR__ . '/uploads/avatars/' . $item['photo'])): ?>
-                                <img src="uploads/avatars/<?= e($item['photo']) ?>" alt="Avatar" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover;">
-                            <?php else: ?>
-                                <div class="mentor-avatar">
-                                    <?= strtoupper(substr($item['name'], 0, 1)) ?>
-                                </div>
-                            <?php endif; ?>
-                            
-                            <div class="mentor-info">
-                                <h4><?= e($item['name']) ?></h4>
-                                <span><?= e($item['major']) ?> • <?= ucfirst(e($item['level'])) ?></span>
+                    <!-- Judul Skill yang Diajarkan -->
+                    <h3 class="skill-main-title">
+                        <?= e($item['skill_name']) ?>
+                    </h3>
+
+                    <!-- Profil Mahasiswa Pengajar -->
+                    <div class="mentor-row">
+                        <?php if (!empty($item['photo']) && file_exists(__DIR__ . '/uploads/avatars/' . $item['photo'])): ?>
+                            <img src="uploads/avatars/<?= e($item['photo']) ?>" alt="Avatar" class="mentor-img">
+                        <?php else: ?>
+                            <div class="mentor-avatar-letter">
+                                <?= strtoupper(substr($item['name'], 0, 1)) ?>
                             </div>
-                        </div>
-
-                        <!-- Info Skill yang Dicari / Ingin Dipelajari -->
-                        <div class="skill-want-box">
-                            <strong>Ingin Ditukar Dengan:</strong>
-                            <?= !empty($item['wanted_skill_name']) ? e($item['wanted_skill_name']) : 'Terbuka barter skill apa saja' ?>
-                        </div>
-
-                        <?php if (!empty($item['skill_desc'])): ?>
-                            <p style="font-size: 12px; color: var(--gray-600); margin-bottom: 12px; line-height: 1.4;">
-                                "<?= e(mb_strimwidth($item['skill_desc'], 0, 85, '...')) ?>"
-                            </p>
                         <?php endif; ?>
-
-                        <!-- Footer Kartu: Tombol Aksi -->
-                        <div class="skill-card-footer">
-                            <span class="exchange-mode">⚡ 1-on-1 Peer</span>
-                            <a href="user.php?id=<?= (int)$item['user_id'] ?>" class="btn btn-dark btn-sm">
-                                Lihat Profil & Tukar <span class="btn-arrow">↗</span>
-                            </a>
+                        <div class="mentor-text">
+                            <span class="mentor-name"><?= e($item['name']) ?></span>
+                            <span class="mentor-badge-sub">
+                                <?= e($item['major']) ?> • <strong class="level-tag"><?= ucfirst(e($item['level'])) ?></strong>
+                            </span>
                         </div>
+                    </div>
+
+                    <!-- Widget Pertukaran Barter Dua Arah (The Soul of TukarSkill) -->
+                    <div class="barter-flow-card">
+                        <div class="barter-direction">
+                            <span class="barter-role-tag">💡 Diajarkan</span>
+                            <span class="barter-skill-highlight"><?= e($item['skill_name']) ?></span>
+                        </div>
+                        
+                        <div class="barter-connector">
+                            <div class="swap-circle" title="Tukar Timbal Balik">⇄</div>
+                        </div>
+
+                        <div class="barter-direction">
+                            <span class="barter-role-tag want-role">🎯 Ingin Belajar</span>
+                            <span class="barter-skill-highlight want-highlight">
+                                <?= !empty($item['wanted_skill_name']) ? e($item['wanted_skill_name']) : 'Terbuka barter skill apa saja' ?>
+                            </span>
+                        </div>
+                    </div>
+
+                    <?php if (!empty($item['skill_desc'])): ?>
+                        <p class="skill-brief-desc">
+                            "<?= e(mb_strimwidth($item['skill_desc'], 0, 80, '...')) ?>"
+                        </p>
+                    <?php endif; ?>
+
+                    <!-- Footer Aksi -->
+                    <div class="card-action-footer">
+                        <span class="swap-method-badge">
+                            <span class="pulse-dot"></span> 1-on-1 Peer
+                        </span>
+                        <a href="user.php?id=<?= (int)$item['user_id'] ?>" class="btn-swap-cta">
+                            <span>Ajak Tukar</span>
+                            <span class="cta-arrow">↗</span>
+                        </a>
                     </div>
                 </div>
             <?php endforeach; ?>

@@ -41,11 +41,14 @@ if (is_db_connected()) {
             u.id AS user_id,
             u.name,
             u.major,
+            u.photo,
             u.batch_year,
             s.id AS skill_id,
             s.name AS skill_name,
             c.id AS category_id,
             c.name AS category_name,
+            c.slug AS category_slug,
+            c.icon AS category_icon,
             COALESCE(AVG(r.rating), 5.0) AS avg_rating,
             COUNT(r.id) AS review_count,
             (
@@ -363,54 +366,81 @@ if (empty($featured_offers)) {
 
         <!-- Grid Kartu Penawar Skill -->
         <div class="skills-grid">
-            <?php 
-            $colors = ['art-blue', 'art-purple', 'art-green', 'art-orange'];
-            $i = 0;
-            foreach ($featured_offers as $offer): 
-                $color_class = $colors[$i % count($colors)];
-                $i++;
+            <?php foreach ($featured_offers as $offer): 
+                $cat_slug = strtolower($offer['category_slug'] ?? '');
+                $cat_class = 'cat-default';
+                if (strpos($cat_slug, 'tekno') !== false || strpos($cat_slug, 'program') !== false) $cat_class = 'cat-tech';
+                elseif (strpos($cat_slug, 'desain') !== false || strpos($cat_slug, 'kreatif') !== false) $cat_class = 'cat-design';
+                elseif (strpos($cat_slug, 'bahasa') !== false) $cat_class = 'cat-lang';
+                elseif (strpos($cat_slug, 'bisnis') !== false || strpos($cat_slug, 'karir') !== false) $cat_class = 'cat-biz';
+                elseif (strpos($cat_slug, 'akademik') !== false) $cat_class = 'cat-academic';
+                elseif (strpos($cat_slug, 'media') !== false || strpos($cat_slug, 'audio') !== false) $cat_class = 'cat-media';
             ?>
                 <div class="skill-card" data-category="<?= (int)$offer['category_id'] ?>">
-                    <!-- Bagian Atas Kartu (Banner Visual Berwarna) -->
-                    <div class="skill-card-top <?= $color_class ?>">
-                        <div class="skill-card-badges">
-                            <span class="badge-tag"><?= e($offer['category_name']) ?></span>
-                            <div class="rating-badge">
-                                <span class="star">★</span>
-                                <span><?= number_format((float)$offer['avg_rating'], 1) ?></span>
-                            </div>
-                        </div>
-                        <div class="skill-card-title-preview">
-                            <?= e($offer['skill_name']) ?>
+                    <!-- Baris Atas: Kategori Tag & Rating Bintang -->
+                    <div class="card-meta-bar">
+                        <span class="cat-pill <?= $cat_class ?>">
+                            <?= e($offer['category_icon'] ?? '💡') ?> <?= e($offer['category_name']) ?>
+                        </span>
+                        <div class="card-rating-pill" title="Rating Ulasan Partner">
+                            <span class="star-icon">★</span>
+                            <span><?= number_format((float)$offer['avg_rating'], 1) ?></span>
+                            <?php if (!empty($offer['review_count'])): ?>
+                                <span class="count">(<?= (int)$offer['review_count'] ?>)</span>
+                            <?php endif; ?>
                         </div>
                     </div>
 
-                    <!-- Bagian Isi Kartu -->
-                    <div class="skill-card-body">
-                        <!-- Profil Mahasiswa Penawar -->
-                        <div class="mentor-profile">
-                            <div class="mentor-avatar">
+                    <!-- Judul Skill yang Diajarkan -->
+                    <h3 class="skill-main-title">
+                        <?= e($offer['skill_name']) ?>
+                    </h3>
+
+                    <!-- Profil Mahasiswa Pengajar -->
+                    <div class="mentor-row">
+                        <?php if (!empty($offer['photo']) && file_exists(__DIR__ . '/uploads/avatars/' . $offer['photo'])): ?>
+                            <img src="uploads/avatars/<?= e($offer['photo']) ?>" alt="Avatar" class="mentor-img">
+                        <?php else: ?>
+                            <div class="mentor-avatar-letter">
                                 <?= strtoupper(substr($offer['name'], 0, 1)) ?>
                             </div>
-                            <div class="mentor-info">
-                                <h4><?= e($offer['name']) ?></h4>
-                                <span><?= e($offer['major']) ?> • <?= ucfirst(e($offer['level'])) ?></span>
-                            </div>
+                        <?php endif; ?>
+                        <div class="mentor-text">
+                            <span class="mentor-name"><?= e($offer['name']) ?></span>
+                            <span class="mentor-badge-sub">
+                                <?= e($offer['major']) ?> • <strong class="level-tag"><?= ucfirst(e($offer['level'])) ?></strong>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Widget Pertukaran Barter Dua Arah (The Soul of TukarSkill) -->
+                    <div class="barter-flow-card">
+                        <div class="barter-direction">
+                            <span class="barter-role-tag">💡 Diajarkan</span>
+                            <span class="barter-skill-highlight"><?= e($offer['skill_name']) ?></span>
+                        </div>
+                        
+                        <div class="barter-connector">
+                            <div class="swap-circle" title="Tukar Timbal Balik">⇄</div>
                         </div>
 
-                        <!-- Info Skill yang Ingin Dipelajari Sebagai Gantinya -->
-                        <div class="skill-want-box">
-                            <strong>Ingin Ditukar Dengan:</strong>
-                            <?= e($offer['want_skill_name'] ?? 'Terbuka untuk barter skill apa saja') ?>
+                        <div class="barter-direction">
+                            <span class="barter-role-tag want-role">🎯 Ingin Belajar</span>
+                            <span class="barter-skill-highlight want-highlight">
+                                <?= e($offer['want_skill_name'] ?? 'Terbuka barter skill apa saja') ?>
+                            </span>
                         </div>
+                    </div>
 
-                        <!-- Footer Kartu: Tombol Aksi -->
-                        <div class="skill-card-footer">
-                            <span class="exchange-mode">⚡ 1-on-1 Swap</span>
-                            <a href="user.php?id=<?= (int)$offer['user_id'] ?>" class="btn btn-dark btn-sm">
-                                Ajak Tukar <span class="btn-arrow">↗</span>
-                            </a>
-                        </div>
+                    <!-- Footer Aksi -->
+                    <div class="card-action-footer">
+                        <span class="swap-method-badge">
+                            <span class="pulse-dot"></span> 1-on-1 Peer
+                        </span>
+                        <a href="user.php?id=<?= (int)$offer['user_id'] ?>" class="btn-swap-cta">
+                            <span>Ajak Tukar</span>
+                            <span class="cta-arrow">↗</span>
+                        </a>
                     </div>
                 </div>
             <?php endforeach; ?>

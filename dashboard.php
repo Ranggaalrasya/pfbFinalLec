@@ -134,7 +134,6 @@ if (is_db_connected()) {
         </div>
         
         <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-            <a href="ai-planner.php" class="btn btn-outline btn-sm" style="background: linear-gradient(135deg, #eff6ff 0%, #ede9fe 100%); border-color: #c7d2fe; color: #4338ca; font-weight: 700;">✨ AI Study Planner</a>
             <a href="my-skills.php" class="btn btn-outline btn-sm">+ Tambah Skill Saya</a>
             <a href="discover.php" class="btn btn-primary btn-sm">Cari Partner Baru <span class="btn-arrow">↗</span></a>
         </div>
@@ -310,6 +309,13 @@ if (is_db_connected()) {
             <div style="background: var(--mint); border-radius: var(--radius-md); padding: 14px; margin-top: 24px; font-size: 12px; color: var(--mint-dark); line-height: 1.5;">
                 <strong>🌱 SDG 4 Quality Education</strong><br>
                 Setiap kali kamu mengajarkan skill ke mahasiswa lain, kamu membantu membuka akses ilmu tanpa batasan finansial.
+            </div>
+
+            <!-- Tautan Silabus Belajar -->
+            <div style="margin-top: 14px; text-align: center;">
+                <a href="ai-planner.php" style="font-size: 12px; font-weight: 600; color: var(--gray-600); text-decoration: none;">
+                    📖 Butuh ide silabus sesi? <u>Rancang Silabus Belajar →</u>
+                </a>
             </div>
         </div>
 
