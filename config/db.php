@@ -4,40 +4,48 @@
 // ini file buat nyambungin web kita ke database MySQL XAMPP pake MySQLi
 // ==============================================================
 
-$db_host = 'localhost';
+// pake 127.0.0.1 biar langsung TCP IPv4, ga kena delay lookup localhost di Windows
+$db_host = '127.0.0.1';
 $db_user = 'root';
 $db_pass = '';
 $db_name = 'tukarskill';
 $db_port = 3306;
 
-// nyalain error reporting mysqli biar kalo ada query typo langsung ketauan
+// matiin reporting default biar kita handle error koneksi sendiri secara elegan
 mysqli_report(MYSQLI_REPORT_OFF);
 
-// coba buka koneksi ke server mysql
-$conn = @new mysqli($db_host, $db_user, $db_pass, $db_name, $db_port);
-
-// kalo database 'tukarskill' belom dibikin atau mysql belom nyala, jangan bikin web crash total
-$db_connected = true;
+$db_connected = false;
 $db_error_message = '';
 
-if ($conn->connect_errno) {
-    $db_connected = false;
-    $db_error_message = $conn->connect_error;
+// inisialisasi koneksi dengan timeout 2 detik biar ga pernah bikin web nge-hang
+$conn = mysqli_init();
+if ($conn) {
+    mysqli_options($conn, MYSQLI_OPT_CONNECT_TIMEOUT, 2);
     
-    // coba cek apakah mysql nyala tapi databasenya doang yang belom diimport
-    $test_server = @new mysqli($db_host, $db_user, $db_pass, '', $db_port);
-    if (!$test_server->connect_errno) {
-        $db_error_message = "Database 'tukarskill' belum ditemukan di phpMyAdmin! Silakan import file 'docs.sql' dulu ya.";
-        $test_server->close();
+    // coba konek langsung ke database 'tukarskill'
+    $connected = @mysqli_real_connect($conn, $db_host, $db_user, $db_pass, $db_name, $db_port);
+    
+    if ($connected) {
+        $db_connected = true;
+        // set charset utf8mb4 biar teks indonesia, emoji dan simbol lancar
+        $conn->set_charset("utf8mb4");
     } else {
-        $db_error_message = "MySQL di XAMPP belum aktif! Klik tombol 'Start' pada MySQL di XAMPP Control Panel.";
+        $errno = mysqli_connect_errno();
+        $error = mysqli_connect_error();
+        
+        // cek apakah server mysql aktif tapi database 'tukarskill' belum diimport di phpMyAdmin
+        $test_conn = mysqli_init();
+        mysqli_options($test_conn, MYSQLI_OPT_CONNECT_TIMEOUT, 1);
+        if (@mysqli_real_connect($test_conn, $db_host, $db_user, $db_pass, '', $db_port)) {
+            $db_error_message = "Database 'tukarskill' belum ditemukan di phpMyAdmin. Silakan import file 'docs.sql' di phpMyAdmin ya!";
+            @mysqli_close($test_conn);
+        } else {
+            $db_error_message = "MySQL di XAMPP belum aktif. Klik tombol 'Start' pada MySQL di XAMPP Control Panel.";
+        }
     }
-} else {
-    // set charset biar teks bahasa indonesia, emot, dan karakter khusus aman
-    $conn->set_charset("utf8mb4");
 }
 
-// helper kecil biar gampang ngecek status koneksi dari file lain
+// helper kecil buat cek status database dari file mana pun
 function is_db_connected() {
     global $db_connected;
     return $db_connected;
