@@ -207,6 +207,62 @@ if (empty($featured_offers)) {
 </section>
 
 <!-- ==============================================================
+     SECTION: SDG & PLATFORM PILLARS (Sesuai Referensi Pengguna)
+     Plain border-radius container square dengan info berbobot
+     ============================================================== -->
+<section style="padding: 10px 0 50px;">
+    <div class="container">
+        <div style="background: var(--white); border-radius: var(--radius-lg); padding: 32px 36px; border: 1px solid var(--gray-200); box-shadow: var(--shadow-sm);">
+            <div style="text-align: center; max-width: 720px; margin: 0 auto 28px;">
+                <span class="section-tag" style="background: #f0fdf4; color: #166534; border: 1px solid #bbf7d0; display: inline-flex; align-items: center; gap: 6px;">
+                    <?= icon('award', '', 14) ?> Global Goals Alignment
+                </span>
+                <h3 style="font-size: 24px; font-weight: 800; color: var(--ink); margin-top: 10px;">
+                    Mewujudkan Pendidikan Berkualitas Tanpa Hambatan Biaya
+                </h3>
+                <p style="font-size: 14px; color: var(--gray-600); margin-top: 6px;">
+                    TukarSkill berkomitmen mendukung Sustainable Development Goals (SDG) dengan memberdayakan mahasiswa saling bertukar ilmu dan keterampilan kerja nyata.
+                </p>
+            </div>
+
+            <!-- The Plain Border-Radius Container dari referensi pengguna -->
+            <div class="sdg-plain-container" style="box-shadow: none; border: 1px solid var(--gray-200); background: #f8fafc;">
+                <div class="sdg-slot-item">
+                    <div class="sdg-slot-icon"><?= icon('graduation-cap', '', 26) ?></div>
+                    <strong class="sdg-slot-title">SDG 4</strong>
+                    <span class="sdg-slot-desc">Quality Education</span>
+                </div>
+                <div class="sdg-slot-item">
+                    <div class="sdg-slot-icon"><?= icon('target', '', 26) ?></div>
+                    <strong class="sdg-slot-title">Target 4.4</strong>
+                    <span class="sdg-slot-desc">Skill Ketenagakerjaan</span>
+                </div>
+                <div class="sdg-slot-item">
+                    <div class="sdg-slot-icon"><?= icon('scale', '', 26) ?></div>
+                    <strong class="sdg-slot-title">SDG 10</strong>
+                    <span class="sdg-slot-desc">Reduced Inequalities</span>
+                </div>
+                <div class="sdg-slot-item">
+                    <div class="sdg-slot-icon"><?= icon('trending-up', '', 26) ?></div>
+                    <strong class="sdg-slot-title">SDG 8</strong>
+                    <span class="sdg-slot-desc">Kesiapan Karir</span>
+                </div>
+                <div class="sdg-slot-item">
+                    <div class="sdg-slot-icon"><?= icon('repeat', '', 26) ?></div>
+                    <strong class="sdg-slot-title">100% Gratis</strong>
+                    <span class="sdg-slot-desc">Barter Tanpa Uang</span>
+                </div>
+                <div class="sdg-slot-item">
+                    <div class="sdg-slot-icon"><?= icon('shield-check', '', 26) ?></div>
+                    <strong class="sdg-slot-title">Verifikasi</strong>
+                    <span class="sdg-slot-desc">Sertifikat Resmi</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ==============================================================
      SECTION: KATEGORI SKILL
      ============================================================== -->
 <section class="section" id="kategori">
