@@ -142,8 +142,10 @@ if (is_db_connected()) {
     <!-- Alert Permintaan Masuk Kalo Ada Request Pending -->
     <?php if ($pending_incoming_count > 0): ?>
         <div style="background: var(--lime); border-radius: var(--radius-lg); padding: 18px 24px; margin-bottom: 28px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; box-shadow: var(--shadow-sm);">
-            <div style="display: flex; align-items: center; gap: 12px;">
-                <span style="font-size: 24px;">📬</span>
+            <div style="display: flex; align-items: center; gap: 14px;">
+                <div style="background: rgba(0,0,0,0.08); width: 42px; height: 42px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--lime-dark);">
+                    <?= icon('bell', '', 22) ?>
+                </div>
                 <div>
                     <strong style="color: var(--lime-dark); font-size: 15px;">Kamu punya <?= $pending_incoming_count ?> permintaan tukar skill baru!</strong>
                     <p style="font-size: 13px; color: var(--lime-dark); opacity: 0.9; margin-top: 2px;">Segera cek dan respon calon partner belajarmu.</p>
@@ -160,7 +162,7 @@ if (is_db_connected()) {
         <div style="background: var(--white); border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow-sm); border: 1px solid var(--gray-200);">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
                 <span style="font-size: 12px; font-weight: 700; color: var(--gray-600); text-transform: uppercase;">Saldo Poin Aktif</span>
-                <span style="font-size: 20px;">🌱</span>
+                <span style="color: var(--blue-500);"><?= icon('coins', '', 22) ?></span>
             </div>
             <div style="font-size: 32px; font-weight: 800; color: var(--blue-600); line-height: 1;">
                 <?= (int)$user['points'] ?> <span style="font-size: 14px; color: var(--gray-400); font-weight: 600;">PTS</span>
@@ -174,16 +176,16 @@ if (is_db_connected()) {
         <div style="background: var(--white); border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow-sm); border: 1px solid var(--gray-200);">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
                 <span style="font-size: 12px; font-weight: 700; color: var(--gray-600); text-transform: uppercase;">Tingkat Badge</span>
-                <span style="font-size: 20px;"><?= e($current_badge['icon'] ?? '🌱') ?></span>
+                <span style="color: #ca8a04;"><?= icon('award', '', 22) ?></span>
             </div>
             <div style="font-size: 28px; font-weight: 800; color: var(--ink); line-height: 1;">
                 <?= e($current_badge['name'] ?? 'Bibit') ?>
             </div>
             <p style="font-size: 12px; color: var(--gray-600); margin-top: 8px;">
                 <?php if ($next_badge): ?>
-                    Perlu <?= ((int)$next_badge['min_points'] - (int)$user['total_points']) ?> poin lagi ke <?= e($next_badge['icon'] . ' ' . $next_badge['name']) ?>
+                    Perlu <?= ((int)$next_badge['min_points'] - (int)$user['total_points']) ?> poin lagi ke <?= e($next_badge['name']) ?>
                 <?php else: ?>
-                    🏆 Kamu sudah di level tertinggi Mentor!
+                    Telah mencapai level tertinggi Mentor!
                 <?php endif; ?>
             </p>
         </div>
@@ -192,7 +194,7 @@ if (is_db_connected()) {
         <div style="background: var(--white); border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow-sm); border: 1px solid var(--gray-200);">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
                 <span style="font-size: 12px; font-weight: 700; color: var(--gray-600); text-transform: uppercase;">Sesi Selesai</span>
-                <span style="font-size: 20px;">🤝</span>
+                <span style="color: #16a34a;"><?= icon('handshake', '', 22) ?></span>
             </div>
             <div style="font-size: 32px; font-weight: 800; color: var(--ink); line-height: 1;">
                 <?= $total_completed ?> <span style="font-size: 14px; color: var(--gray-400); font-weight: 600;">Sesi</span>
@@ -206,7 +208,7 @@ if (is_db_connected()) {
         <div style="background: var(--white); border-radius: var(--radius-lg); padding: 24px; box-shadow: var(--shadow-sm); border: 1px solid var(--gray-200);">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
                 <span style="font-size: 12px; font-weight: 700; color: var(--gray-600); text-transform: uppercase;">Reputasi Kamu</span>
-                <span style="font-size: 20px; color: var(--star);">★</span>
+                <span style="color: var(--star);"><?= icon('star', '', 22) ?></span>
             </div>
             <div style="font-size: 32px; font-weight: 800; color: var(--ink); line-height: 1;">
                 <?= number_format($avg_rating, 1) ?> <span style="font-size: 14px; color: var(--gray-400); font-weight: 600;">/ 5.0</span>
@@ -224,13 +226,15 @@ if (is_db_connected()) {
         <!-- KOLOM KIRI: Sesi Pertukaran Terdekat -->
         <div style="background: var(--white); border-radius: var(--radius-xl); padding: 32px; box-shadow: var(--shadow-sm); border: 1px solid var(--gray-200);">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                <h3 style="font-size: 18px; font-weight: 800; color: var(--ink);">Jadwal Sesi Terdekat 📅</h3>
+                <h3 style="font-size: 18px; font-weight: 800; color: var(--ink); display: flex; align-items: center; gap: 8px;">
+                    <?= icon('calendar', '', 18) ?> <span>Jadwal Sesi Terdekat</span>
+                </h3>
                 <a href="exchanges.php" style="font-size: 13px; font-weight: 600; color: var(--blue-600);">Semua Sesi →</a>
             </div>
 
             <?php if (empty($upcoming_sessions)): ?>
                 <div style="text-align: center; padding: 40px 20px; color: var(--gray-400);">
-                    <div style="font-size: 36px; margin-bottom: 10px;">☕</div>
+                    <div style="color: var(--gray-400); margin-bottom: 10px;"><?= icon('calendar', '', 36) ?></div>
                     <p style="font-size: 14px; font-weight: 600; color: var(--gray-600);">Belum ada jadwal sesi pertukaran aktif.</p>
                     <p style="font-size: 13px; margin-top: 4px;">Cari partner yang cocok dan ajukan permintaan tukar skill pertamamu!</p>
                     <a href="discover.php" class="btn btn-outline btn-sm" style="margin-top: 16px;">Jelajahi Skill Sekarang</a>
@@ -257,8 +261,8 @@ if (is_db_connected()) {
                             </div>
                             <div style="display: flex; gap: 8px;">
                                 <?php if (!empty($partner_wa)): ?>
-                                    <a href="https://wa.me/<?= preg_replace('/[^0-9]/', '', $partner_wa) ?>" target="_blank" class="btn btn-outline btn-sm" style="color: #15803d; border-color: #86efac;">
-                                        WhatsApp 💬
+                                    <a href="https://wa.me/<?= preg_replace('/[^0-9]/', '', $partner_wa) ?>" target="_blank" class="btn btn-outline btn-sm" style="color: #15803d; border-color: #86efac; display: inline-flex; align-items: center; gap: 6px;">
+                                        <?= icon('phone', '', 14) ?> <span>WhatsApp</span>
                                     </a>
                                 <?php endif; ?>
                                 <a href="exchange-detail.php?id=<?= (int)$ses['id'] ?>" class="btn btn-dark btn-sm">Detail</a>
@@ -272,13 +276,15 @@ if (is_db_connected()) {
         <!-- KOLOM KANAN: Rekomendasi Partner SkillMatch -->
         <div style="background: var(--white); border-radius: var(--radius-xl); padding: 32px; box-shadow: var(--shadow-sm); border: 1px solid var(--gray-200);">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                <h3 style="font-size: 18px; font-weight: 800; color: var(--ink);">Rekomendasi Match ✨</h3>
+                <h3 style="font-size: 18px; font-weight: 800; color: var(--ink); display: flex; align-items: center; gap: 8px;">
+                    <?= icon('sparkles', '', 18) ?> <span>Rekomendasi Match</span>
+                </h3>
                 <a href="skillmatch.php" style="font-size: 13px; font-weight: 600; color: var(--blue-600);">Semua →</a>
             </div>
 
             <?php if (empty($match_recommendations)): ?>
                 <div style="text-align: center; padding: 30px 10px; color: var(--gray-400);">
-                    <div style="font-size: 32px; margin-bottom: 8px;">🎯</div>
+                    <div style="color: var(--blue-500); margin-bottom: 8px;"><?= icon('sparkles', '', 32) ?></div>
                     <p style="font-size: 13px; color: var(--gray-600);">
                         Tambahkan skill yang ingin kamu pelajari di menu <strong>Skill Saya</strong> agar SkillMatch bisa merekomendasikan partner yang cocok!
                     </p>
@@ -289,9 +295,7 @@ if (is_db_connected()) {
                     <?php foreach ($match_recommendations as $match): ?>
                         <div style="padding: 14px; background: var(--blue-50); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: space-between; gap: 10px;">
                             <div style="display: flex; align-items: center; gap: 10px;">
-                                <div class="mini-avatar" style="background: var(--blue-500); width: 36px; height: 36px; font-size: 13px;">
-                                    <?= strtoupper(substr($match['name'], 0, 1)) ?>
-                                </div>
+                                <?= render_avatar('', $match['name'], 36) ?>
                                 <div>
                                     <h4 style="font-size: 13px; font-weight: 700; color: var(--ink);"><?= e($match['name']) ?></h4>
                                     <span style="font-size: 11px; color: var(--blue-600); font-weight: 600;">Bisa: <?= e($match['offer_skill_name']) ?></span>
@@ -307,7 +311,7 @@ if (is_db_connected()) {
 
             <!-- Banner SDG Komitmen -->
             <div style="background: var(--mint); border-radius: var(--radius-md); padding: 14px; margin-top: 24px; font-size: 12px; color: var(--mint-dark); line-height: 1.5;">
-                <strong>🌱 SDG 4 Quality Education</strong><br>
+                <strong style="display: inline-flex; align-items: center; gap: 6px;"><?= icon('shield-check', '', 15) ?> SDG 4 Quality Education</strong><br>
                 Setiap kali kamu mengajarkan skill ke mahasiswa lain, kamu membantu membuka akses ilmu tanpa batasan finansial.
             </div>
 

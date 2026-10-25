@@ -164,22 +164,28 @@ if (is_db_connected()) {
                 Kelola informasi biodata, kontak WhatsApp, dan keamanan akunmu.
             </p>
         </div>
-        <div style="display: flex; gap: 10px;">
-            <a href="dashboard.php" class="btn btn-outline btn-sm">← Kembali ke Dashboard</a>
-            <a href="my-skills.php" class="btn btn-primary btn-sm">Kelola Skill Saya →</a>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <a href="dashboard.php" class="btn btn-outline btn-sm" style="display: inline-flex; align-items: center; gap: 6px;">
+                <?= icon('arrow-left', '', '14px') ?> Dashboard
+            </a>
+            <a href="my-skills.php" class="btn btn-primary btn-sm" style="display: inline-flex; align-items: center; gap: 6px;">
+                Kelola Skill <?= icon('arrow-right', '', '14px') ?>
+            </a>
         </div>
     </div>
 
     <!-- Alert Notifikasi -->
     <?php if (!empty($success_msg)): ?>
-        <div style="background: var(--mint); border-left: 4px solid #10b981; color: var(--mint-dark); padding: 14px 20px; border-radius: var(--radius-sm); margin-bottom: 24px; font-weight: 600; font-size: 14px;">
-            <?= e($success_msg) ?>
+        <div style="background: var(--mint); border-left: 4px solid #10b981; color: var(--mint-dark); padding: 14px 20px; border-radius: var(--radius-sm); margin-bottom: 24px; font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 10px;">
+            <?= icon('check-circle', '', '18px') ?>
+            <span><?= e($success_msg) ?></span>
         </div>
     <?php endif; ?>
 
     <?php if (!empty($error_msg)): ?>
-        <div style="background: #fee2e2; border-left: 4px solid var(--danger); color: #991b1b; padding: 14px 20px; border-radius: var(--radius-sm); margin-bottom: 24px; font-weight: 600; font-size: 14px;">
-            <?= e($error_msg) ?>
+        <div style="background: #fee2e2; border-left: 4px solid var(--danger); color: #991b1b; padding: 14px 20px; border-radius: var(--radius-sm); margin-bottom: 24px; font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 10px;">
+            <?= icon('alert-circle', '', '18px') ?>
+            <span><?= e($error_msg) ?></span>
         </div>
     <?php endif; ?>
 
@@ -190,15 +196,9 @@ if (is_db_connected()) {
         <div>
             <div style="background: var(--white); border-radius: var(--radius-xl); padding: 32px; box-shadow: var(--shadow-sm); border: 1px solid var(--gray-200); text-align: center;">
                 
-                <!-- Avatar Profil -->
-                <div style="position: relative; width: 100px; height: 100px; margin: 0 auto 16px;">
-                    <?php if (!empty($user['photo']) && file_exists(__DIR__ . '/uploads/avatars/' . $user['photo'])): ?>
-                        <img src="uploads/avatars/<?= e($user['photo']) ?>" alt="Avatar" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid var(--blue-400);">
-                    <?php else: ?>
-                        <div style="width: 100%; height: 100%; border-radius: 50%; background: var(--blue-500); color: var(--white); font-size: 38px; font-weight: 800; display: flex; align-items: center; justify-content: center; box-shadow: var(--shadow-md);">
-                            <?= strtoupper(substr($user['name'], 0, 1)) ?>
-                        </div>
-                    <?php endif; ?>
+                <!-- Avatar Profil dengan render_avatar -->
+                <div style="display: flex; justify-content: center; margin-bottom: 16px;">
+                    <?= render_avatar($user['photo'], $user['name'], 100) ?>
                 </div>
 
                 <h2 style="font-size: 20px; font-weight: 800; color: var(--ink);"><?= e($user['name']) ?></h2>
@@ -209,11 +209,17 @@ if (is_db_connected()) {
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--gray-200);">
                     <div style="background: var(--blue-50); padding: 12px; border-radius: var(--radius-md);">
                         <span style="font-size: 11px; font-weight: 700; color: var(--blue-600); text-transform: uppercase;">Saldo Poin</span>
-                        <div style="font-size: 20px; font-weight: 800; color: var(--ink); margin-top: 4px;">🌱 <?= (int)$user['points'] ?></div>
+                        <div style="font-size: 20px; font-weight: 800; color: var(--ink); margin-top: 4px; display: flex; align-items: center; justify-content: center; gap: 6px;">
+                            <span style="color: var(--blue-600); display: inline-flex;"><?= icon('sprout', '', '18px') ?></span>
+                            <?= (int)$user['points'] ?>
+                        </div>
                     </div>
                     <div style="background: var(--lime); padding: 12px; border-radius: var(--radius-md);">
                         <span style="font-size: 11px; font-weight: 700; color: var(--lime-dark); text-transform: uppercase;">Total Karir</span>
-                        <div style="font-size: 20px; font-weight: 800; color: var(--lime-dark); margin-top: 4px;">⭐ <?= (int)$user['total_points'] ?></div>
+                        <div style="font-size: 20px; font-weight: 800; color: var(--lime-dark); margin-top: 4px; display: flex; align-items: center; justify-content: center; gap: 6px;">
+                            <span style="color: var(--lime-dark); display: inline-flex;"><?= icon('star', '', '18px') ?></span>
+                            <?= (int)$user['total_points'] ?>
+                        </div>
                     </div>
                 </div>
 
@@ -225,8 +231,8 @@ if (is_db_connected()) {
                             <span style="font-size: 12px; color: var(--gray-400);">Belum ada badge</span>
                         <?php else: ?>
                             <?php foreach ($user_badges as $ub): ?>
-                                <span style="background: var(--gray-100); border: 1px solid var(--gray-200); padding: 5px 12px; border-radius: var(--radius-pill); font-size: 12px; font-weight: 700; color: var(--ink);" title="<?= e($ub['description']) ?>">
-                                    <?= e($ub['icon']) ?> <?= e($ub['name']) ?>
+                                <span style="background: var(--gray-100); border: 1px solid var(--gray-200); padding: 5px 12px; border-radius: var(--radius-pill); font-size: 12px; font-weight: 700; color: var(--ink); display: inline-flex; align-items: center; gap: 6px;" title="<?= e($ub['description']) ?>">
+                                    <?= badge_icon_svg($ub['icon'], '14px') ?> <?= e($ub['name']) ?>
                                 </span>
                             <?php endforeach; ?>
                         <?php endif; ?>

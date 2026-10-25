@@ -187,9 +187,7 @@ if (is_db_connected()) {
                                 </td>
                                 <td style="padding: 14px 16px;">
                                     <div style="display: flex; align-items: center; gap: 10px;">
-                                        <div style="width: 36px; height: 36px; border-radius: 50%; background: #3b82f6; color: white; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 13px; flex-shrink: 0;">
-                                            <?= strtoupper(substr($u['name'], 0, 1)) ?>
-                                        </div>
+                                        <?= render_avatar($u['photo'], $u['name'], 36) ?>
                                         <div>
                                             <a href="../user.php?id=<?= $u['id'] ?>" target="_blank" style="font-weight: 700; color: #0f172a; text-decoration: none;">
                                                 <?= e($u['name']) ?>
@@ -197,8 +195,8 @@ if (is_db_connected()) {
                                             <?php if ($is_self): ?>
                                                 <span style="font-size: 10px; background: #3b82f6; color: white; padding: 1px 6px; border-radius: 999px;">Akun Kamu</span>
                                             <?php endif; ?>
-                                            <span style="font-size: 11px; color: #64748b; display: block;">
-                                                ⭐ <?= number_format($u['rating'], 1) ?>
+                                            <span style="font-size: 11px; color: #64748b; display: flex; align-items: center; gap: 3px; margin-top: 2px;">
+                                                <span style="color: var(--star); display: inline-flex;"><?= icon('star', '', '11px') ?></span> <?= number_format($u['rating'], 1) ?>
                                             </span>
                                         </div>
                                     </div>
@@ -217,7 +215,9 @@ if (is_db_connected()) {
                                     </span>
                                 </td>
                                 <td style="padding: 14px 16px; text-align: right; font-weight: 800; color: #2563eb;">
-                                    🪙 <?= number_format($u['points']) ?>
+                                    <span style="display: inline-flex; align-items: center; gap: 4px; justify-content: flex-end;">
+                                        <?= icon('coins', '', '14px') ?> <?= number_format($u['points']) ?>
+                                    </span>
                                 </td>
                                 <td style="padding: 14px 16px; text-align: center;">
                                     <?php if ($u['is_active'] == 1): ?>

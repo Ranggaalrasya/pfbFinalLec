@@ -48,8 +48,8 @@ $current_admin_page = basename($_SERVER['PHP_SELF']);
         <!-- Logo & Admin Badge -->
         <div style="display: flex; align-items: center; gap: 12px;">
             <a href="index.php" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: white;">
-                <div style="width: 32px; height: 32px; border-radius: 8px; background: #3b82f6; display: flex; align-items: center; justify-content: center; font-size: 16px;">
-                    🤝
+                <div style="width: 32px; height: 32px; border-radius: 8px; background: #3b82f6; display: flex; align-items: center; justify-content: center; color: white;">
+                    <?= icon('handshake', '', '18px') ?>
                 </div>
                 <span style="font-size: 18px; font-weight: 800; color: white;">
                     Tukar<span style="color: #60a5fa;">Skill</span>
@@ -62,36 +62,34 @@ $current_admin_page = basename($_SERVER['PHP_SELF']);
 
         <!-- Menu Navigasi Admin -->
         <nav style="display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
-            <a href="index.php" style="padding: 6px 12px; border-radius: 8px; font-size: 13px; font-weight: 600; text-decoration: none; color: <?= ($current_admin_page === 'index.php') ? '#ffffff' : '#94a3b8' ?>; background: <?= ($current_admin_page === 'index.php') ? '#1e293b' : 'transparent' ?>;">
-                📊 Dashboard
+            <a href="index.php" style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 8px; font-size: 13px; font-weight: 600; text-decoration: none; color: <?= ($current_admin_page === 'index.php') ? '#ffffff' : '#94a3b8' ?>; background: <?= ($current_admin_page === 'index.php') ? '#1e293b' : 'transparent' ?>;">
+                <?= icon('bar-chart', '', '14px') ?> Dashboard
             </a>
-            <a href="users.php" style="padding: 6px 12px; border-radius: 8px; font-size: 13px; font-weight: 600; text-decoration: none; color: <?= ($current_admin_page === 'users.php') ? '#ffffff' : '#94a3b8' ?>; background: <?= ($current_admin_page === 'users.php') ? '#1e293b' : 'transparent' ?>;">
-                👥 Pengguna
+            <a href="users.php" style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 8px; font-size: 13px; font-weight: 600; text-decoration: none; color: <?= ($current_admin_page === 'users.php') ? '#ffffff' : '#94a3b8' ?>; background: <?= ($current_admin_page === 'users.php') ? '#1e293b' : 'transparent' ?>;">
+                <?= icon('users', '', '14px') ?> Pengguna
             </a>
-            <a href="categories.php" style="padding: 6px 12px; border-radius: 8px; font-size: 13px; font-weight: 600; text-decoration: none; color: <?= ($current_admin_page === 'categories.php') ? '#ffffff' : '#94a3b8' ?>; background: <?= ($current_admin_page === 'categories.php') ? '#1e293b' : 'transparent' ?>;">
-                🗂️ Kategori
+            <a href="categories.php" style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 8px; font-size: 13px; font-weight: 600; text-decoration: none; color: <?= ($current_admin_page === 'categories.php') ? '#ffffff' : '#94a3b8' ?>; background: <?= ($current_admin_page === 'categories.php') ? '#1e293b' : 'transparent' ?>;">
+                <?= icon('folder', '', '14px') ?> Kategori
             </a>
-            <a href="skills.php" style="padding: 6px 12px; border-radius: 8px; font-size: 13px; font-weight: 600; text-decoration: none; color: <?= ($current_admin_page === 'skills.php') ? '#ffffff' : '#94a3b8' ?>; background: <?= ($current_admin_page === 'skills.php') ? '#1e293b' : 'transparent' ?>;">
-                💡 Katalog Skill
+            <a href="skills.php" style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 8px; font-size: 13px; font-weight: 600; text-decoration: none; color: <?= ($current_admin_page === 'skills.php') ? '#ffffff' : '#94a3b8' ?>; background: <?= ($current_admin_page === 'skills.php') ? '#1e293b' : 'transparent' ?>;">
+                <?= icon('lightbulb', '', '14px') ?> Katalog Skill
             </a>
-            <a href="reviews.php" style="padding: 6px 12px; border-radius: 8px; font-size: 13px; font-weight: 600; text-decoration: none; color: <?= ($current_admin_page === 'reviews.php') ? '#ffffff' : '#94a3b8' ?>; background: <?= ($current_admin_page === 'reviews.php') ? '#1e293b' : 'transparent' ?>;">
-                ⭐ Moderasi Ulasan
+            <a href="reviews.php" style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 8px; font-size: 13px; font-weight: 600; text-decoration: none; color: <?= ($current_admin_page === 'reviews.php') ? '#ffffff' : '#94a3b8' ?>; background: <?= ($current_admin_page === 'reviews.php') ? '#1e293b' : 'transparent' ?>;">
+                <?= icon('star', '', '14px') ?> Moderasi Ulasan
             </a>
         </nav>
 
         <!-- Sisi Kanan: Kembali ke App & Info Admin -->
         <div style="display: flex; align-items: center; gap: 12px;">
             <a href="../dashboard.php" style="padding: 6px 12px; border-radius: 8px; font-size: 12px; font-weight: 700; color: #38bdf8; text-decoration: none; border: 1px solid #0284c7; background: rgba(56, 189, 248, 0.1);">
-                ← Kembali ke Web
+                ← Web
             </a>
             <div style="display: flex; align-items: center; gap: 8px; color: white;">
-                <div style="width: 28px; height: 28px; border-radius: 50%; background: #3b82f6; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800;">
-                    <?= strtoupper(substr($admin['name'], 0, 1)) ?>
-                </div>
+                <?= render_avatar($admin['photo'], $admin['name'], 28) ?>
                 <span style="font-size: 12px; font-weight: 700;"><?= e(explode(' ', $admin['name'])[0]) ?></span>
             </div>
-            <a href="../logout.php" style="color: #ef4444; font-size: 12px; font-weight: 700; text-decoration: none;" title="Keluar">
-                🚪 Keluar
+            <a href="../logout.php" style="display: inline-flex; align-items: center; gap: 4px; color: #ef4444; font-size: 12px; font-weight: 700; text-decoration: none;" title="Keluar">
+                <?= icon('log-out', '', '13px') ?> Keluar
             </a>
         </div>
 

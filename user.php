@@ -125,22 +125,16 @@ $is_self = is_logged_in() && ($target_id === (int)$_SESSION['user_id']);
     <div style="background: var(--white); border-radius: var(--radius-xl); padding: 36px; box-shadow: var(--shadow-sm); border: 1px solid var(--gray-200); margin-bottom: 32px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 24px;">
         <div style="display: flex; align-items: center; gap: 24px; flex-wrap: wrap;">
             
-            <!-- Avatar Foto -->
-            <div style="width: 90px; height: 90px; border-radius: 50%; overflow: hidden; background: var(--blue-500); color: var(--white); display: flex; align-items: center; justify-content: center; font-size: 36px; font-weight: 800; box-shadow: var(--shadow-md); flex-shrink: 0;">
-                <?php if (!empty($target_user['photo']) && file_exists(__DIR__ . '/uploads/avatars/' . $target_user['photo'])): ?>
-                    <img src="uploads/avatars/<?= e($target_user['photo']) ?>" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover;">
-                <?php else: ?>
-                    <?= strtoupper(substr($target_user['name'], 0, 1)) ?>
-                <?php endif; ?>
-            </div>
+            <!-- Avatar Foto dengan render_avatar helper -->
+            <?= render_avatar($target_user['photo'], $target_user['name'], 90) ?>
 
             <!-- Biodata Singkat -->
             <div>
                 <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
                     <h1 style="font-size: 24px; font-weight: 800; color: var(--ink);"><?= e($target_user['name']) ?></h1>
                     <?php foreach ($badges as $b): ?>
-                        <span class="badge-tag" style="background: var(--lime); color: var(--lime-dark);" title="<?= e($b['description']) ?>">
-                            <?= e($b['icon']) ?> <?= e($b['name']) ?>
+                        <span class="badge-tag" style="background: var(--lime); color: var(--lime-dark); display: inline-flex; align-items: center; gap: 6px;" title="<?= e($b['description']) ?>">
+                            <?= badge_icon_svg($b['icon'], '14px') ?> <?= e($b['name']) ?>
                         </span>
                     <?php endforeach; ?>
                 </div>
@@ -151,7 +145,7 @@ $is_self = is_logged_in() && ($target_id === (int)$_SESSION['user_id']);
 
                 <!-- Rating & Review -->
                 <div style="display: flex; align-items: center; gap: 8px; margin-top: 8px; font-size: 13px;">
-                    <span style="color: var(--star); font-size: 16px;">★</span>
+                    <span style="color: var(--star); display: inline-flex; align-items: center;"><?= icon('star', '', '16px') ?></span>
                     <strong style="color: var(--ink);"><?= number_format($avg_rating, 1) ?></strong>
                     <span style="color: var(--gray-400);">•</span>
                     <span style="color: var(--gray-600);"><?= $review_count ?> ulasan sesi</span>
@@ -162,7 +156,9 @@ $is_self = is_logged_in() && ($target_id === (int)$_SESSION['user_id']);
         <!-- Tombol Aksi Kanan -->
         <div>
             <?php if ($is_self): ?>
-                <a href="profile.php" class="btn btn-outline">Edit Profil Saya ⚙️</a>
+                <a href="profile.php" class="btn btn-outline" style="display: inline-flex; align-items: center; gap: 8px;">
+                    <?= icon('settings', '', '16px') ?> Edit Profil Saya
+                </a>
             <?php else: ?>
                 <a href="request.php?receiver_id=<?= $target_id ?>" class="btn btn-primary" style="padding: 12px 24px;">
                     Ajak Tukar Skill Sekarang <span class="btn-arrow">↗</span>
@@ -190,8 +186,8 @@ $is_self = is_logged_in() && ($target_id === (int)$_SESSION['user_id']);
             <!-- 1. Skill yang BISA Diajarkan (Offer) -->
             <div style="background: var(--white); border-radius: var(--radius-xl); padding: 32px; box-shadow: var(--shadow-sm); border: 1px solid var(--gray-200);">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px;">
-                    <h3 style="font-size: 18px; font-weight: 800; color: var(--blue-600);">
-                        Skill yang Bisa Diajarkan 🎓
+                    <h3 style="font-size: 18px; font-weight: 800; color: var(--blue-600); display: flex; align-items: center; gap: 8px;">
+                        <?= icon('graduation-cap', '', '20px') ?> Skill yang Bisa Diajarkan
                     </h3>
                     <span class="badge-tag" style="background: var(--blue-100); color: var(--blue-600);">Bisa Jadi Guru</span>
                 </div>
@@ -204,7 +200,7 @@ $is_self = is_logged_in() && ($target_id === (int)$_SESSION['user_id']);
                             <div style="padding: 16px; background: var(--blue-50); border-radius: var(--radius-md); display: flex; justify-content: space-between; align-items: flex-start; gap: 12px;">
                                 <div>
                                     <div style="display: flex; align-items: center; gap: 8px;">
-                                        <span style="font-size: 18px;"><?= e($o['category_icon']) ?></span>
+                                        <span style="display: inline-flex; align-items: center; color: var(--blue-600);"><?= category_icon_svg($o['category_icon'], '18px') ?></span>
                                         <strong style="font-size: 15px; color: var(--ink);"><?= e($o['skill_name']) ?></strong>
                                         <span class="badge-tag" style="background: var(--white); color: var(--blue-600); font-size: 11px;">
                                             <?= ucfirst(e($o['level'])) ?>
@@ -229,8 +225,8 @@ $is_self = is_logged_in() && ($target_id === (int)$_SESSION['user_id']);
             <!-- 2. Skill yang INGIN Dipelajari (Want) -->
             <div style="background: var(--white); border-radius: var(--radius-xl); padding: 32px; box-shadow: var(--shadow-sm); border: 1px solid var(--gray-200);">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px;">
-                    <h3 style="font-size: 18px; font-weight: 800; color: #65a30d;">
-                        Skill yang Ingin Dipelajari ✨
+                    <h3 style="font-size: 18px; font-weight: 800; color: #65a30d; display: flex; align-items: center; gap: 8px;">
+                        <?= icon('sparkles', '', '20px') ?> Skill yang Ingin Dipelajari
                     </h3>
                     <span class="badge-tag" style="background: var(--lime); color: var(--lime-dark);">Terbuka Barter</span>
                 </div>
@@ -241,7 +237,7 @@ $is_self = is_logged_in() && ($target_id === (int)$_SESSION['user_id']);
                     <div style="display: flex; flex-direction: column; gap: 10px;">
                         <?php foreach ($wants as $w): ?>
                             <div style="padding: 14px 18px; background: #f7fee7; border-radius: var(--radius-md); display: flex; align-items: center; gap: 10px;">
-                                <span style="font-size: 18px;"><?= e($w['category_icon']) ?></span>
+                                <span style="display: inline-flex; align-items: center; color: #65a30d;"><?= category_icon_svg($w['category_icon'], '18px') ?></span>
                                 <strong style="font-size: 14px; color: var(--ink);"><?= e($w['skill_name']) ?></strong>
                                 <span class="badge-tag" style="background: var(--white); color: #65a30d; font-size: 11px;">
                                     Target: <?= ucfirst(e($w['level'])) ?>
@@ -266,20 +262,20 @@ $is_self = is_logged_in() && ($target_id === (int)$_SESSION['user_id']);
                             <div style="border-bottom: 1px solid var(--gray-200); padding-bottom: 16px;">
                                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
                                     <div style="display: flex; align-items: center; gap: 10px;">
-                                        <div class="mini-avatar" style="background: var(--blue-500); width: 32px; height: 32px; font-size: 12px;">
-                                            <?= strtoupper(substr($rv['reviewer_name'], 0, 1)) ?>
-                                        </div>
+                                        <?= render_avatar($rv['reviewer_photo'], $rv['reviewer_name'], 34) ?>
                                         <div>
                                             <strong style="font-size: 14px; color: var(--ink);"><?= e($rv['reviewer_name']) ?></strong>
                                             <span style="font-size: 11px; color: var(--gray-400); display: block;"><?= e($rv['reviewer_major']) ?></span>
                                         </div>
                                     </div>
-                                    <div style="color: var(--star); font-size: 14px;">
-                                        <?= str_repeat('★', (int)$rv['rating']) ?><?= str_repeat('☆', 5 - (int)$rv['rating']) ?>
+                                    <div style="color: var(--star); font-size: 14px; display: inline-flex; align-items: center; gap: 2px;">
+                                        <?php for ($s = 1; $s <= 5; $s++): ?>
+                                            <?= icon('star', $s <= (int)$rv['rating'] ? 'text-star' : 'text-gray-300', '14px') ?>
+                                        <?php endfor; ?>
                                     </div>
                                 </div>
                                 <?php if (!empty($rv['comment'])): ?>
-                                    <p style="font-size: 13px; color: var(--gray-600); line-height: 1.5; margin-left: 42px;">
+                                    <p style="font-size: 13px; color: var(--gray-600); line-height: 1.5; margin-left: 44px;">
                                         "<?= e($rv['comment']) ?>"
                                     </p>
                                 <?php endif; ?>
@@ -293,8 +289,8 @@ $is_self = is_logged_in() && ($target_id === (int)$_SESSION['user_id']);
 
         <!-- KOLOM KANAN: Jadwal Ketersediaan Luang -->
         <div style="background: var(--white); border-radius: var(--radius-xl); padding: 32px; box-shadow: var(--shadow-sm); border: 1px solid var(--gray-200);">
-            <h3 style="font-size: 18px; font-weight: 800; color: var(--ink); margin-bottom: 16px;">
-                Jadwal Luang 🕒
+            <h3 style="font-size: 18px; font-weight: 800; color: var(--ink); margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                <?= icon('calendar', '', '20px') ?> Jadwal Luang
             </h3>
             <p style="font-size: 13px; color: var(--gray-600); margin-bottom: 20px;">
                 Waktu yang disarankan untuk mengadakan sesi belajar bersama <?= e(explode(' ', $target_user['name'])[0]) ?>:

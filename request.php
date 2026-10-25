@@ -157,9 +157,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         <!-- Header Halaman -->
         <div style="text-align: center; margin-bottom: 30px;">
-            <a href="user.php?id=<?= $receiver_id ?>" style="font-size: 13px; font-weight: 600; color: var(--blue-600);">← Kembali ke Profil <?= e($receiver['name']) ?></a>
-            <h1 style="font-size: 26px; font-weight: 800; color: var(--ink); margin-top: 8px;">
-                Ajukan Pertukaran Skill 🤝
+            <a href="user.php?id=<?= $receiver_id ?>" style="font-size: 13px; font-weight: 600; color: var(--blue-600); display: inline-flex; align-items: center; gap: 6px;">
+                <?= icon('arrow-left', '', '13px') ?> Kembali ke Profil <?= e($receiver['name']) ?>
+            </a>
+            <h1 style="font-size: 26px; font-weight: 800; color: var(--ink); margin-top: 8px; display: flex; align-items: center; justify-content: center; gap: 10px;">
+                Ajukan Pertukaran Skill <?= icon('handshake', '', '26px') ?>
             </h1>
             <p style="font-size: 14px; color: var(--gray-600); margin-top: 4px;">
                 Kirim proposal belajar bersama teman kampus.
@@ -168,9 +170,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <!-- Kartu Target Partner -->
         <div style="background: var(--blue-50); border: 1px solid var(--blue-100); border-radius: var(--radius-lg); padding: 16px 20px; display: flex; align-items: center; gap: 14px; margin-bottom: 24px;">
-            <div class="mini-avatar" style="background: var(--blue-500); width: 44px; height: 44px; font-size: 16px;">
-                <?= strtoupper(substr($receiver['name'], 0, 1)) ?>
-            </div>
+            <?= render_avatar($receiver['photo'], $receiver['name'], 46) ?>
             <div>
                 <strong style="font-size: 15px; color: var(--ink);"><?= e($receiver['name']) ?></strong>
                 <span style="display: block; font-size: 12px; color: var(--blue-600); font-weight: 600;"><?= e($receiver['major']) ?></span>
@@ -178,8 +178,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
 
         <?php if (!empty($error_msg)): ?>
-            <div style="background: #fee2e2; border-left: 4px solid var(--danger); color: #991b1b; padding: 14px 18px; border-radius: var(--radius-sm); margin-bottom: 24px; font-size: 13px; font-weight: 600;">
-                <?= e($error_msg) ?>
+            <div style="background: #fee2e2; border-left: 4px solid var(--danger); color: #991b1b; padding: 14px 18px; border-radius: var(--radius-sm); margin-bottom: 24px; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 10px;">
+                <?= icon('alert-circle', '', '18px') ?>
+                <span><?= e($error_msg) ?></span>
             </div>
         <?php endif; ?>
 
@@ -197,16 +198,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         <label style="border: 2px solid var(--blue-500); background: var(--blue-50); padding: 14px; border-radius: var(--radius-md); cursor: pointer; display: flex; align-items: flex-start; gap: 10px;">
                             <input type="radio" name="type" value="swap" id="type_swap" checked onchange="toggleTypeFields()" style="margin-top: 3px;">
                             <div>
-                                <strong style="font-size: 13px; color: var(--blue-600); display: block;">Barter Skill (Swap) ⚡</strong>
-                                <span style="font-size: 12px; color: var(--gray-600);">Kamu ajarin 1 skill milikmu sebagai gantinya. 100% gratis!</span>
+                                <strong style="font-size: 13px; color: var(--blue-600); display: flex; align-items: center; gap: 6px;">
+                                    Barter Skill (Swap) <?= icon('repeat', '', '14px') ?>
+                                </strong>
+                                <span style="font-size: 12px; color: var(--gray-600); display: block; margin-top: 2px;">Kamu ajarin 1 skill milikmu sebagai gantinya. 100% gratis!</span>
                             </div>
                         </label>
 
                         <label style="border: 2px solid var(--gray-200); background: var(--white); padding: 14px; border-radius: var(--radius-md); cursor: pointer; display: flex; align-items: flex-start; gap: 10px;" id="type_points_label">
                             <input type="radio" name="type" value="points" id="type_points" onchange="toggleTypeFields()" style="margin-top: 3px;">
                             <div>
-                                <strong style="font-size: 13px; color: var(--ink); display: block;">Bayar Poin (15 Poin) 🪙</strong>
-                                <span style="font-size: 12px; color: var(--gray-600);">Belajar satu arah tanpa mengajar balik. Saldo: <strong><?= (int)$user['points'] ?> Poin</strong></span>
+                                <strong style="font-size: 13px; color: var(--ink); display: flex; align-items: center; gap: 6px;">
+                                    Bayar Poin (15 Poin) <?= icon('coins', '', '14px') ?>
+                                </strong>
+                                <span style="font-size: 12px; color: var(--gray-600); display: block; margin-top: 2px;">Belajar satu arah tanpa mengajar balik. Saldo: <strong><?= (int)$user['points'] ?> Poin</strong></span>
                             </div>
                         </label>
 

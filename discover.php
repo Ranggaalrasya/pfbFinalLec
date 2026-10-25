@@ -132,9 +132,9 @@ if (is_db_connected()) {
                 <input type="hidden" name="category" value="<?= $category_filter ?>">
             <?php endif; ?>
             <input type="text" name="q" value="<?= e($q) ?>" placeholder="Ketik skill (contoh: UI/UX, PHP, TOEFL) atau nama mahasiswa..." 
-                   style="flex: 1; border: none; outline: none; padding: 10px 18px; font-family: inherit; font-size: 14px; background: transparent;">
-            <button type="submit" class="btn btn-dark btn-sm">
-                Cari Partner <span class="btn-arrow">↗</span>
+                   style="flex: 1; border: none; outline: none; padding: 10px 18px; font-family: inherit; font-size: 14px; background: transparent; box-shadow: none;">
+            <button type="submit" class="btn btn-dark btn-sm" style="display: inline-flex; align-items: center; gap: 6px;">
+                <?= icon('search', '', 14) ?> <span>Cari Partner</span> <span class="btn-arrow"><?= icon('arrow-up-right', '', 12) ?></span>
             </button>
         </form>
     </div>
@@ -152,8 +152,8 @@ if (is_db_connected()) {
                 </a>
                 <?php foreach ($all_categories as $c): ?>
                     <a href="discover.php?<?= http_build_query(array_merge($_GET, ['category' => $c['id']])) ?>" 
-                       class="filter-pill <?= ($category_filter === (int)$c['id']) ? 'active' : '' ?>">
-                        <?= e($c['icon']) ?> <?= e($c['name']) ?>
+                       class="filter-pill <?= ($category_filter === (int)$c['id']) ? 'active' : '' ?>" style="display: inline-flex; align-items: center; gap: 6px;">
+                        <?= category_icon_svg($c['slug'] ?? $c['name'], 14) ?> <span><?= e($c['name']) ?></span>
                     </a>
                 <?php endforeach; ?>
             </div>
@@ -231,10 +231,10 @@ if (is_db_connected()) {
                     <!-- Baris Atas: Kategori Tag & Rating Bintang -->
                     <div class="card-meta-bar">
                         <span class="cat-pill <?= $cat_class ?>">
-                            <?= e($item['category_icon'] ?? '💡') ?> <?= e($item['category_name']) ?>
+                            <?= category_icon_svg($item['category_slug'] ?? $item['category_name'], 13) ?> <?= e($item['category_name']) ?>
                         </span>
                         <div class="card-rating-pill" title="Rating Ulasan Partner">
-                            <span class="star-icon">★</span>
+                            <span class="star-icon"><?= icon('star', '', 12) ?></span>
                             <span><?= number_format((float)$item['avg_rating'], 1) ?></span>
                             <span class="count">(<?= (int)$item['review_count'] ?>)</span>
                         </div>
@@ -247,13 +247,7 @@ if (is_db_connected()) {
 
                     <!-- Profil Mahasiswa Pengajar -->
                     <div class="mentor-row">
-                        <?php if (!empty($item['photo']) && file_exists(__DIR__ . '/uploads/avatars/' . $item['photo'])): ?>
-                            <img src="uploads/avatars/<?= e($item['photo']) ?>" alt="Avatar" class="mentor-img">
-                        <?php else: ?>
-                            <div class="mentor-avatar-letter">
-                                <?= strtoupper(substr($item['name'], 0, 1)) ?>
-                            </div>
-                        <?php endif; ?>
+                        <?= render_avatar($item['photo'] ?? '', $item['name'], 38) ?>
                         <div class="mentor-text">
                             <span class="mentor-name"><?= e($item['name']) ?></span>
                             <span class="mentor-badge-sub">
@@ -265,16 +259,16 @@ if (is_db_connected()) {
                     <!-- Widget Pertukaran Barter Dua Arah (The Soul of TukarSkill) -->
                     <div class="barter-flow-card">
                         <div class="barter-direction">
-                            <span class="barter-role-tag">💡 Diajarkan</span>
+                            <span class="barter-role-tag"><?= icon('lightbulb', '', 11) ?> Diajarkan</span>
                             <span class="barter-skill-highlight"><?= e($item['skill_name']) ?></span>
                         </div>
                         
                         <div class="barter-connector">
-                            <div class="swap-circle" title="Tukar Timbal Balik">⇄</div>
+                            <div class="swap-circle" title="Tukar Timbal Balik"><?= icon('arrow-swap', '', 11) ?></div>
                         </div>
 
                         <div class="barter-direction">
-                            <span class="barter-role-tag want-role">🎯 Ingin Belajar</span>
+                            <span class="barter-role-tag want-role"><?= icon('book-open', '', 11) ?> Ingin Belajar</span>
                             <span class="barter-skill-highlight want-highlight">
                                 <?= !empty($item['wanted_skill_name']) ? e($item['wanted_skill_name']) : 'Terbuka barter skill apa saja' ?>
                             </span>
@@ -293,6 +287,11 @@ if (is_db_connected()) {
                             <span class="pulse-dot"></span> 1-on-1 Peer
                         </span>
                         <a href="user.php?id=<?= (int)$item['user_id'] ?>" class="btn-swap-cta">
+                            <span>Ajak Tukar</span>
+                            <span class="cta-arrow"><?= icon('arrow-up-right', '', 13) ?></span>
+                        </a>
+                    </div>
+                </div>
                             <span>Ajak Tukar</span>
                             <span class="cta-arrow">↗</span>
                         </a>

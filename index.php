@@ -166,20 +166,22 @@ if (empty($featured_offers)) {
                 </button>
             </form>
 
-            <!-- Showcase tengah: foto & kartu melayang -->
+            <!-- Showcase tengah: ilustrasi mahasiswa & kartu melayang -->
             <div class="hero-showcase">
                 <!-- Floating card kiri (Rating kepuasan) -->
                 <div class="float-card-left">
                     <div class="rating-number">4.9</div>
-                    <div class="stars">★★★★★</div>
+                    <div class="stars" style="color: var(--star); display: flex; gap: 3px; justify-content: center; margin: 4px 0;">
+                        <?= icon('star', '', 15) ?><?= icon('star', '', 15) ?><?= icon('star', '', 15) ?><?= icon('star', '', 15) ?><?= icon('star', '', 15) ?>
+                    </div>
                     <p>Tingkat kepuasan mahasiswa dari 200+ sesi pertukaran skill yang sukses.</p>
                 </div>
 
-                <!-- Gambar ilustrasi mahasiswa di tengah -->
-                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=600&q=80" 
+                <!-- Gambar ilustrasi mahasiswa lokal kelas enterprise -->
+                <img src="assets/img/hero-student.svg" 
                      alt="Mahasiswa TukarSkill" 
                      class="hero-student-img" 
-                     style="object-fit: cover; height: 340px;">
+                     style="object-fit: contain; height: 350px;">
 
                 <!-- Floating card kanan (Komunitas mahasiswa) -->
                 <div class="float-card-right">
@@ -189,13 +191,15 @@ if (empty($featured_offers)) {
                         <div class="mini-avatar" style="background:#059669">L</div>
                         <div class="mini-avatar" style="background:#ea580c">S</div>
                     </div>
-                    <div class="stat-title">500+</div>
+                    <div class="stat-title" style="display: flex; align-items: center; justify-content: center; gap: 6px;">
+                        <?= icon('users', '', 20) ?> 500+
+                    </div>
                     <p>Mahasiswa aktif saling barter ilmu dari berbagai jurusan.</p>
                 </div>
 
                 <!-- Chip animasi barter yang berubah kata tiap 3 detik -->
                 <div class="swap-chip-interactive">
-                    <span id="hero-swap-text">🎨 UI/UX Design ⇄ 💻 Web Dev PHP</span>
+                    <span id="hero-swap-text">UI/UX Design <?= icon('arrow-swap', '', 14) ?> Web Dev PHP</span>
                 </div>
             </div>
         </div>
@@ -216,8 +220,8 @@ if (empty($featured_offers)) {
         <div class="category-grid">
             <?php foreach ($categories as $cat): ?>
                 <a href="discover.php?category=<?= (int)$cat['id'] ?>" class="category-card">
-                    <div class="category-icon">
-                        <?= e($cat['icon'] ?? '✨') ?>
+                    <div class="category-icon" style="color: var(--blue-600);">
+                        <?= category_icon_svg($cat['slug'] ?? $cat['name'], 30) ?>
                     </div>
                     <div class="category-name"><?= e($cat['name']) ?></div>
                     <div class="category-count"><?= (int)($cat['skill_count'] ?? 0) ?> Skill Tersedia</div>
@@ -243,7 +247,7 @@ if (empty($featured_offers)) {
             <div class="bento-card bento-problem">
                 <div>
                     <div class="bento-header">
-                        <h3>Tantangan Mahasiswa 🎯</h3>
+                        <h3>Tantangan Mahasiswa <?= icon('alert-triangle', '', 20) ?></h3>
                         <div class="bento-arrow-btn">✕</div>
                     </div>
                     <p>
@@ -266,7 +270,7 @@ if (empty($featured_offers)) {
             <div class="bento-card bento-solution">
                 <div>
                     <div class="bento-header">
-                        <h3>Solusi TukarSkill 🚀</h3>
+                        <h3>Solusi TukarSkill <?= icon('sparkles', '', 20) ?></h3>
                         <div class="bento-arrow-btn">✓</div>
                     </div>
                     <p>
@@ -303,7 +307,7 @@ if (empty($featured_offers)) {
             <div class="constellation-graphic">
                 <!-- Node Tengah: User yang login -->
                 <div class="center-user-node">
-                    <div style="font-size: 20px;">🎓</div>
+                    <div style="font-size: 18px; color: var(--blue-600);"><?= icon('graduation-cap', '', 22) ?></div>
                     <span>Kamu</span>
                 </div>
 
@@ -380,10 +384,10 @@ if (empty($featured_offers)) {
                     <!-- Baris Atas: Kategori Tag & Rating Bintang -->
                     <div class="card-meta-bar">
                         <span class="cat-pill <?= $cat_class ?>">
-                            <?= e($offer['category_icon'] ?? '💡') ?> <?= e($offer['category_name']) ?>
+                            <?= category_icon_svg($offer['category_slug'] ?? $offer['category_name'], 13) ?> <?= e($offer['category_name']) ?>
                         </span>
                         <div class="card-rating-pill" title="Rating Ulasan Partner">
-                            <span class="star-icon">★</span>
+                            <span class="star-icon"><?= icon('star', '', 12) ?></span>
                             <span><?= number_format((float)$offer['avg_rating'], 1) ?></span>
                             <?php if (!empty($offer['review_count'])): ?>
                                 <span class="count">(<?= (int)$offer['review_count'] ?>)</span>
@@ -398,13 +402,7 @@ if (empty($featured_offers)) {
 
                     <!-- Profil Mahasiswa Pengajar -->
                     <div class="mentor-row">
-                        <?php if (!empty($offer['photo']) && file_exists(__DIR__ . '/uploads/avatars/' . $offer['photo'])): ?>
-                            <img src="uploads/avatars/<?= e($offer['photo']) ?>" alt="Avatar" class="mentor-img">
-                        <?php else: ?>
-                            <div class="mentor-avatar-letter">
-                                <?= strtoupper(substr($offer['name'], 0, 1)) ?>
-                            </div>
-                        <?php endif; ?>
+                        <?= render_avatar($offer['photo'] ?? '', $offer['name'], 38) ?>
                         <div class="mentor-text">
                             <span class="mentor-name"><?= e($offer['name']) ?></span>
                             <span class="mentor-badge-sub">
@@ -416,16 +414,16 @@ if (empty($featured_offers)) {
                     <!-- Widget Pertukaran Barter Dua Arah (The Soul of TukarSkill) -->
                     <div class="barter-flow-card">
                         <div class="barter-direction">
-                            <span class="barter-role-tag">💡 Diajarkan</span>
+                            <span class="barter-role-tag"><?= icon('lightbulb', '', 11) ?> Diajarkan</span>
                             <span class="barter-skill-highlight"><?= e($offer['skill_name']) ?></span>
                         </div>
                         
                         <div class="barter-connector">
-                            <div class="swap-circle" title="Tukar Timbal Balik">⇄</div>
+                            <div class="swap-circle" title="Tukar Timbal Balik"><?= icon('arrow-swap', '', 11) ?></div>
                         </div>
 
                         <div class="barter-direction">
-                            <span class="barter-role-tag want-role">🎯 Ingin Belajar</span>
+                            <span class="barter-role-tag want-role"><?= icon('book-open', '', 11) ?> Ingin Belajar</span>
                             <span class="barter-skill-highlight want-highlight">
                                 <?= e($offer['want_skill_name'] ?? 'Terbuka barter skill apa saja') ?>
                             </span>
@@ -439,7 +437,7 @@ if (empty($featured_offers)) {
                         </span>
                         <a href="user.php?id=<?= (int)$offer['user_id'] ?>" class="btn-swap-cta">
                             <span>Ajak Tukar</span>
-                            <span class="cta-arrow">↗</span>
+                            <span class="cta-arrow"><?= icon('arrow-up-right', '', 13) ?></span>
                         </a>
                     </div>
                 </div>
@@ -471,7 +469,7 @@ if (empty($featured_offers)) {
                     "Awalnya ragu ada yang mau ngajarin Figma gratis. Ternyata dapet partner Kak Jennifer yang telaten banget! Gantinya aku ajarin dasar PHP buat tugas kuliahnya. Barter ilmu yang saling menguntungkan!"
                 </p>
                 <div class="story-author">
-                    <div class="story-avatar" style="background: var(--blue-100); color: var(--blue-600);">R</div>
+                    <?= render_avatar('rangga.svg', 'Rangga Alrasya', 42) ?>
                     <div class="story-details">
                         <h4>Rangga Alrasya</h4>
                         <span>Teknik Informatika (2025)</span>
@@ -484,7 +482,7 @@ if (empty($featured_offers)) {
                     "Nilai TOEFL-ku naik dari 480 jadi 560 setelah latihan speaking 4 kali bareng Syifa! Dan asiknya aku cuma bayar pake sesi mentoring desain Canva buat dia. Hemat jutaan dibanding les privat."
                 </p>
                 <div class="story-author">
-                    <div class="story-avatar" style="background: #fef3c7; color: #b45309;">L</div>
+                    <?= render_avatar('lucky.svg', 'Lucky Fadlan', 42) ?>
                     <div class="story-details">
                         <h4>Lucky Fadlan</h4>
                         <span>Computer Science (2025)</span>
@@ -497,7 +495,7 @@ if (empty($featured_offers)) {
                     "Selain dapet ilmu video editing dari Dimas, aku juga dapet temen networking baru lintas jurusan. Sistem poinnya juga bikin semangat buat terus berkontribusi ngajarin anak-anak lain."
                 </p>
                 <div class="story-author">
-                    <div class="story-avatar" style="background: #dcfce7; color: #15803d;">A</div>
+                    <?= render_avatar('', 'Amanda Putri', 42) ?>
                     <div class="story-details">
                         <h4>Amanda Putri</h4>
                         <span>Marketing Communication (2025)</span>
@@ -523,7 +521,7 @@ if (empty($featured_offers)) {
             <div class="faq-item active">
                 <button class="faq-question">
                     <span>Apakah platform TukarSkill benar-benar 100% gratis?</span>
-                    <div class="faq-icon">▼</div>
+                    <div class="faq-icon"><?= icon('plus', '', 14) ?></div>
                 </button>
                 <div class="faq-answer">
                     Ya, sepenuhnya gratis! Tidak ada biaya langganan maupun komisi uang tunai. Transaksi dilakukan murni menggunakan pertukaran kemampuan (Swap Skill) atau menggunakan saldo Skill Points yang didapat dari kontribusi belajar-mengajar.
@@ -533,7 +531,7 @@ if (empty($featured_offers)) {
             <div class="faq-item">
                 <button class="faq-question">
                     <span>Bagaimana jika kemampuan saya masih di tingkat pemula?</span>
-                    <div class="faq-icon">▼</div>
+                    <div class="faq-icon"><?= icon('plus', '', 14) ?></div>
                 </button>
                 <div class="faq-answer">
                     Tidak masalah sama sekali! Banyak mahasiswa yang baru memulai dan justru mencari teman belajar di tingkat dasar. Kamu bisa mencantumkan level skill kamu (Pemula, Menengah, Mahir) secara transparan di profil.
@@ -543,7 +541,7 @@ if (empty($featured_offers)) {
             <div class="faq-item">
                 <button class="faq-question">
                     <span>Bagaimana jika saya tidak punya skill untuk ditukar balik saat ini?</span>
-                    <div class="faq-icon">▼</div>
+                    <div class="faq-icon"><?= icon('plus', '', 14) ?></div>
                 </button>
                 <div class="faq-answer">
                     Kamu bisa menggunakan fitur <strong>Request via Poin</strong> (15 Poin). Setiap mahasiswa baru otomatis mendapatkan +20 Poin selamat datang saat mendaftar, sehingga kamu bisa langsung mengajukan sesi belajar pertama tanpa harus mengajar balik.
@@ -553,7 +551,7 @@ if (empty($featured_offers)) {
             <div class="faq-item">
                 <button class="faq-question">
                     <span>Di mana dan bagaimana sesi pertukaran skill diadakan?</span>
-                    <div class="faq-icon">▼</div>
+                    <div class="faq-icon"><?= icon('plus', '', 14) ?></div>
                 </button>
                 <div class="faq-answer">
                     Kalian bebas menentukan mode: <strong>Online</strong> (Google Meet / Zoom) atau <strong>Offline</strong> (perpustakaan kampus, kafe terdekat). Kontak WhatsApp partner hanya akan dibuka setelah request disetujui untuk menjaga privasi.

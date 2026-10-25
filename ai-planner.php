@@ -149,8 +149,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($selected_skill)) {
 
     <!-- HEADER FITUR AI -->
     <div style="text-align: center; max-width: 680px; margin: 0 auto 36px;">
-        <span class="badge-tag" style="background: linear-gradient(135deg, #dbeafe 0%, #ede9fe 100%); color: #4338ca; border: 1px solid #c7d2fe; margin-bottom: 12px; display: inline-block;">
-            ✨ AI Pedagogical Assistant
+        <span class="badge-tag" style="background: linear-gradient(135deg, #dbeafe 0%, #ede9fe 100%); color: #4338ca; border: 1px solid #c7d2fe; margin-bottom: 12px; display: inline-flex; align-items: center; gap: 6px;">
+            <?= icon('sparkles', '', '14px') ?> AI Pedagogical Assistant
         </span>
         <h1 style="font-size: 32px; font-weight: 800; color: var(--ink); margin-bottom: 8px;">
             AI Study & Exchange Planner
@@ -165,8 +165,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($selected_skill)) {
         
         <!-- KOLOM KIRI: FORM PARAMETER AI -->
         <div style="background: var(--white); border-radius: var(--radius-xl); padding: 28px; border: 1px solid var(--gray-200); box-shadow: var(--shadow-sm);">
-            <h3 style="font-size: 16px; font-weight: 800; color: var(--ink); margin-bottom: 16px;">
-                ⚙️ Parameter Sesi Belajar
+            <h3 style="font-size: 16px; font-weight: 800; color: var(--ink); margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                <?= icon('settings', '', '16px') ?> Parameter Sesi Belajar
             </h3>
 
             <form action="ai-planner.php" method="POST">
@@ -229,7 +229,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($selected_skill)) {
                 </div>
 
                 <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 8px;">
-                    <span>✨</span> Hasilkan Silabus AI
+                    <?= icon('sparkles', '', '16px') ?> Hasilkan Silabus AI
                 </button>
             </form>
         </div>
@@ -238,7 +238,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($selected_skill)) {
         <div>
             <?php if (!$generated_plan): ?>
                 <div style="background: var(--white); border-radius: var(--radius-xl); padding: 48px 32px; border: 1px dashed var(--gray-300); text-align: center; color: var(--gray-400);">
-                    <div style="font-size: 48px; margin-bottom: 12px;">🧠</div>
+                    <div style="color: var(--gray-400); margin-bottom: 12px; display: flex; justify-content: center;">
+                        <?= icon('brain', '', '48px') ?>
+                    </div>
                     <strong style="font-size: 16px; color: var(--ink); display: block; margin-bottom: 6px;">
                         Pilih Skill & Klik "Hasilkan Silabus AI"
                     </strong>
@@ -252,8 +254,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($selected_skill)) {
                     <!-- Header Rencana -->
                     <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px; flex-wrap: wrap; gap: 12px;">
                         <div>
-                            <span class="badge-tag" style="background: var(--mint); color: var(--mint-dark); margin-bottom: 8px;">
-                                Silabus AI Siap Digunakan ✓
+                            <span class="badge-tag" style="background: var(--mint); color: var(--mint-dark); margin-bottom: 8px; display: inline-flex; align-items: center; gap: 4px;">
+                                <?= icon('check-circle', '', '13px') ?> Silabus AI Siap Digunakan
                             </span>
                             <h2 style="font-size: 24px; font-weight: 800; color: var(--ink);">
                                 Kurikulum Barter: <?= e($generated_plan['skill']) ?>
@@ -264,7 +266,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($selected_skill)) {
                         </div>
                         
                         <button onclick="copyPlanToClipboard()" class="btn btn-outline btn-sm" id="copy-btn">
-                            📋 Salin Teks Silabus
+                            Salin Teks Silabus
                         </button>
                     </div>
 
@@ -295,8 +297,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($selected_skill)) {
 
                     <!-- Rekomendasi Mini Project -->
                     <div style="background: var(--blue-50); border: 1px solid var(--blue-200); border-radius: var(--radius-lg); padding: 20px; margin-bottom: 24px;">
-                        <span style="font-size: 11px; font-weight: 800; color: var(--blue-600); text-transform: uppercase; letter-spacing: 0.5px;">
-                            💡 Rekomendasi Proyek Praktik Hands-on
+                        <span style="font-size: 11px; font-weight: 800; color: var(--blue-600); text-transform: uppercase; letter-spacing: 0.5px; display: flex; align-items: center; gap: 6px;">
+                            <?= icon('lightbulb', '', '14px') ?> Rekomendasi Proyek Praktik Hands-on
                         </span>
                         <p style="font-size: 14px; font-weight: 700; color: var(--ink); margin: 6px 0 0;">
                             <?= e($generated_plan['project']) ?>
@@ -305,8 +307,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($selected_skill)) {
 
                     <!-- Rubrik Evaluasi Peer -->
                     <div style="margin-bottom: 28px;">
-                        <h4 style="font-size: 15px; font-weight: 800; color: var(--ink); margin-bottom: 12px;">
-                            Rubrik Evaluasi Pertukaran (Penilaian Akhir) 📝
+                        <h4 style="font-size: 15px; font-weight: 800; color: var(--ink); margin-bottom: 12px; display: flex; align-items: center; gap: 8px;">
+                            <?= icon('book-open', '', '16px') ?> Rubrik Evaluasi Pertukaran (Penilaian Akhir)
                         </h4>
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
                             <?php foreach ($generated_plan['rubrics'] as $crit => $rubric_desc): ?>
@@ -323,9 +325,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($selected_skill)) {
                     </div>
 
                     <!-- Banner Kontribusi SDG 4 -->
-                    <div style="padding: 14px 18px; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: var(--radius-md); font-size: 12px; color: #15803d; margin-bottom: 24px;">
-                        <strong>🌍 Dampak Pendidikan Berkualitas (SDG 4):</strong><br>
-                        <?= e($generated_plan['sdg_competency']) ?>
+                    <div style="padding: 14px 18px; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: var(--radius-md); font-size: 12px; color: #15803d; margin-bottom: 24px; display: flex; align-items: flex-start; gap: 10px;">
+                        <span style="display: inline-flex; margin-top: 2px;"><?= icon('award', '', '18px') ?></span>
+                        <div>
+                            <strong>Dampak Pendidikan Berkualitas (SDG 4):</strong><br>
+                            <?= e($generated_plan['sdg_competency']) ?>
+                        </div>
                     </div>
 
                     <!-- CTA Gunakan di Request Pertukaran -->

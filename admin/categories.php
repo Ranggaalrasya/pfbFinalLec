@@ -106,8 +106,8 @@ if (is_db_connected()) {
         
         <!-- FORM TAMBAH KATEGORI -->
         <div style="background: white; border-radius: 12px; padding: 24px; border: 1px solid #e2e8f0; box-shadow: var(--shadow-sm);">
-            <h3 style="font-size: 16px; font-weight: 800; color: #0f172a; margin-bottom: 16px;">
-                ➕ Tambah Kategori Baru
+            <h3 style="font-size: 16px; font-weight: 800; color: #0f172a; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                <?= icon('plus', '', '16px') ?> Tambah Kategori Baru
             </h3>
 
             <form action="categories.php" method="POST">
@@ -173,8 +173,10 @@ if (is_db_connected()) {
                         <?php else: ?>
                             <?php foreach ($categories as $cat): ?>
                                 <tr style="border-bottom: 1px solid #f1f5f9;">
-                                    <td style="padding: 14px 16px; font-size: 24px; text-align: center;">
-                                        <?= e($cat['icon']) ?>
+                                    <td style="padding: 14px 16px; text-align: center; color: var(--blue-600);">
+                                        <div style="display: flex; justify-content: center;">
+                                            <?= category_icon_svg($cat['icon'], '22px') ?>
+                                        </div>
                                     </td>
                                     <td style="padding: 14px 16px;">
                                         <strong style="color: #0f172a; font-size: 14px; display: block;">
@@ -201,8 +203,8 @@ if (is_db_connected()) {
                                                 </button>
                                             </form>
                                         <?php else: ?>
-                                            <span style="font-size: 11px; color: #94a3b8;" title="Kategori masih punya skill aktif">
-                                                Terkunci 🔒
+                                            <span style="font-size: 11px; color: #94a3b8; display: inline-flex; align-items: center; gap: 4px;" title="Kategori masih punya skill aktif">
+                                                <?= icon('shield', '', '12px') ?> Terkunci
                                             </span>
                                         <?php endif; ?>
                                     </td>

@@ -158,9 +158,11 @@ if (is_db_connected() && (!empty($my_offers) || !empty($my_wants))) {
 
     <!-- Header Halaman SkillMatch -->
     <div style="text-align: center; max-width: 720px; margin: 0 auto 40px;">
-        <span class="section-tag" style="background: var(--lime); color: var(--lime-dark);">✨ Algoritma Rekomendasi</span>
-        <h1 style="font-size: 32px; font-weight: 800; color: var(--ink); margin-top: 10px;">
-            SkillMatch™ Partner Finder 🎯
+        <span class="section-tag" style="background: var(--lime); color: var(--lime-dark); display: inline-flex; align-items: center; gap: 6px;">
+            <?= icon('sparkles', '', '14px') ?> Algoritma Rekomendasi
+        </span>
+        <h1 style="font-size: 32px; font-weight: 800; color: var(--ink); margin-top: 10px; display: flex; align-items: center; justify-content: center; gap: 10px;">
+            SkillMatch™ Partner Finder <?= icon('target', '', '28px') ?>
         </h1>
         <p style="font-size: 15px; color: var(--gray-600); margin-top: 8px;">
             Sistem otomatis mencocokkan keahlianmu dengan mahasiswa lain yang memiliki kebutuhan saling melengkapi, jadwal sinkron, dan reputasi terpercaya.
@@ -170,7 +172,9 @@ if (is_db_connected() && (!empty($my_offers) || !empty($my_wants))) {
     <!-- Peringatan Kalo User Belum Nambahin Skill -->
     <?php if (empty($my_offers) && empty($my_wants)): ?>
         <div style="background: var(--white); border-radius: var(--radius-xl); padding: 50px 20px; text-align: center; box-shadow: var(--shadow-sm); border: 1px solid var(--gray-200); max-width: 600px; margin: 0 auto;">
-            <div style="font-size: 48px; margin-bottom: 12px;">🌱</div>
+            <div style="color: var(--gray-400); margin-bottom: 12px; display: flex; justify-content: center;">
+                <?= icon('sprout', '', '48px') ?>
+            </div>
             <h3 style="font-size: 20px; font-weight: 800; color: var(--ink);">Profil Skill Kamu Masih Kosong</h3>
             <p style="font-size: 14px; color: var(--gray-600); margin: 8px 0 24px;">
                 Tambahkan minimal 1 skill yang bisa kamu ajarkan dan 1 skill yang ingin kamu pelajari agar SkillMatch bisa menghitung persentase kecocokanmu!
@@ -179,7 +183,9 @@ if (is_db_connected() && (!empty($my_offers) || !empty($my_wants))) {
         </div>
     <?php elseif (empty($candidates)): ?>
         <div style="background: var(--white); border-radius: var(--radius-xl); padding: 50px 20px; text-align: center; box-shadow: var(--shadow-sm); border: 1px solid var(--gray-200); max-width: 600px; margin: 0 auto;">
-            <div style="font-size: 48px; margin-bottom: 12px;">🤝</div>
+            <div style="color: var(--gray-400); margin-bottom: 12px; display: flex; justify-content: center;">
+                <?= icon('handshake', '', '48px') ?>
+            </div>
             <h3 style="font-size: 20px; font-weight: 800; color: var(--ink);">Belum Menemukan Match yang Cocok</h3>
             <p style="font-size: 14px; color: var(--gray-600); margin: 8px 0 24px;">
                 Coba tambahkan lebih banyak variasi skill incaran di menu Skill Saya, atau telusuri semua penawaran di menu Cari Skill.
@@ -200,8 +206,8 @@ if (is_db_connected() && (!empty($my_offers) || !empty($my_wants))) {
                     
                     <!-- Pita Highlight untuk Swap Sempurna (Mutual) -->
                     <?php if ($is_perfect): ?>
-                        <div style="position: absolute; top: 0; right: 0; background: var(--lime); color: var(--lime-dark); font-size: 11px; font-weight: 800; padding: 6px 18px; border-radius: 0 0 0 var(--radius-md); text-transform: uppercase;">
-                            ⚡ Swap Sempurna (Saling Membutuhkan)
+                        <div style="position: absolute; top: 0; right: 0; background: var(--lime); color: var(--lime-dark); font-size: 11px; font-weight: 800; padding: 6px 18px; border-radius: 0 0 0 var(--radius-md); text-transform: uppercase; display: inline-flex; align-items: center; gap: 4px;">
+                            <?= icon('repeat', '', '12px') ?> Swap Sempurna
                         </div>
                     <?php endif; ?>
 
@@ -209,13 +215,7 @@ if (is_db_connected() && (!empty($my_offers) || !empty($my_wants))) {
                         
                         <!-- Info Partner Kiri -->
                         <div style="display: flex; align-items: center; gap: 18px; flex: 1; min-width: 280px;">
-                            <div style="width: 64px; height: 64px; border-radius: 50%; overflow: hidden; background: var(--blue-500); color: var(--white); display: flex; align-items: center; justify-content: center; font-size: 26px; font-weight: 800; flex-shrink: 0;">
-                                <?php if (!empty($cand['photo']) && file_exists(__DIR__ . '/uploads/avatars/' . $cand['photo'])): ?>
-                                    <img src="uploads/avatars/<?= e($cand['photo']) ?>" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover;">
-                                <?php else: ?>
-                                    <?= strtoupper(substr($cand['name'], 0, 1)) ?>
-                                <?php endif; ?>
-                            </div>
+                            <?= render_avatar($cand['photo'], $cand['name'], 64) ?>
 
                             <div>
                                 <h3 style="font-size: 18px; font-weight: 800; color: var(--ink);">
@@ -225,7 +225,7 @@ if (is_db_connected() && (!empty($my_offers) || !empty($my_wants))) {
                                     <?= e($cand['major']) ?> • Angkatan <?= e($cand['batch_year'] ?? '-') ?>
                                 </p>
                                 <div style="display: flex; align-items: center; gap: 6px; margin-top: 6px; font-size: 12px;">
-                                    <span style="color: var(--star);">★</span>
+                                    <span style="color: var(--star); display: inline-flex; align-items: center;"><?= icon('star', '', '13px') ?></span>
                                     <strong><?= number_format((float)$cand['avg_rating'], 1) ?></strong>
                                     <span style="color: var(--gray-400);">• <?= (int)$cand['review_count'] ?> sesi selesai</span>
                                 </div>
@@ -254,8 +254,8 @@ if (is_db_connected() && (!empty($my_offers) || !empty($my_wants))) {
                         
                         <!-- Apa yang bisa kamu pelajari dari dia -->
                         <div style="background: var(--blue-50); border-radius: var(--radius-md); padding: 12px 16px;">
-                            <span style="font-size: 11px; font-weight: 700; color: var(--blue-600); text-transform: uppercase;">
-                                🎓 Kamu Akan Pelajari:
+                            <span style="font-size: 11px; font-weight: 700; color: var(--blue-600); text-transform: uppercase; display: flex; align-items: center; gap: 6px;">
+                                <?= icon('graduation-cap', '', '14px') ?> Kamu Akan Pelajari:
                             </span>
                             <div style="font-size: 13px; font-weight: 700; color: var(--ink); margin-top: 4px;">
                                 <?= !empty($cand['matched_get']) ? e(implode(', ', $cand['matched_get'])) : '<span style="color:var(--gray-400); font-weight:400;">Pilihan terbuka (kamu ajari dia)</span>' ?>
@@ -264,8 +264,8 @@ if (is_db_connected() && (!empty($my_offers) || !empty($my_wants))) {
 
                         <!-- Apa yang bisa kamu ajarkan ke dia -->
                         <div style="background: #f7fee7; border-radius: var(--radius-md); padding: 12px 16px;">
-                            <span style="font-size: 11px; font-weight: 700; color: #65a30d; text-transform: uppercase;">
-                                💡 Kamu Akan Ajarkan:
+                            <span style="font-size: 11px; font-weight: 700; color: #65a30d; text-transform: uppercase; display: flex; align-items: center; gap: 6px;">
+                                <?= icon('lightbulb', '', '14px') ?> Kamu Akan Ajarkan:
                             </span>
                             <div style="font-size: 13px; font-weight: 700; color: var(--ink); margin-top: 4px;">
                                 <?= !empty($cand['matched_give']) ? e(implode(', ', $cand['matched_give'])) : '<span style="color:var(--gray-400); font-weight:400;">Bisa gunakan sistem 15 Poin</span>' ?>

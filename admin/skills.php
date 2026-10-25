@@ -138,8 +138,8 @@ if (is_db_connected()) {
         
         <!-- FORM TAMBAH SKILL -->
         <div style="background: white; border-radius: 12px; padding: 24px; border: 1px solid #e2e8f0; box-shadow: var(--shadow-sm);">
-            <h3 style="font-size: 16px; font-weight: 800; color: #0f172a; margin-bottom: 16px;">
-                ➕ Tambah Skill Baru
+            <h3 style="font-size: 16px; font-weight: 800; color: #0f172a; margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                <?= icon('plus', '', '16px') ?> Tambah Skill Baru
             </h3>
 
             <form action="skills.php" method="POST">
@@ -248,8 +248,9 @@ if (is_db_connected()) {
                                             </span>
                                         </td>
                                         <td style="padding: 12px 16px; white-space: nowrap;">
-                                            <span style="font-size: 12px; font-weight: 600; color: #334155;">
-                                                <?= e($sk['category_icon']) ?> <?= e($sk['category_name']) ?>
+                                            <span style="font-size: 12px; font-weight: 600; color: #334155; display: inline-flex; align-items: center; gap: 6px;">
+                                                <span style="display: inline-flex; color: var(--blue-600);"><?= category_icon_svg($sk['category_icon'], '14px') ?></span>
+                                                <?= e($sk['category_name']) ?>
                                             </span>
                                         </td>
                                         <td style="padding: 12px 16px; text-align: center;">

@@ -137,7 +137,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             <!-- Header Form -->
             <div style="text-align: center; margin-bottom: 32px;">
-                <span class="section-tag" style="background: var(--lime); color: var(--lime-dark);">✨ Bonus +20 Poin</span>
+                <span class="section-tag" style="background: var(--lime); color: var(--lime-dark); display: inline-flex; align-items: center; gap: 6px;">
+                    <?= icon('sparkles', '', '14px') ?> Bonus +20 Poin
+                </span>
                 <h1 style="font-size: 28px; font-weight: 800; color: var(--ink); margin-top: 10px;">Gabung TukarSkill</h1>
                 <p style="font-size: 14px; color: var(--gray-600); margin-top: 6px;">
                     Mulai tukar skill dengan teman kampus. 100% gratis tanpa biaya les!
@@ -146,8 +148,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <!-- Pesan Error Global -->
             <?php if (!empty($errors['general'])): ?>
-                <div style="background: #fee2e2; border-left: 4px solid var(--danger); color: #991b1b; padding: 12px 16px; border-radius: var(--radius-sm); margin-bottom: 24px; font-size: 13px;">
-                    <?= e($errors['general']) ?>
+                <div style="background: #fee2e2; border-left: 4px solid var(--danger); color: #991b1b; padding: 12px 16px; border-radius: var(--radius-sm); margin-bottom: 24px; font-size: 13px; display: flex; align-items: center; gap: 8px;">
+                    <?= icon('alert-circle', '', '16px') ?>
+                    <span><?= e($errors['general']) ?></span>
                 </div>
             <?php endif; ?>
 

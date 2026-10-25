@@ -88,8 +88,8 @@ if ($next_badge) {
 
     <!-- HEADER DOMPET -->
     <div style="margin-bottom: 32px;">
-        <span class="badge-tag" style="background: var(--blue-100); color: var(--blue-600); margin-bottom: 8px;">
-            🪙 TukarSkill Gamification & Reward
+        <span class="badge-tag" style="background: var(--blue-100); color: var(--blue-600); margin-bottom: 8px; display: inline-flex; align-items: center; gap: 6px;">
+            <?= icon('coins', '', 14) ?> <span>TukarSkill Gamification & Reward</span>
         </span>
         <h1 style="font-size: 28px; font-weight: 800; color: var(--ink);">
             Dompet Poin & Koleksi Badge
@@ -104,7 +104,9 @@ if ($next_badge) {
         
         <!-- KARTU 1: Saldo Poin Sekarang -->
         <div style="background: linear-gradient(135deg, var(--blue-600) 0%, #1e40af 100%); border-radius: var(--radius-xl); padding: 28px; color: var(--white); box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.4); position: relative; overflow: hidden;">
-            <div style="position: absolute; right: -15px; bottom: -20px; font-size: 110px; opacity: 0.15; user-select: none;">🪙</div>
+            <div style="position: absolute; right: -15px; bottom: -20px; opacity: 0.12; color: #ffffff; user-select: none;">
+                <?= icon('coins', '', 140) ?>
+            </div>
             <span style="font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.9;">Saldo Poin Aktif</span>
             <div style="font-size: 42px; font-weight: 900; margin: 10px 0 6px;">
                 <?= number_format($current_points, 0, ',', '.') ?> <span style="font-size: 20px; font-weight: 600;">Poin</span>
@@ -118,8 +120,10 @@ if ($next_badge) {
         <div style="background: var(--white); border-radius: var(--radius-xl); padding: 28px; border: 1px solid var(--gray-200); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; justify-content: space-between;">
             <div>
                 <span style="font-size: 12px; font-weight: 700; color: var(--gray-400); text-transform: uppercase; letter-spacing: 0.5px;">Gelar & Badge Kamu</span>
-                <div style="display: flex; align-items: center; gap: 12px; margin-top: 12px;">
-                    <div style="font-size: 36px;"><?= $active_badge['icon'] ?? '🌱' ?></div>
+                <div style="display: flex; align-items: center; gap: 14px; margin-top: 12px;">
+                    <div style="color: var(--blue-600); width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--blue-50); display: flex; align-items: center; justify-content: center;">
+                        <?= badge_icon_svg($active_badge['name'] ?? 'Bibit', 28) ?>
+                    </div>
                     <div>
                         <div style="font-size: 20px; font-weight: 800; color: var(--ink);">
                             <?= e($active_badge['name'] ?? 'Bibit Mahasiswa') ?>
@@ -142,8 +146,8 @@ if ($next_badge) {
                         <div style="width: <?= $progress_pct ?>%; height: 100%; background: var(--blue-500); border-radius: 999px;"></div>
                     </div>
                 <?php else: ?>
-                    <div style="font-size: 12px; font-weight: 700; color: #16a34a; background: #f0fdf4; padding: 6px 12px; border-radius: var(--radius-md); text-align: center;">
-                        🏆 Kamu telah mencapai badge kasta tertinggi!
+                    <div style="font-size: 12px; font-weight: 700; color: #16a34a; background: #f0fdf4; padding: 8px 12px; border-radius: var(--radius-md); text-align: center; display: flex; align-items: center; justify-content: center; gap: 6px;">
+                        <?= icon('trophy', '', 16) ?> <span>Kamu telah mencapai badge kasta tertinggi!</span>
                     </div>
                 <?php endif; ?>
             </div>
@@ -160,8 +164,8 @@ if ($next_badge) {
                     Total reputasi kontribusi kamu di platform TukarSkill sejak awal.
                 </p>
             </div>
-            <a href="leaderboard.php" class="btn btn-outline btn-sm" style="align-self: flex-start; margin-top: 14px;">
-                Lihat Ranking Leaderboard 🏆
+            <a href="leaderboard.php" class="btn btn-outline btn-sm" style="align-self: flex-start; margin-top: 14px; display: inline-flex; align-items: center; gap: 6px;">
+                <span>Lihat Ranking Leaderboard</span> <?= icon('arrow-up-right', '', 12) ?>
             </a>
         </div>
 
@@ -169,8 +173,8 @@ if ($next_badge) {
 
     <!-- SECTION KOLEKSI SEMUA BADGE -->
     <div style="background: var(--white); border-radius: var(--radius-xl); padding: 32px; border: 1px solid var(--gray-200); box-shadow: var(--shadow-sm); margin-bottom: 36px;">
-        <h3 style="font-size: 18px; font-weight: 800; color: var(--ink); margin-bottom: 6px;">
-            Pohon Gelar & Reputasi Badge 🎖️
+        <h3 style="font-size: 18px; font-weight: 800; color: var(--ink); margin-bottom: 6px; display: flex; align-items: center; gap: 8px;">
+            <?= icon('medal', '', 20) ?> <span>Pohon Gelar & Reputasi Badge</span>
         </h3>
         <p style="font-size: 13px; color: var(--gray-600); margin-bottom: 24px;">
             Badge akan terbuka otomatis begitu saldo poinmu mencapai syarat minimal. Tunjukkan reputasimu ke calon partner!
@@ -180,19 +184,19 @@ if ($next_badge) {
             <?php foreach ($badges as $bg): 
                 $unlocked = ($bg['earned_at'] !== null) || ($current_points >= (int)$bg['min_points']);
             ?>
-                <div style="border: 2px solid <?= $unlocked ? 'var(--blue-400)' : 'var(--gray-200)' ?>; background: <?= $unlocked ? '#f8fafc' : '#f9fafb' ?>; border-radius: var(--radius-lg); padding: 20px; text-align: center; position: relative; opacity: <?= $unlocked ? '1' : '0.6' ?>;">
+                <div style="border: 2px solid <?= $unlocked ? 'var(--blue-400)' : 'var(--gray-200)' ?>; background: <?= $unlocked ? '#f8fafc' : '#f9fafb' ?>; border-radius: var(--radius-lg); padding: 22px; text-align: center; position: relative; opacity: <?= $unlocked ? '1' : '0.65' ?>;">
                     <?php if ($unlocked): ?>
-                        <span style="position: absolute; top: 12px; right: 12px; font-size: 10px; font-weight: 800; background: #dcfce7; color: #15803d; padding: 2px 8px; border-radius: 999px;">
-                            TERBUKA ✓
+                        <span style="position: absolute; top: 12px; right: 12px; font-size: 10px; font-weight: 800; background: #dcfce7; color: #15803d; padding: 2px 8px; border-radius: 999px; display: inline-flex; align-items: center; gap: 3px;">
+                            <?= icon('check', '', 10) ?> TERBUKA
                         </span>
                     <?php else: ?>
-                        <span style="position: absolute; top: 12px; right: 12px; font-size: 10px; font-weight: 800; background: var(--gray-200); color: var(--gray-600); padding: 2px 8px; border-radius: 999px;">
-                            🔒 TERKUNCI
+                        <span style="position: absolute; top: 12px; right: 12px; font-size: 10px; font-weight: 800; background: var(--gray-200); color: var(--gray-600); padding: 2px 8px; border-radius: 999px; display: inline-flex; align-items: center; gap: 3px;">
+                            <?= icon('lock', '', 10) ?> TERKUNCI
                         </span>
                     <?php endif; ?>
 
-                    <div style="font-size: 42px; margin-bottom: 10px; filter: <?= $unlocked ? 'none' : 'grayscale(100%)' ?>;">
-                        <?= e($bg['icon']) ?>
+                    <div style="width: 56px; height: 56px; margin: 0 auto 12px; border-radius: var(--radius-md); background: <?= $unlocked ? 'var(--blue-50)' : 'var(--gray-100)' ?>; color: <?= $unlocked ? 'var(--blue-600)' : 'var(--gray-400)' ?>; display: flex; align-items: center; justify-content: center;">
+                        <?= badge_icon_svg($bg['name'], 28) ?>
                     </div>
                     <strong style="font-size: 15px; color: var(--ink); display: block; margin-bottom: 4px;">
                         <?= e($bg['name']) ?>
@@ -214,19 +218,19 @@ if ($next_badge) {
         <!-- TABEL RIWAYAT TRANSAKSI POIN -->
         <div style="background: var(--white); border-radius: var(--radius-xl); padding: 32px; border: 1px solid var(--gray-200); box-shadow: var(--shadow-sm);">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                <h3 style="font-size: 18px; font-weight: 800; color: var(--ink);">
-                    Aktivitas & Riwayat Transaksi 📜
+                <h3 style="font-size: 18px; font-weight: 800; color: var(--ink); display: flex; align-items: center; gap: 8px;">
+                    <?= icon('file-text', '', 18) ?> <span>Aktivitas & Riwayat Transaksi</span>
                 </h3>
                 <span style="font-size: 12px; color: var(--gray-400);">50 aktivitas terakhir</span>
             </div>
 
             <?php if (empty($transactions)): ?>
                 <div style="text-align: center; padding: 40px 20px; color: var(--gray-400);">
-                    <div style="font-size: 36px; margin-bottom: 8px;">📭</div>
+                    <div style="margin-bottom: 8px;"><?= icon('file-text', '', 36) ?></div>
                     <p style="font-size: 14px;">Belum ada riwayat transaksi poin tercatat.</p>
                 </div>
             <?php else: ?>
-                <div style="overflow-x: auto;">
+                <div style="overflow-x: auto; border-radius: var(--radius-md);">
                     <table style="width: 100%; border-collapse: collapse; font-size: 13px; text-align: left;">
                         <thead>
                             <tr style="border-bottom: 2px solid var(--gray-200); color: var(--gray-600);">
@@ -268,50 +272,64 @@ if ($next_badge) {
         <div style="display: flex; flex-direction: column; gap: 24px;">
             
             <div style="background: var(--white); border-radius: var(--radius-xl); padding: 28px; border: 1px solid var(--gray-200); box-shadow: var(--shadow-sm);">
-                <h4 style="font-size: 16px; font-weight: 800; color: var(--ink); margin-bottom: 14px;">
-                    Cara Mengumpulkan Poin 🌱
+                <h4 style="font-size: 16px; font-weight: 800; color: var(--ink); margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
+                    <?= icon('coins', '', 18) ?> <span>Cara Mengumpulkan Poin</span>
                 </h4>
                 <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; font-size: 13px;">
                     <li style="display: flex; justify-content: space-between; align-items: center;">
-                        <span style="color: var(--gray-600);">🎉 Daftar Akun Baru</span>
+                        <span style="color: var(--gray-600); display: inline-flex; align-items: center; gap: 6px;">
+                            <?= icon('plus', '', 14) ?> Daftar Akun Baru
+                        </span>
                         <strong style="color: #16a34a;">+20 Poin</strong>
                     </li>
                     <li style="display: flex; justify-content: space-between; align-items: center;">
-                        <span style="color: var(--gray-600);">📝 Lengkapi Profil & Kontak WA</span>
+                        <span style="color: var(--gray-600); display: inline-flex; align-items: center; gap: 6px;">
+                            <?= icon('user', '', 14) ?> Lengkapi Profil & Kontak
+                        </span>
                         <strong style="color: #16a34a;">+10 Poin</strong>
                     </li>
                     <li style="display: flex; justify-content: space-between; align-items: center;">
-                        <span style="color: var(--gray-600);">🎓 Tuntas Mengajar Teman</span>
+                        <span style="color: var(--gray-600); display: inline-flex; align-items: center; gap: 6px;">
+                            <?= icon('graduation-cap', '', 14) ?> Tuntas Mengajar Teman
+                        </span>
                         <strong style="color: #16a34a;">+20 Poin</strong>
                     </li>
                     <li style="display: flex; justify-content: space-between; align-items: center;">
-                        <span style="color: var(--gray-600);">🪙 Mengajar via Pembayaran Poin</span>
+                        <span style="color: var(--gray-600); display: inline-flex; align-items: center; gap: 6px;">
+                            <?= icon('coins', '', 14) ?> Sesi via Pembayaran Poin
+                        </span>
                         <strong style="color: #16a34a;">+35 Poin</strong>
                     </li>
                     <li style="display: flex; justify-content: space-between; align-items: center;">
-                        <span style="color: var(--gray-600);">✍️ Memberikan Review Partner</span>
+                        <span style="color: var(--gray-600); display: inline-flex; align-items: center; gap: 6px;">
+                            <?= icon('edit', '', 14) ?> Memberikan Review Partner
+                        </span>
                         <strong style="color: #16a34a;">+5 Poin</strong>
                     </li>
                     <li style="display: flex; justify-content: space-between; align-items: center;">
-                        <span style="color: var(--gray-600);">⭐ Mendapat Rating Bintang 5</span>
+                        <span style="color: var(--gray-600); display: inline-flex; align-items: center; gap: 6px;">
+                            <?= icon('star', '', 14) ?> Mendapat Rating Bintang 5
+                        </span>
                         <strong style="color: #16a34a;">+10 Poin</strong>
                     </li>
                 </ul>
             </div>
 
             <div style="background: var(--mint); border-radius: var(--radius-xl); padding: 28px; border: 1px solid #bbf7d0;">
-                <h4 style="font-size: 16px; font-weight: 800; color: var(--mint-dark); margin-bottom: 8px;">
-                    Dukungan SDG 4 Quality Education 🌍
+                <h4 style="font-size: 16px; font-weight: 800; color: var(--mint-dark); margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                    <?= icon('shield-check', '', 18) ?> <span>Dukungan SDG 4 Quality Education</span>
                 </h4>
                 <p style="font-size: 12px; color: var(--ink); line-height: 1.5; margin-bottom: 14px;">
                     Sistem poin di TukarSkill bukan mata uang komersial, melainkan metrik penghargaan atas kesediaan mahasiswa saling mendidik sesama tanpa batasan finansial.
                 </p>
-                <a href="discover.php" class="btn btn-primary btn-sm" style="width: 100%; text-align: center;">
-                    Cari Teman Belajar Sekarang ↗
+                <a href="discover.php" class="btn btn-primary btn-sm" style="width: 100%; text-align: center; display: inline-flex; align-items: center; justify-content: center; gap: 6px;">
+                    <span>Cari Teman Belajar Sekarang</span> <?= icon('arrow-up-right', '', 12) ?>
                 </a>
             </div>
 
         </div>
+
+    </div>
 
     </div>
 

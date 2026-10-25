@@ -201,22 +201,28 @@ if (is_db_connected()) {
                 Atur kemampuan yang bisa kamu ajarkan, skill yang ingin kamu pelajari, dan jam luangmu.
             </p>
         </div>
-        <div style="display: flex; gap: 10px;">
-            <a href="dashboard.php" class="btn btn-outline btn-sm">← Dashboard</a>
-            <a href="skillmatch.php" class="btn btn-primary btn-sm">✨ Lihat Hasil SkillMatch →</a>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <a href="dashboard.php" class="btn btn-outline btn-sm" style="display: inline-flex; align-items: center; gap: 6px;">
+                <?= icon('arrow-left', '', '14px') ?> Dashboard
+            </a>
+            <a href="skillmatch.php" class="btn btn-primary btn-sm" style="display: inline-flex; align-items: center; gap: 6px;">
+                <?= icon('sparkles', '', '14px') ?> Lihat SkillMatch →
+            </a>
         </div>
     </div>
 
     <!-- Alert Notifikasi Sukses / Gagal -->
     <?php if (!empty($success_msg)): ?>
-        <div style="background: var(--mint); border-left: 4px solid #10b981; color: var(--mint-dark); padding: 14px 20px; border-radius: var(--radius-sm); margin-bottom: 24px; font-weight: 600; font-size: 14px;">
-            <?= e($success_msg) ?>
+        <div style="background: var(--mint); border-left: 4px solid #10b981; color: var(--mint-dark); padding: 14px 20px; border-radius: var(--radius-sm); margin-bottom: 24px; font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 10px;">
+            <?= icon('check-circle', '', '18px') ?>
+            <span><?= e($success_msg) ?></span>
         </div>
     <?php endif; ?>
 
     <?php if (!empty($error_msg)): ?>
-        <div style="background: #fee2e2; border-left: 4px solid var(--danger); color: #991b1b; padding: 14px 20px; border-radius: var(--radius-sm); margin-bottom: 24px; font-weight: 600; font-size: 14px;">
-            <?= e($error_msg) ?>
+        <div style="background: #fee2e2; border-left: 4px solid var(--danger); color: #991b1b; padding: 14px 20px; border-radius: var(--radius-sm); margin-bottom: 24px; font-weight: 600; font-size: 14px; display: flex; align-items: center; gap: 10px;">
+            <?= icon('alert-circle', '', '18px') ?>
+            <span><?= e($error_msg) ?></span>
         </div>
     <?php endif; ?>
 
@@ -225,8 +231,8 @@ if (is_db_connected()) {
         
         <!-- KOLOM KIRI: Form Tambah Skill -->
         <div style="background: var(--white); border-radius: var(--radius-xl); padding: 32px; box-shadow: var(--shadow-sm); border: 1px solid var(--gray-200);">
-            <h3 style="font-size: 18px; font-weight: 800; color: var(--ink); margin-bottom: 18px;">
-                + Tambah Skill Baru
+            <h3 style="font-size: 18px; font-weight: 800; color: var(--ink); margin-bottom: 18px; display: flex; align-items: center; gap: 8px;">
+                <?= icon('plus', '', '18px') ?> Tambah Skill Baru
             </h3>
 
             <form action="my-skills.php" method="POST">
@@ -313,7 +319,7 @@ if (is_db_connected()) {
                             <div style="padding: 14px 18px; background: var(--blue-50); border-radius: var(--radius-md); display: flex; justify-content: space-between; align-items: center; gap: 12px;">
                                 <div>
                                     <div style="display: flex; align-items: center; gap: 8px;">
-                                        <span style="font-size: 16px;"><?= e($os['category_icon']) ?></span>
+                                        <span style="display: inline-flex; align-items: center; color: var(--blue-600);"><?= category_icon_svg($os['category_icon'], '16px') ?></span>
                                         <strong style="font-size: 14px; color: var(--ink);"><?= e($os['skill_name']) ?></strong>
                                         <span class="badge-tag" style="background: var(--white); color: var(--blue-600); font-size: 11px;">
                                             <?= ucfirst(e($os['level'])) ?>
@@ -327,7 +333,9 @@ if (is_db_connected()) {
                                     <?= csrf_field() ?>
                                     <input type="hidden" name="action" value="delete_skill">
                                     <input type="hidden" name="user_skill_id" value="<?= (int)$os['id'] ?>">
-                                    <button type="submit" style="background: none; border: none; color: var(--danger); cursor: pointer; font-size: 16px;" title="Hapus">✕</button>
+                                    <button type="submit" style="background: none; border: none; color: var(--danger); cursor: pointer; display: inline-flex; align-items: center; padding: 6px; border-radius: var(--radius-sm);" title="Hapus">
+                                        <?= icon('trash', '', '16px') ?>
+                                    </button>
                                 </form>
                             </div>
                         <?php endforeach; ?>
@@ -357,7 +365,7 @@ if (is_db_connected()) {
                             <div style="padding: 14px 18px; background: #f7fee7; border-radius: var(--radius-md); display: flex; justify-content: space-between; align-items: center; gap: 12px;">
                                 <div>
                                     <div style="display: flex; align-items: center; gap: 8px;">
-                                        <span style="font-size: 16px;"><?= e($ws['category_icon']) ?></span>
+                                        <span style="display: inline-flex; align-items: center; color: #65a30d;"><?= category_icon_svg($ws['category_icon'], '16px') ?></span>
                                         <strong style="font-size: 14px; color: var(--ink);"><?= e($ws['skill_name']) ?></strong>
                                         <span class="badge-tag" style="background: var(--white); color: #65a30d; font-size: 11px;">
                                             Target: <?= ucfirst(e($ws['level'])) ?>
@@ -371,7 +379,9 @@ if (is_db_connected()) {
                                     <?= csrf_field() ?>
                                     <input type="hidden" name="action" value="delete_skill">
                                     <input type="hidden" name="user_skill_id" value="<?= (int)$ws['id'] ?>">
-                                    <button type="submit" style="background: none; border: none; color: var(--danger); cursor: pointer; font-size: 16px;" title="Hapus">✕</button>
+                                    <button type="submit" style="background: none; border: none; color: var(--danger); cursor: pointer; display: inline-flex; align-items: center; padding: 6px; border-radius: var(--radius-sm);" title="Hapus">
+                                        <?= icon('trash', '', '16px') ?>
+                                    </button>
                                 </form>
                             </div>
                         <?php endforeach; ?>
@@ -387,7 +397,9 @@ if (is_db_connected()) {
     <div style="background: var(--white); border-radius: var(--radius-xl); padding: 36px; box-shadow: var(--shadow-sm); border: 1px solid var(--gray-200);">
         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 24px;">
             <div>
-                <h3 style="font-size: 20px; font-weight: 800; color: var(--ink);">Jadwal Ketersediaan Barter 🕒</h3>
+                <h3 style="font-size: 20px; font-weight: 800; color: var(--ink); display: flex; align-items: center; gap: 8px;">
+                    <?= icon('calendar', '', '20px') ?> Jadwal Ketersediaan Barter
+                </h3>
                 <p style="font-size: 13px; color: var(--gray-600); margin-top: 2px;">
                     Tentukan hari dan jam luangmu di luar jam kuliah agar calon partner tahu kapan kamu bisa diajak sesi belajar.
                 </p>
@@ -438,13 +450,15 @@ if (is_db_connected()) {
                 </p>
             <?php else: ?>
                 <?php foreach ($my_availabilities as $av): ?>
-                    <div style="background: var(--blue-50); border: 1px solid var(--blue-100); padding: 10px 16px; border-radius: var(--radius-pill); display: flex; align-items: center; gap: 10px; font-size: 13px;">
+                    <div style="background: var(--blue-50); border: 1px solid var(--blue-100); padding: 10px 16px; border-radius: var(--radius-pill); display: inline-flex; align-items: center; gap: 10px; font-size: 13px;">
                         <strong><?= ucfirst(e($av['day'])) ?></strong>: <?= substr(e($av['start_time']), 0, 5) ?> - <?= substr(e($av['end_time']), 0, 5) ?> WIB
-                        <form action="my-skills.php" method="POST" onsubmit="return confirm('Hapus slot jadwal ini?');" style="display: inline;">
+                        <form action="my-skills.php" method="POST" onsubmit="return confirm('Hapus slot jadwal ini?');" style="display: inline; margin: 0;">
                             <?= csrf_field() ?>
                             <input type="hidden" name="action" value="delete_availability">
                             <input type="hidden" name="avail_id" value="<?= (int)$av['id'] ?>">
-                            <button type="submit" style="background: none; border: none; color: var(--danger); cursor: pointer; font-size: 14px; font-weight: 700;" title="Hapus">✕</button>
+                            <button type="submit" style="background: none; border: none; color: var(--danger); cursor: pointer; display: inline-flex; align-items: center; padding: 2px;" title="Hapus">
+                                <?= icon('x', '', '14px') ?>
+                            </button>
                         </form>
                     </div>
                 <?php endforeach; ?>

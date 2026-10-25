@@ -63,8 +63,8 @@ if (is_db_connected()) {
     <!-- HEADER TITLE & TOMBOL MARK ALL READ -->
     <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 28px; gap: 16px; flex-wrap: wrap;">
         <div>
-            <span class="badge-tag" style="background: var(--blue-100); color: var(--blue-600); margin-bottom: 8px;">
-                🔔 Notifikasi & Aktivitas
+            <span class="badge-tag" style="background: var(--blue-100); color: var(--blue-600); margin-bottom: 8px; display: inline-flex; align-items: center; gap: 6px;">
+                <?= icon('bell', '', '14px') ?> Notifikasi & Aktivitas
             </span>
             <h1 style="font-size: 26px; font-weight: 800; color: var(--ink);">
                 Pusat Pemberitahuan
@@ -78,8 +78,8 @@ if (is_db_connected()) {
             <form action="notifications.php" method="POST">
                 <?= csrf_field() ?>
                 <input type="hidden" name="action" value="mark_all_read">
-                <button type="submit" class="btn btn-outline btn-sm">
-                    Tandai Semua Sudah Dibaca ✓
+                <button type="submit" class="btn btn-outline btn-sm" style="display: inline-flex; align-items: center; gap: 6px;">
+                    <?= icon('check', '', '14px') ?> Tandai Semua Dibaca
                 </button>
             </form>
         <?php endif; ?>
@@ -89,7 +89,9 @@ if (is_db_connected()) {
     <div style="background: var(--white); border-radius: var(--radius-xl); border: 1px solid var(--gray-200); box-shadow: var(--shadow-sm); overflow: hidden;">
         <?php if (empty($notifications)): ?>
             <div style="text-align: center; padding: 60px 20px; color: var(--gray-400);">
-                <div style="font-size: 44px; margin-bottom: 12px;">🔕</div>
+                <div style="color: var(--gray-400); margin-bottom: 12px; display: flex; justify-content: center;">
+                    <?= icon('bell', '', '44px') ?>
+                </div>
                 <strong style="font-size: 16px; color: var(--ink); display: block; margin-bottom: 4px;">
                     Kotak Notifikasimu Masih Bersih
                 </strong>
@@ -107,8 +109,8 @@ if (is_db_connected()) {
                     <a href="<?= e($target_link) ?>" style="display: flex; align-items: flex-start; gap: 16px; padding: 20px 24px; border-bottom: 1px solid var(--gray-100); text-decoration: none; background: <?= $is_unread ? '#f0f9ff' : 'var(--white)' ?>; transition: 0.15s ease;">
                         
                         <!-- Icon Notif -->
-                        <div style="width: 40px; height: 40px; border-radius: 50%; background: <?= $is_unread ? 'var(--blue-500)' : 'var(--gray-200)' ?>; color: <?= $is_unread ? 'var(--white)' : 'var(--gray-600)' ?>; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0;">
-                            <?= $is_unread ? '🔔' : '✉️' ?>
+                        <div style="width: 40px; height: 40px; border-radius: 50%; background: <?= $is_unread ? 'var(--blue-500)' : 'var(--gray-200)' ?>; color: <?= $is_unread ? 'var(--white)' : 'var(--gray-600)' ?>; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                            <?= $is_unread ? icon('bell', '', '18px') : icon('mail', '', '18px') ?>
                         </div>
 
                         <!-- Konten Pesan -->

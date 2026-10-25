@@ -9,6 +9,45 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+// load pustaka icon enterprise SVG
+require_once __DIR__ . '/icons.php';
+
+/**
+ * Ambil URL avatar user yang pasti valid dan tidak akan menghasilkan gambar rusak (404)
+ */
+function user_avatar_url($photo, $name = '') {
+    if (!empty($photo) && file_exists(__DIR__ . '/../uploads/avatars/' . $photo)) {
+        return 'uploads/avatars/' . htmlspecialchars($photo);
+    }
+    
+    // Cek avatar SVG spesifik nama panggilan (contoh: rangga, jennifer, lucky, dll)
+    $first_word = strtolower(explode(' ', trim((string)$name))[0] ?? '');
+    if ($first_word && file_exists(__DIR__ . '/../uploads/avatars/' . $first_word . '.svg')) {
+        return 'uploads/avatars/' . $first_word . '.svg';
+    }
+
+    if (file_exists(__DIR__ . '/../uploads/avatars/default.svg')) {
+        return 'uploads/avatars/default.svg';
+    }
+    return '';
+}
+
+/**
+ * Render avatar HTML yang elegan, tahan banting, dan ber-border radius bulat sempurna
+ */
+function render_avatar($photo, $name, $size = 40, $extra_class = '') {
+    $url = user_avatar_url($photo, $name);
+    $initial = strtoupper(substr(trim((string)$name), 0, 1) ?: 'U');
+    $size_px = (int)$size;
+
+    if ($url) {
+        return '<img src="' . e($url) . '" alt="' . e($name) . '" class="ts-avatar ' . e($extra_class) . '" style="width:' . $size_px . 'px; height:' . $size_px . 'px; border-radius:50%; object-fit:cover; border:2px solid #ffffff; box-shadow:0 2px 8px rgba(15,23,42,0.06); flex-shrink:0;">';
+    }
+
+    // Fallback inisial dengan gradien modern
+    return '<div class="ts-avatar-fallback ' . e($extra_class) . '" style="width:' . $size_px . 'px; height:' . $size_px . 'px; border-radius:50%; background:linear-gradient(135deg, #3b82f6, #1d4ed8); color:#ffffff; font-weight:800; font-size:' . round($size_px * 0.42) . 'px; display:inline-flex; align-items:center; justify-content:center; border:2px solid #ffffff; box-shadow:0 2px 8px rgba(15,23,42,0.06); flex-shrink:0;">' . e($initial) . '</div>';
+}
+
 /**
  * ini fungsi buat sanitize teks biar ga kena serangan XSS pas dicetak ke HTML
  */

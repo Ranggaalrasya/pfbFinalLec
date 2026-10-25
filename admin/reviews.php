@@ -178,15 +178,19 @@ if (is_db_connected()) {
                                     <span style="font-size: 11px; color: #64748b; display: block;"><?= e($rv['reviewee_major']) ?></span>
                                 </td>
                                 <td style="padding: 14px 16px; color: #eab308; font-size: 14px; white-space: nowrap;">
-                                    <?= str_repeat('★', (int)$rv['rating']) ?>
-                                    <span style="font-size: 11px; color: #64748b; font-weight: 700;">(<?= (int)$rv['rating'] ?>)</span>
+                                    <span style="display: inline-flex; align-items: center; gap: 2px;">
+                                        <?php for ($s = 1; $s <= 5; $s++): ?>
+                                            <?= icon('star', $s <= (int)$rv['rating'] ? 'text-star' : 'text-gray-300', '13px') ?>
+                                        <?php endfor; ?>
+                                    </span>
+                                    <span style="font-size: 11px; color: #64748b; font-weight: 700; margin-left: 4px;">(<?= (int)$rv['rating'] ?>)</span>
                                 </td>
                                 <td style="padding: 14px 16px; color: #334155; line-height: 1.5; font-style: italic;">
                                     "<?= e($rv['comment']) ?>"
                                     <?php if (!empty($rv['exchange_id'])): ?>
                                         <div style="margin-top: 4px;">
-                                            <a href="../exchange-detail.php?id=<?= $rv['exchange_id'] ?>" target="_blank" style="font-size: 11px; color: #2563eb; text-decoration: none; font-style: normal;">
-                                                🔗 Lihat Sesi #<?= $rv['exchange_id'] ?> (<?= strtoupper(e($rv['exchange_type'])) ?>)
+                                            <a href="../exchange-detail.php?id=<?= $rv['exchange_id'] ?>" target="_blank" style="font-size: 11px; color: #2563eb; text-decoration: none; font-style: normal; display: inline-flex; align-items: center; gap: 4px;">
+                                                <?= icon('external-link', '', '11px') ?> Sesi #<?= $rv['exchange_id'] ?> (<?= strtoupper(e($rv['exchange_type'])) ?>)
                                             </a>
                                         </div>
                                     <?php endif; ?>

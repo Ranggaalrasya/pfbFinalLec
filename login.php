@@ -103,8 +103,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             <!-- Header Form -->
             <div style="text-align: center; margin-bottom: 30px;">
-                <div class="logo-icon" style="margin: 0 auto 14px; width: 48px; height: 48px; font-size: 24px; border-radius: 16px;">
-                    🤝
+                <div class="logo-icon" style="margin: 0 auto 14px; width: 48px; height: 48px; border-radius: 16px; display: flex; align-items: center; justify-content: center; background: var(--blue-500); color: #fff;">
+                    <?= icon('handshake', '', '26px') ?>
                 </div>
                 <h1 style="font-size: 26px; font-weight: 800; color: var(--ink);">Masuk ke TukarSkill</h1>
                 <p style="font-size: 14px; color: var(--gray-600); margin-top: 6px;">
@@ -114,8 +114,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <!-- Pesan Error Kalo Gagal Login -->
             <?php if (!empty($error)): ?>
-                <div style="background: #fee2e2; border-left: 4px solid var(--danger); color: #991b1b; padding: 12px 16px; border-radius: var(--radius-sm); margin-bottom: 24px; font-size: 13px;">
-                    <?= e($error) ?>
+                <div style="background: #fee2e2; border-left: 4px solid var(--danger); color: #991b1b; padding: 12px 16px; border-radius: var(--radius-sm); margin-bottom: 24px; font-size: 13px; display: flex; align-items: center; gap: 8px;">
+                    <?= icon('alert-circle', '', '16px') ?>
+                    <span><?= e($error) ?></span>
                 </div>
             <?php endif; ?>
 
@@ -160,7 +161,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             <!-- Info Akun Cepat Buat Demo Ujian / Dosen -->
             <div style="background: var(--blue-50); border: 1px solid var(--blue-100); border-radius: var(--radius-md); padding: 12px 16px; margin-top: 24px; font-size: 12px; color: var(--blue-600);">
-                <strong>💡 Akun Uji Coba Demo:</strong><br>
+                <div style="display: flex; align-items: center; gap: 6px; font-weight: 700; margin-bottom: 4px;">
+                    <?= icon('info', '', '14px') ?> Akun Uji Coba Demo:
+                </div>
                 • <strong>Mahasiswa:</strong> <code>rangga.alrasya@binus.ac.id</code> / <code>password123</code><br>
                 • <strong>Admin:</strong> <code>admin@tukarskill.id</code> / <code>admin123</code>
             </div>

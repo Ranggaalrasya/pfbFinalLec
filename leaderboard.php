@@ -59,8 +59,8 @@ $rest = array_slice($leaderboard, 3);
 
     <!-- HEADER TITLE & FILTER TABS -->
     <div style="text-align: center; max-width: 640px; margin: 0 auto 40px;">
-        <span class="badge-tag" style="background: var(--blue-100); color: var(--blue-600); margin-bottom: 12px; display: inline-block;">
-            🏆 Papan Peringkat Komunitas
+        <span class="badge-tag" style="background: var(--blue-100); color: var(--blue-600); margin-bottom: 12px; display: inline-flex; align-items: center; gap: 6px;">
+            <?= icon('trophy', '', 14) ?> <span>Papan Peringkat Komunitas</span>
         </span>
         <h1 style="font-size: 32px; font-weight: 800; color: var(--ink); margin-bottom: 8px;">
             Leaderboard TukarSkill
@@ -71,14 +71,14 @@ $rest = array_slice($leaderboard, 3);
 
         <!-- TABS FILTER -->
         <div style="display: inline-flex; background: var(--gray-100); padding: 4px; border-radius: 999px; margin-top: 20px; gap: 4px;">
-            <a href="leaderboard.php?tab=points" style="padding: 8px 18px; border-radius: 999px; font-size: 13px; font-weight: 700; text-decoration: none; transition: 0.2s; <?= ($tab === 'points') ? 'background: var(--white); color: var(--ink); box-shadow: var(--shadow-sm);' : 'color: var(--gray-600);' ?>">
-                🪙 Poin Terbanyak
+            <a href="leaderboard.php?tab=points" style="padding: 8px 18px; border-radius: 999px; font-size: 13px; font-weight: 700; text-decoration: none; transition: 0.2s; display: inline-flex; align-items: center; gap: 6px; <?= ($tab === 'points') ? 'background: var(--white); color: var(--ink); box-shadow: var(--shadow-sm);' : 'color: var(--gray-600);' ?>">
+                <?= icon('coins', '', 13) ?> <span>Poin Terbanyak</span>
             </a>
-            <a href="leaderboard.php?tab=swaps" style="padding: 8px 18px; border-radius: 999px; font-size: 13px; font-weight: 700; text-decoration: none; transition: 0.2s; <?= ($tab === 'swaps') ? 'background: var(--white); color: var(--ink); box-shadow: var(--shadow-sm);' : 'color: var(--gray-600);' ?>">
-                🎓 Sesi Terbanyak
+            <a href="leaderboard.php?tab=swaps" style="padding: 8px 18px; border-radius: 999px; font-size: 13px; font-weight: 700; text-decoration: none; transition: 0.2s; display: inline-flex; align-items: center; gap: 6px; <?= ($tab === 'swaps') ? 'background: var(--white); color: var(--ink); box-shadow: var(--shadow-sm);' : 'color: var(--gray-600);' ?>">
+                <?= icon('handshake', '', 13) ?> <span>Sesi Terbanyak</span>
             </a>
-            <a href="leaderboard.php?tab=rating" style="padding: 8px 18px; border-radius: 999px; font-size: 13px; font-weight: 700; text-decoration: none; transition: 0.2s; <?= ($tab === 'rating') ? 'background: var(--white); color: var(--ink); box-shadow: var(--shadow-sm);' : 'color: var(--gray-600);' ?>">
-                ⭐ Rating Tertinggi
+            <a href="leaderboard.php?tab=rating" style="padding: 8px 18px; border-radius: 999px; font-size: 13px; font-weight: 700; text-decoration: none; transition: 0.2s; display: inline-flex; align-items: center; gap: 6px; <?= ($tab === 'rating') ? 'background: var(--white); color: var(--ink); box-shadow: var(--shadow-sm);' : 'color: var(--gray-600);' ?>">
+                <?= icon('star', '', 13) ?> <span>Rating Tertinggi</span>
             </a>
         </div>
     </div>
@@ -95,8 +95,8 @@ $rest = array_slice($leaderboard, 3);
                     <span style="font-size: 12px; color: var(--gray-600);">Terus bagikan skillmu untuk naik ke podium 3 besar!</span>
                 </div>
             </div>
-            <div style="font-size: 16px; font-weight: 800; color: var(--blue-600);">
-                🪙 <?= number_format($my_rank['points']) ?> Poin
+            <div style="font-size: 16px; font-weight: 800; color: var(--blue-600); display: flex; align-items: center; gap: 6px;">
+                <?= icon('coins', '', 16) ?> <span><?= number_format($my_rank['points']) ?> Poin</span>
             </div>
         </div>
     <?php endif; ?>
@@ -107,9 +107,11 @@ $rest = array_slice($leaderboard, 3);
             
             <!-- JUARA 2: PERAK -->
             <div style="flex: 1; min-width: 200px; max-width: 240px; background: var(--white); border-radius: var(--radius-xl); padding: 24px 20px 28px; text-align: center; border: 2px solid #cbd5e1; box-shadow: var(--shadow-sm); order: 1;">
-                <div style="font-size: 28px; margin-bottom: 4px;">🥈</div>
-                <div class="mini-avatar" style="width: 64px; height: 64px; margin: 0 auto 12px; background: #94a3b8; font-size: 24px; color: var(--white); box-shadow: 0 4px 12px rgba(148, 163, 184, 0.4);">
-                    <?= strtoupper(substr($top3[1]['name'], 0, 1)) ?>
+                <div style="color: #64748b; margin-bottom: 8px; display: flex; justify-content: center;">
+                    <?= icon('medal', '', 28) ?>
+                </div>
+                <div style="margin: 0 auto 12px; display: flex; justify-content: center;">
+                    <?= render_avatar($top3[1]['photo'] ?? '', $top3[1]['name'], 64) ?>
                 </div>
                 <strong style="font-size: 15px; color: var(--ink); display: block; margin-bottom: 2px;">
                     <a href="user.php?id=<?= $top3[1]['id'] ?>" style="color: inherit; text-decoration: none;">
@@ -119,8 +121,8 @@ $rest = array_slice($leaderboard, 3);
                 <span style="font-size: 11px; color: var(--gray-400); display: block; margin-bottom: 10px;">
                     <?= e($top3[1]['major']) ?>
                 </span>
-                <span class="badge-tag" style="background: #f1f5f9; color: #475569; font-size: 11px; margin-bottom: 12px;">
-                    <?= $top3[1]['badge_icon'] ?? '🌱' ?> <?= e($top3[1]['badge_name'] ?? 'Bibit') ?>
+                <span class="badge-tag" style="background: #f1f5f9; color: #475569; font-size: 11px; margin-bottom: 12px; display: inline-flex; align-items: center; gap: 4px;">
+                    <?= badge_icon_svg($top3[1]['badge_name'] ?? 'Bibit', 12) ?> <span><?= e($top3[1]['badge_name'] ?? 'Bibit') ?></span>
                 </span>
                 <div style="font-size: 18px; font-weight: 800; color: var(--ink);">
                     <?= number_format($top3[1]['points']) ?> <span style="font-size: 12px; font-weight: 600; color: var(--gray-600);">Poin</span>
@@ -129,9 +131,11 @@ $rest = array_slice($leaderboard, 3);
 
             <!-- JUARA 1: EMAS (PODIUM TENGAH TINGGI) -->
             <div style="flex: 1.1; min-width: 220px; max-width: 270px; background: linear-gradient(180deg, #fffbeb 0%, #ffffff 100%); border-radius: var(--radius-xl); padding: 32px 24px 36px; text-align: center; border: 2px solid #fde047; box-shadow: 0 12px 30px -10px rgba(234, 179, 8, 0.35); order: 2; transform: translateY(-12px);">
-                <div style="font-size: 36px; margin-bottom: 4px;">👑</div>
-                <div class="mini-avatar" style="width: 78px; height: 78px; margin: 0 auto 12px; background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%); font-size: 30px; color: var(--white); box-shadow: 0 6px 18px rgba(234, 179, 8, 0.45); border: 3px solid #fef08a;">
-                    <?= strtoupper(substr($top3[0]['name'], 0, 1)) ?>
+                <div style="color: #ca8a04; margin-bottom: 8px; display: flex; justify-content: center;">
+                    <?= icon('trophy', '', 36) ?>
+                </div>
+                <div style="margin: 0 auto 12px; display: flex; justify-content: center;">
+                    <?= render_avatar($top3[0]['photo'] ?? '', $top3[0]['name'], 76) ?>
                 </div>
                 <strong style="font-size: 17px; color: var(--ink); display: block; margin-bottom: 2px;">
                     <a href="user.php?id=<?= $top3[0]['id'] ?>" style="color: inherit; text-decoration: none;">
@@ -141,8 +145,8 @@ $rest = array_slice($leaderboard, 3);
                 <span style="font-size: 12px; color: var(--gray-400); display: block; margin-bottom: 10px;">
                     <?= e($top3[0]['major']) ?>
                 </span>
-                <span class="badge-tag" style="background: #fef9c3; color: #854d0e; font-size: 11px; margin-bottom: 12px;">
-                    <?= $top3[0]['badge_icon'] ?? '🏆' ?> <?= e($top3[0]['badge_name'] ?? 'Mentor SDG') ?>
+                <span class="badge-tag" style="background: #fef9c3; color: #854d0e; font-size: 11px; margin-bottom: 12px; display: inline-flex; align-items: center; gap: 4px;">
+                    <?= badge_icon_svg($top3[0]['badge_name'] ?? 'Mentor', 12) ?> <span><?= e($top3[0]['badge_name'] ?? 'Mentor SDG') ?></span>
                 </span>
                 <div style="font-size: 22px; font-weight: 900; color: #854d0e;">
                     <?= number_format($top3[0]['points']) ?> <span style="font-size: 13px; font-weight: 600; color: #a16207;">Poin</span>
@@ -151,9 +155,11 @@ $rest = array_slice($leaderboard, 3);
 
             <!-- JUARA 3: PERUNGGU -->
             <div style="flex: 1; min-width: 200px; max-width: 240px; background: var(--white); border-radius: var(--radius-xl); padding: 24px 20px 28px; text-align: center; border: 2px solid #fed7aa; box-shadow: var(--shadow-sm); order: 3;">
-                <div style="font-size: 28px; margin-bottom: 4px;">🥉</div>
-                <div class="mini-avatar" style="width: 64px; height: 64px; margin: 0 auto 12px; background: #d97706; font-size: 24px; color: var(--white); box-shadow: 0 4px 12px rgba(217, 119, 6, 0.35);">
-                    <?= strtoupper(substr($top3[2]['name'], 0, 1)) ?>
+                <div style="color: #b45309; margin-bottom: 8px; display: flex; justify-content: center;">
+                    <?= icon('award', '', 28) ?>
+                </div>
+                <div style="margin: 0 auto 12px; display: flex; justify-content: center;">
+                    <?= render_avatar($top3[2]['photo'] ?? '', $top3[2]['name'], 64) ?>
                 </div>
                 <strong style="font-size: 15px; color: var(--ink); display: block; margin-bottom: 2px;">
                     <a href="user.php?id=<?= $top3[2]['id'] ?>" style="color: inherit; text-decoration: none;">
@@ -163,8 +169,8 @@ $rest = array_slice($leaderboard, 3);
                 <span style="font-size: 11px; color: var(--gray-400); display: block; margin-bottom: 10px;">
                     <?= e($top3[2]['major']) ?>
                 </span>
-                <span class="badge-tag" style="background: #ffedd5; color: #9a3412; font-size: 11px; margin-bottom: 12px;">
-                    <?= $top3[2]['badge_icon'] ?? '🌱' ?> <?= e($top3[2]['badge_name'] ?? 'Mahir') ?>
+                <span class="badge-tag" style="background: #ffedd5; color: #9a3412; font-size: 11px; margin-bottom: 12px; display: inline-flex; align-items: center; gap: 4px;">
+                    <?= badge_icon_svg($top3[2]['badge_name'] ?? 'Mahir', 12) ?> <span><?= e($top3[2]['badge_name'] ?? 'Mahir') ?></span>
                 </span>
                 <div style="font-size: 18px; font-weight: 800; color: var(--ink);">
                     <?= number_format($top3[2]['points']) ?> <span style="font-size: 12px; font-weight: 600; color: var(--gray-600);">Poin</span>
@@ -185,7 +191,7 @@ $rest = array_slice($leaderboard, 3);
                 Belum ada data mahasiswa yang dapat ditampilkan.
             </div>
         <?php else: ?>
-            <div style="overflow-x: auto;">
+            <div style="overflow-x: auto; border-radius: var(--radius-md);">
                 <table style="width: 100%; border-collapse: collapse; font-size: 13px; text-align: left;">
                     <thead>
                         <tr style="border-bottom: 2px solid var(--gray-200); color: var(--gray-600);">
@@ -204,16 +210,17 @@ $rest = array_slice($leaderboard, 3);
                         ?>
                             <tr style="border-bottom: 1px solid var(--gray-100); background: <?= $is_me ? '#eff6ff' : 'transparent' ?>;">
                                 <td style="padding: 14px 10px; font-weight: 800; color: var(--ink);">
-                                    <?php if ($row['rank'] == 1): ?>🥇
-                                    <?php elseif ($row['rank'] == 2): ?>🥈
-                                    <?php elseif ($row['rank'] == 3): ?>🥉
+                                    <?php if ($row['rank'] == 1): ?>
+                                        <span style="color: #ca8a04; display: inline-flex; align-items: center; gap: 4px;"><?= icon('trophy', '', 16) ?> 1</span>
+                                    <?php elseif ($row['rank'] == 2): ?>
+                                        <span style="color: #64748b; display: inline-flex; align-items: center; gap: 4px;"><?= icon('medal', '', 16) ?> 2</span>
+                                    <?php elseif ($row['rank'] == 3): ?>
+                                        <span style="color: #b45309; display: inline-flex; align-items: center; gap: 4px;"><?= icon('award', '', 16) ?> 3</span>
                                     <?php else: ?>#<?= $row['rank'] ?><?php endif; ?>
                                 </td>
                                 <td style="padding: 14px 10px;">
                                     <div style="display: flex; align-items: center; gap: 10px;">
-                                        <div class="mini-avatar" style="width: 36px; height: 36px; font-size: 14px; background: var(--blue-500);">
-                                            <?= strtoupper(substr($row['name'], 0, 1)) ?>
-                                        </div>
+                                        <?= render_avatar($row['photo'] ?? '', $row['name'], 36) ?>
                                         <div>
                                             <strong style="color: var(--ink); display: block;">
                                                 <?= e($row['name']) ?> <?= $is_me ? '<span style="font-size:10px; background:var(--blue-500); color:white; padding:1px 6px; border-radius:999px;">Kamu</span>' : '' ?>
@@ -223,18 +230,20 @@ $rest = array_slice($leaderboard, 3);
                                     </div>
                                 </td>
                                 <td style="padding: 14px 10px;">
-                                    <span style="font-size: 12px; font-weight: 600; color: var(--gray-600);">
-                                        <?= $row['badge_icon'] ?? '🌱' ?> <?= e($row['badge_name'] ?? 'Bibit') ?>
+                                    <span style="font-size: 12px; font-weight: 600; color: var(--gray-600); display: inline-flex; align-items: center; gap: 5px;">
+                                        <?= badge_icon_svg($row['badge_name'] ?? 'Bibit', 14) ?> <span><?= e($row['badge_name'] ?? 'Bibit') ?></span>
                                     </span>
                                 </td>
                                 <td style="padding: 14px 10px; text-align: center; color: var(--star); font-weight: 700;">
-                                    ★ <?= number_format($row['rating'], 1) ?>
+                                    <span style="display: inline-flex; align-items: center; gap: 3px;">
+                                        <?= icon('star', '', 13) ?> <?= number_format($row['rating'], 1) ?>
+                                    </span>
                                 </td>
                                 <td style="padding: 14px 10px; text-align: center; font-weight: 700; color: var(--ink);">
                                     <?= (int)$row['completed_count'] ?> Sesi
                                 </td>
                                 <td style="padding: 14px 10px; text-align: right; font-weight: 800; color: var(--blue-600); font-size: 14px;">
-                                    🪙 <?= number_format($row['points']) ?>
+                                    <?= number_format($row['points']) ?>
                                 </td>
                                 <td style="padding: 14px 10px; text-align: center;">
                                     <a href="user.php?id=<?= $row['id'] ?>" class="btn btn-outline btn-sm" style="padding: 4px 10px; font-size: 11px;">

@@ -114,8 +114,8 @@ $impact_hours = $stats['completed_exchanges'] * 2;
                 Pantau performa platform, aktivitas pertukaran skill antar mahasiswa, dan kontribusi SDG 4.
             </p>
         </div>
-        <div style="font-size: 12px; color: #64748b; background: white; padding: 8px 16px; border-radius: 8px; border: 1px solid #e2e8f0;">
-            📅 Waktu Server: <strong><?= date('d M Y, H:i') ?> WIB</strong>
+        <div style="font-size: 12px; color: #64748b; background: white; padding: 8px 16px; border-radius: 8px; border: 1px solid #e2e8f0; display: inline-flex; align-items: center; gap: 6px;">
+            <?= icon('calendar', '', '13px') ?> Waktu Server: <strong><?= date('d M Y, H:i') ?> WIB</strong>
         </div>
     </div>
 
@@ -126,7 +126,7 @@ $impact_hours = $stats['completed_exchanges'] * 2;
         <div style="background: white; border-radius: 12px; padding: 20px; border: 1px solid #e2e8f0; box-shadow: var(--shadow-sm);">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                 <span style="font-size: 12px; font-weight: 700; color: #64748b; text-transform: uppercase;">Total Pengguna</span>
-                <span style="font-size: 20px;">👥</span>
+                <span style="color: #64748b;"><?= icon('users', '', '20px') ?></span>
             </div>
             <div style="font-size: 28px; font-weight: 800; color: #0f172a;">
                 <?= number_format($stats['total_users']) ?>
@@ -140,7 +140,7 @@ $impact_hours = $stats['completed_exchanges'] * 2;
         <div style="background: white; border-radius: 12px; padding: 20px; border: 1px solid #e2e8f0; box-shadow: var(--shadow-sm);">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                 <span style="font-size: 12px; font-weight: 700; color: #64748b; text-transform: uppercase;">Barter Selesai</span>
-                <span style="font-size: 20px;">🤝</span>
+                <span style="color: #2563eb;"><?= icon('repeat', '', '20px') ?></span>
             </div>
             <div style="font-size: 28px; font-weight: 800; color: #2563eb;">
                 <?= number_format($stats['completed_exchanges']) ?>
@@ -154,7 +154,7 @@ $impact_hours = $stats['completed_exchanges'] * 2;
         <div style="background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: white; border-radius: 12px; padding: 20px; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                 <span style="font-size: 12px; font-weight: 700; opacity: 0.9; text-transform: uppercase;">Dampak SDG 4</span>
-                <span style="font-size: 20px;">🌍</span>
+                <span style="color: white;"><?= icon('award', '', '20px') ?></span>
             </div>
             <div style="font-size: 28px; font-weight: 900;">
                 ~<?= number_format($impact_hours) ?> <span style="font-size: 16px; font-weight: 600;">Jam</span>
@@ -168,7 +168,7 @@ $impact_hours = $stats['completed_exchanges'] * 2;
         <div style="background: white; border-radius: 12px; padding: 20px; border: 1px solid #e2e8f0; box-shadow: var(--shadow-sm);">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                 <span style="font-size: 12px; font-weight: 700; color: #64748b; text-transform: uppercase;">Katalog Skill</span>
-                <span style="font-size: 20px;">💡</span>
+                <span style="color: #0f172a;"><?= icon('lightbulb', '', '20px') ?></span>
             </div>
             <div style="font-size: 28px; font-weight: 800; color: #0f172a;">
                 <?= number_format($stats['total_skills']) ?>
@@ -182,13 +182,13 @@ $impact_hours = $stats['completed_exchanges'] * 2;
         <div style="background: white; border-radius: 12px; padding: 20px; border: 1px solid #e2e8f0; box-shadow: var(--shadow-sm);">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                 <span style="font-size: 12px; font-weight: 700; color: #64748b; text-transform: uppercase;">Poin Beredar</span>
-                <span style="font-size: 20px;">🪙</span>
+                <span style="color: #d97706;"><?= icon('coins', '', '20px') ?></span>
             </div>
             <div style="font-size: 28px; font-weight: 800; color: #d97706;">
                 <?= number_format($stats['total_points_circulating']) ?>
             </div>
-            <span style="font-size: 11px; color: #64748b;">
-                ⭐ <?= $stats['avg_rating'] ?>/5.0 (<?= $stats['total_reviews'] ?> ulasan)
+            <span style="font-size: 11px; color: #64748b; display: inline-flex; align-items: center; gap: 4px;">
+                <span style="color: var(--star); display: inline-flex;"><?= icon('star', '', '12px') ?></span> <?= $stats['avg_rating'] ?>/5.0 (<?= $stats['total_reviews'] ?> ulasan)
             </span>
         </div>
 
@@ -200,8 +200,8 @@ $impact_hours = $stats['completed_exchanges'] * 2;
         <!-- TABEL 1: PENGGUNA TERBARU -->
         <div style="background: white; border-radius: 12px; padding: 24px; border: 1px solid #e2e8f0; box-shadow: var(--shadow-sm);">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-                <h3 style="font-size: 16px; font-weight: 800; color: #0f172a;">
-                    👥 Pengguna Terdaftar Baru
+                <h3 style="font-size: 16px; font-weight: 800; color: #0f172a; display: flex; align-items: center; gap: 8px;">
+                    <?= icon('users', '', '16px') ?> Pengguna Terdaftar Baru
                 </h3>
                 <a href="users.php" style="font-size: 12px; font-weight: 700; color: #2563eb; text-decoration: none;">
                     Lihat Semua →
@@ -246,8 +246,8 @@ $impact_hours = $stats['completed_exchanges'] * 2;
         <!-- TABEL 2: PERTUKARAN TERBARU -->
         <div style="background: white; border-radius: 12px; padding: 24px; border: 1px solid #e2e8f0; box-shadow: var(--shadow-sm);">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-                <h3 style="font-size: 16px; font-weight: 800; color: #0f172a;">
-                    🤝 Aktivitas Pertukaran Terbaru
+                <h3 style="font-size: 16px; font-weight: 800; color: #0f172a; display: flex; align-items: center; gap: 8px;">
+                    <?= icon('repeat', '', '16px') ?> Aktivitas Pertukaran Terbaru
                 </h3>
                 <span style="font-size: 12px; color: #94a3b8;">5 transaksi terakhir</span>
             </div>

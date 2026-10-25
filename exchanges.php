@@ -158,24 +158,26 @@ if (is_db_connected()) {
 
     <!-- TAB NAVIGASI (4 TAB) -->
     <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; border-bottom: 2px solid var(--gray-200); padding-bottom: 12px;">
-        <a href="exchanges.php?tab=active" class="btn <?= ($tab === 'active') ? 'btn-dark' : 'btn-outline' ?> btn-sm">
-            📅 Sesi Aktif Disetujui
+        <a href="exchanges.php?tab=active" class="btn <?= ($tab === 'active') ? 'btn-dark' : 'btn-outline' ?> btn-sm" style="display: inline-flex; align-items: center; gap: 6px;">
+            <?= icon('calendar', '', '14px') ?> Sesi Aktif
         </a>
-        <a href="exchanges.php?tab=incoming" class="btn <?= ($tab === 'incoming') ? 'btn-dark' : 'btn-outline' ?> btn-sm">
-            📬 Permintaan Masuk <?= ($count_incoming > 0) ? "<span style='background:var(--danger); color:#fff; font-size:11px; padding:2px 6px; border-radius:10px;'>$count_incoming</span>" : '' ?>
+        <a href="exchanges.php?tab=incoming" class="btn <?= ($tab === 'incoming') ? 'btn-dark' : 'btn-outline' ?> btn-sm" style="display: inline-flex; align-items: center; gap: 6px;">
+            <?= icon('inbox', '', '14px') ?> Permintaan Masuk <?= ($count_incoming > 0) ? "<span style='background:var(--danger); color:#fff; font-size:11px; padding:2px 6px; border-radius:10px;'>$count_incoming</span>" : '' ?>
         </a>
-        <a href="exchanges.php?tab=sent" class="btn <?= ($tab === 'sent') ? 'btn-dark' : 'btn-outline' ?> btn-sm">
-            📤 Terkirim (Menunggu Respon)
+        <a href="exchanges.php?tab=sent" class="btn <?= ($tab === 'sent') ? 'btn-dark' : 'btn-outline' ?> btn-sm" style="display: inline-flex; align-items: center; gap: 6px;">
+            <?= icon('send', '', '14px') ?> Terkirim
         </a>
-        <a href="exchanges.php?tab=history" class="btn <?= ($tab === 'history') ? 'btn-dark' : 'btn-outline' ?> btn-sm">
-            📜 Riwayat Selesai & Batal
+        <a href="exchanges.php?tab=history" class="btn <?= ($tab === 'history') ? 'btn-dark' : 'btn-outline' ?> btn-sm" style="display: inline-flex; align-items: center; gap: 6px;">
+            <?= icon('clock', '', '14px') ?> Riwayat Selesai & Batal
         </a>
     </div>
 
     <!-- DAFTAR ITEM PERTUKARAN -->
     <?php if (empty($list)): ?>
         <div style="background: var(--white); border-radius: var(--radius-xl); padding: 50px 20px; text-align: center; box-shadow: var(--shadow-sm); border: 1px solid var(--gray-200);">
-            <div style="font-size: 44px; margin-bottom: 12px;">☕</div>
+            <div style="color: var(--gray-400); margin-bottom: 12px; display: flex; justify-content: center;">
+                <?= icon('coffee', '', '44px') ?>
+            </div>
             <h3 style="font-size: 18px; font-weight: 800; color: var(--ink);">Tidak ada data pertukaran di tab ini</h3>
             <p style="font-size: 13px; color: var(--gray-600); margin-top: 6px;">
                 Saat ada request masuk atau jadwal sesi baru, daftarnya akan muncul di sini.
@@ -195,9 +197,7 @@ if (is_db_connected()) {
                     
                     <!-- Kiri: Info Partner & Materi -->
                     <div style="display: flex; align-items: center; gap: 16px; flex: 1; min-width: 280px;">
-                        <div class="mini-avatar" style="background: var(--blue-500); width: 48px; height: 48px; font-size: 18px;">
-                            <?= strtoupper(substr($partner_name, 0, 1)) ?>
-                        </div>
+                        <?= render_avatar($partner_photo, $partner_name, 48) ?>
                         <div>
                             <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
                                 <strong style="font-size: 16px; color: var(--ink);"><?= e($partner_name) ?></strong>
@@ -218,9 +218,12 @@ if (is_db_connected()) {
                                 <?php endif; ?>
                             </p>
 
-                            <p style="font-size: 12px; color: var(--gray-400); margin-top: 2px;">
-                                🕒 Jadwal: <?= format_tanggal_id($item['scheduled_at']) ?> 
-                                <?= !empty($item['location']) ? ' • 📍 ' . e($item['location']) : '' ?>
+                            <p style="font-size: 12px; color: var(--gray-400); margin-top: 2px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap;">
+                                <span style="display: inline-flex; align-items: center; gap: 4px;"><?= icon('calendar', '', '13px') ?> <?= format_tanggal_id($item['scheduled_at']) ?></span>
+                                <?php if (!empty($item['location'])): ?>
+                                    <span>•</span>
+                                    <span style="display: inline-flex; align-items: center; gap: 4px;"><?= icon('map-pin', '', '13px') ?> <?= e($item['location']) ?></span>
+                                <?php endif; ?>
                             </p>
                         </div>
                     </div>
@@ -234,14 +237,14 @@ if (is_db_connected()) {
                                 <?= csrf_field() ?>
                                 <input type="hidden" name="action" value="accept">
                                 <input type="hidden" name="exchange_id" value="<?= (int)$item['id'] ?>">
-                                <button type="submit" class="btn btn-primary btn-sm">Terima Barter ✓</button>
+                                <button type="submit" class="btn btn-primary btn-sm">Terima Barter</button>
                             </form>
 
                             <form action="exchanges.php" method="POST" onsubmit="return confirm('Tolak permintaan pertukaran ini?');" style="display: inline;">
                                 <?= csrf_field() ?>
                                 <input type="hidden" name="action" value="reject">
                                 <input type="hidden" name="exchange_id" value="<?= (int)$item['id'] ?>">
-                                <button type="submit" class="btn btn-outline btn-sm" style="color: var(--danger);">Tolak ✕</button>
+                                <button type="submit" class="btn btn-outline btn-sm" style="color: var(--danger);">Tolak</button>
                             </form>
                         <?php endif; ?>
 
@@ -258,19 +261,19 @@ if (is_db_connected()) {
                         <!-- Aksi Tab Aktif: Chat WhatsApp & Detail Sesi -->
                         <?php if ($item['status'] === 'accepted'): ?>
                             <?php if (!empty($partner_wa)): ?>
-                                <a href="https://wa.me/<?= preg_replace('/[^0-9]/', '', $partner_wa) ?>" target="_blank" class="btn btn-outline btn-sm" style="color: #16a34a; border-color: #86efac;">
-                                    WhatsApp 💬
+                                <a href="https://wa.me/<?= preg_replace('/[^0-9]/', '', $partner_wa) ?>" target="_blank" class="btn btn-outline btn-sm" style="color: #16a34a; border-color: #86efac; display: inline-flex; align-items: center; gap: 6px;">
+                                    <?= icon('phone', '', '14px') ?> WhatsApp
                                 </a>
                             <?php endif; ?>
-                            <a href="exchange-detail.php?id=<?= (int)$item['id'] ?>" class="btn btn-primary btn-sm">
-                                Konfirmasi Selesai 🤝
+                            <a href="exchange-detail.php?id=<?= (int)$item['id'] ?>" class="btn btn-primary btn-sm" style="display: inline-flex; align-items: center; gap: 6px;">
+                                <?= icon('handshake', '', '14px') ?> Konfirmasi Selesai
                             </a>
                         <?php endif; ?>
 
                         <!-- Aksi Tab Riwayat: Tulis Review -->
                         <?php if ($item['status'] === 'completed' && (int)$item['user_reviewed'] === 0): ?>
-                            <a href="exchange-detail.php?id=<?= (int)$item['id'] ?>#review" class="btn btn-dark btn-sm" style="background: var(--star); color: var(--ink);">
-                                Beri Review ★
+                            <a href="exchange-detail.php?id=<?= (int)$item['id'] ?>#review" class="btn btn-dark btn-sm" style="background: var(--star); color: var(--ink); display: inline-flex; align-items: center; gap: 6px;">
+                                <?= icon('star', '', '14px') ?> Beri Review
                             </a>
                         <?php endif; ?>
 

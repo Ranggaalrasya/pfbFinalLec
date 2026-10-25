@@ -125,7 +125,9 @@ if ($exchange['status'] === 'completed') {
     
     <!-- Tombol Kembali -->
     <div style="margin-bottom: 24px;">
-        <a href="exchanges.php" style="font-size: 13px; font-weight: 600; color: var(--blue-600);">← Kembali ke Daftar Pertukaran</a>
+        <a href="exchanges.php" style="font-size: 13px; font-weight: 600; color: var(--blue-600); display: inline-flex; align-items: center; gap: 6px;">
+            <?= icon('arrow-left', '', '14px') ?> Kembali ke Daftar Pertukaran
+        </a>
     </div>
 
     <!-- STEPPER TIMELINE STATUS -->
@@ -193,16 +195,23 @@ if ($exchange['status'] === 'completed') {
                 <div style="background: var(--blue-50); border-radius: var(--radius-lg); padding: 20px; margin-bottom: 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
                     <div>
                         <span style="font-size: 11px; font-weight: 700; color: var(--blue-600); text-transform: uppercase;">Materi Dipelajari:</span>
-                        <div style="font-size: 16px; font-weight: 800; color: var(--ink); margin-top: 4px;">
-                            🎓 <?= e($exchange['requested_skill_name']) ?>
+                        <div style="font-size: 16px; font-weight: 800; color: var(--ink); margin-top: 4px; display: flex; align-items: center; gap: 6px;">
+                            <span style="color: var(--blue-600); display: inline-flex;"><?= icon('graduation-cap', '', '18px') ?></span>
+                            <?= e($exchange['requested_skill_name']) ?>
                         </div>
                         <span style="font-size: 12px; color: var(--gray-600);">Diajarkan oleh: <?= e($exchange['rec_name']) ?></span>
                     </div>
 
                     <div>
                         <span style="font-size: 11px; font-weight: 700; color: #65a30d; text-transform: uppercase;">Skill Pengganti (Barter):</span>
-                        <div style="font-size: 16px; font-weight: 800; color: var(--ink); margin-top: 4px;">
-                            <?= ($exchange['type'] === 'swap') ? '💡 ' . e($exchange['offered_skill_name']) : '🪙 Bayar 15 Poin' ?>
+                        <div style="font-size: 16px; font-weight: 800; color: var(--ink); margin-top: 4px; display: flex; align-items: center; gap: 6px;">
+                            <?php if ($exchange['type'] === 'swap'): ?>
+                                <span style="color: #65a30d; display: inline-flex;"><?= icon('repeat', '', '16px') ?></span>
+                                <?= e($exchange['offered_skill_name']) ?>
+                            <?php else: ?>
+                                <span style="color: var(--lime-dark); display: inline-flex;"><?= icon('coins', '', '16px') ?></span>
+                                Bayar 15 Poin
+                            <?php endif; ?>
                         </div>
                         <span style="font-size: 12px; color: var(--gray-600);">Diajarkan oleh: <?= e($exchange['req_name']) ?></span>
                     </div>
@@ -210,14 +219,20 @@ if ($exchange['status'] === 'completed') {
 
                 <!-- Info Waktu, Mode & Tempat -->
                 <div style="display: flex; flex-direction: column; gap: 12px; font-size: 14px; color: var(--ink);">
-                    <div>
-                        <strong style="color: var(--gray-600);">🕒 Jadwal Sesi:</strong> <?= format_tanggal_id($exchange['scheduled_at']) ?>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="color: var(--gray-600); display: inline-flex;"><?= icon('calendar', '', '16px') ?></span>
+                        <strong style="color: var(--gray-600);">Jadwal Sesi:</strong>
+                        <span><?= format_tanggal_id($exchange['scheduled_at']) ?></span>
                     </div>
-                    <div>
-                        <strong style="color: var(--gray-600);">🌐 Format Pertemuan:</strong> <?= ucfirst(e($exchange['mode'])) ?>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="color: var(--gray-600); display: inline-flex;"><?= icon('globe', '', '16px') ?></span>
+                        <strong style="color: var(--gray-600);">Format Pertemuan:</strong>
+                        <span><?= ucfirst(e($exchange['mode'])) ?></span>
                     </div>
-                    <div>
-                        <strong style="color: var(--gray-600);">📍 Lokasi / Link:</strong> <?= !empty($exchange['location']) ? e($exchange['location']) : '<span style="color:var(--gray-400); font-style:italic;">Belum ditentukan</span>' ?>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="color: var(--gray-600); display: inline-flex;"><?= icon('map-pin', '', '16px') ?></span>
+                        <strong style="color: var(--gray-600);">Lokasi / Link:</strong>
+                        <span><?= !empty($exchange['location']) ? e($exchange['location']) : '<span style="color:var(--gray-400); font-style:italic;">Belum ditentukan</span>' ?></span>
                     </div>
                     <?php if (!empty($exchange['message'])): ?>
                         <div style="margin-top: 10px; padding: 14px; background: var(--gray-100); border-radius: var(--radius-md); font-size: 13px; color: var(--gray-600);">
@@ -232,8 +247,8 @@ if ($exchange['status'] === 'completed') {
             <!-- KONFIRMASI SELESAI KEDUA PIHAK -->
             <?php if ($exchange['status'] === 'accepted'): ?>
                 <div style="background: var(--white); border-radius: var(--radius-xl); padding: 32px; box-shadow: var(--shadow-sm); border: 2px solid var(--blue-400);">
-                    <h3 style="font-size: 18px; font-weight: 800; color: var(--ink); margin-bottom: 8px;">
-                        Verifikasi Sesi Selesai 🤝
+                    <h3 style="font-size: 18px; font-weight: 800; color: var(--ink); margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                        <?= icon('shield-check', '', '20px') ?> Verifikasi Sesi Selesai
                     </h3>
                     <p style="font-size: 13px; color: var(--gray-600); margin-bottom: 20px;">
                         Untuk mencegah kecurangan, status pertukaran hanya akan tuntas setelah <strong>kedua mahasiswa</strong> menekan tombol konfirmasi di bawah.
@@ -278,8 +293,8 @@ if ($exchange['status'] === 'completed') {
             <!-- SECTION FORM REVIEW (Muncul Pas Status Completed) -->
             <?php if ($exchange['status'] === 'completed'): ?>
                 <div style="background: var(--white); border-radius: var(--radius-xl); padding: 32px; box-shadow: var(--shadow-sm); border: 1px solid var(--gray-200);" id="review">
-                    <h3 style="font-size: 18px; font-weight: 800; color: var(--ink); margin-bottom: 8px;">
-                        Ulasan Sesi Barter ★
+                    <h3 style="font-size: 18px; font-weight: 800; color: var(--ink); margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
+                        <?= icon('star', '', '20px') ?> Ulasan Sesi Barter
                     </h3>
                     <p style="font-size: 13px; color: var(--gray-600); margin-bottom: 20px;">
                         Beri rating & apresiasi ke <strong><?= e($partner_name) ?></strong>. Kamu akan mendapatkan <strong>+5 Poin</strong> karena menulis review!
@@ -289,8 +304,8 @@ if ($exchange['status'] === 'completed') {
                         <div style="background: var(--blue-50); border-radius: var(--radius-md); padding: 18px; margin-bottom: 20px;">
                             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
                                 <strong style="font-size: 14px;">Ulasan yang Kamu Tulis:</strong>
-                                <span style="color: var(--star); font-size: 16px;">
-                                    <?= str_repeat('★', (int)$my_review['rating']) ?> (<?= (int)$my_review['rating'] ?>/5)
+                                <span style="color: var(--star); font-size: 16px; display: inline-flex; align-items: center; gap: 4px;">
+                                    <?= icon('star', '', '16px') ?> <?= (int)$my_review['rating'] ?>/5
                                 </span>
                             </div>
                             <p style="font-size: 13px; color: var(--ink); line-height: 1.5;">
@@ -320,8 +335,8 @@ if ($exchange['status'] === 'completed') {
                                           style="width: 100%; padding: 12px 16px; border-radius: var(--radius-md); border: 1px solid var(--gray-200); font-family: inherit; font-size: 13px; outline: none; resize: vertical;"></textarea>
                             </div>
 
-                            <button type="submit" class="btn btn-dark" style="background: var(--star); color: var(--ink); font-weight: 700;">
-                                Kirim Review & Klaim +5 Poin ★
+                            <button type="submit" class="btn btn-dark" style="background: var(--star); color: var(--ink); font-weight: 700; display: inline-flex; align-items: center; gap: 8px;">
+                                <?= icon('star', '', '16px') ?> Kirim Review & Klaim +5 Poin
                             </button>
                         </form>
                     <?php endif; ?>
@@ -329,8 +344,8 @@ if ($exchange['status'] === 'completed') {
                     <?php if ($partner_review): ?>
                         <div style="margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--gray-200);">
                             <strong style="font-size: 13px; color: var(--gray-600); display: block; margin-bottom: 6px;">Ulasan dari <?= e($partner_name) ?> untukmu:</strong>
-                            <div style="color: var(--star); font-size: 14px; margin-bottom: 4px;">
-                                <?= str_repeat('★', (int)$partner_review['rating']) ?>
+                            <div style="color: var(--star); font-size: 14px; margin-bottom: 4px; display: inline-flex; align-items: center; gap: 4px;">
+                                <?= icon('star', '', '14px') ?> <?= (int)$partner_review['rating'] ?>/5
                             </div>
                             <p style="font-size: 13px; color: var(--ink); font-style: italic;">
                                 "<?= e($partner_review['comment']) ?>"
@@ -342,16 +357,14 @@ if ($exchange['status'] === 'completed') {
 
         </div>
 
-        <!-- KOLOM KANAN: Kontak Partner WhatsApp -->
+        <!-- KOLOM KANAN: Kontak Partner WhatsApp & Sertifikat Barter SDG 4 -->
         <div style="background: var(--white); border-radius: var(--radius-xl); padding: 32px; box-shadow: var(--shadow-sm); border: 1px solid var(--gray-200);">
-            <h3 style="font-size: 18px; font-weight: 800; color: var(--ink); margin-bottom: 16px;">
-                Partner Belajar 🎓
+            <h3 style="font-size: 18px; font-weight: 800; color: var(--ink); margin-bottom: 16px; display: flex; align-items: center; gap: 8px;">
+                <?= icon('users', '', '20px') ?> Partner Belajar
             </h3>
 
             <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 20px;">
-                <div class="mini-avatar" style="background: var(--blue-500); width: 50px; height: 50px; font-size: 18px;">
-                    <?= strtoupper(substr($partner_name, 0, 1)) ?>
-                </div>
+                <?= render_avatar($is_requester ? $exchange['rec_photo'] : $exchange['req_photo'], $partner_name, 50) ?>
                 <div>
                     <strong style="font-size: 16px; color: var(--ink); display: block;"><?= e($partner_name) ?></strong>
                     <span style="font-size: 12px; color: var(--gray-400);"><?= e($is_requester ? $exchange['rec_major'] : $exchange['req_major']) ?></span>
@@ -368,8 +381,8 @@ if ($exchange['status'] === 'completed') {
                         <?= !empty($partner_wa) ? e($partner_wa) : 'Nomor belum diisi di profil' ?>
                     </strong>
                     <?php if (!empty($partner_wa)): ?>
-                        <a href="https://wa.me/<?= preg_replace('/[^0-9]/', '', $partner_wa) ?>" target="_blank" class="btn btn-primary btn-sm" style="background: #16a34a; border-color: #16a34a; width: 100%;">
-                            Chat WhatsApp Sekarang 💬
+                        <a href="https://wa.me/<?= preg_replace('/[^0-9]/', '', $partner_wa) ?>" target="_blank" class="btn btn-primary btn-sm" style="background: #16a34a; border-color: #16a34a; width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 6px;">
+                            <?= icon('phone', '', '14px') ?> Chat WhatsApp Sekarang
                         </a>
                     <?php endif; ?>
                 </div>
@@ -379,7 +392,23 @@ if ($exchange['status'] === 'completed') {
                 </div>
             <?php endif; ?>
 
-            <a href="user.php?id=<?= $partner_id ?>" class="btn btn-outline btn-sm" style="width: 100%;">
+            <!-- Sertifikat Barter SDG 4 (Hanya jika Status Selesai) -->
+            <?php if ($exchange['status'] === 'completed'): ?>
+                <div style="background: linear-gradient(135deg, #eff6ff 0%, #f0fdf4 100%); border: 1px solid var(--blue-200); border-radius: var(--radius-lg); padding: 18px; margin-bottom: 20px; text-align: center;">
+                    <div style="color: var(--blue-600); margin-bottom: 6px; display: flex; justify-content: center;">
+                        <?= icon('award', '', '32px') ?>
+                    </div>
+                    <strong style="font-size: 14px; color: var(--ink); display: block;">Bukti Barter & SDG 4</strong>
+                    <p style="font-size: 12px; color: var(--gray-600); margin: 4px 0 14px;">
+                        Cetak sertifikat bukti kontribusi pembelajaran berkualitas untuk portofolio.
+                    </p>
+                    <a href="certificate.php?id=<?= $exchange_id ?>" target="_blank" class="btn btn-primary btn-sm" style="width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 6px;">
+                        <?= icon('award', '', '14px') ?> Unduh Bukti Barter SDG 4
+                    </a>
+                </div>
+            <?php endif; ?>
+
+            <a href="user.php?id=<?= $partner_id ?>" class="btn btn-outline btn-sm" style="width: 100%; text-align: center;">
                 Buka Profil Lengkap Partner
             </a>
         </div>
