@@ -20,32 +20,32 @@
             <!-- Plain border-radius container dengan grid info kotak (Clean White Box persis referensi) -->
             <div class="sdg-plain-container" style="background: #ffffff; border-radius: 18px; padding: 22px 24px; display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; box-shadow: 0 14px 34px rgba(0, 0, 0, 0.28); border: 1px solid #e2e8f0;">
                 <div class="sdg-slot-item" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 10px 6px; border-radius: 12px; transition: transform 0.2s ease;">
-                    <div class="sdg-slot-icon" style="color: #c2410c; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; height: 36px;"><?= icon('graduation-cap', '', 26) ?></div>
+                    <div class="sdg-slot-icon" style="color: #2563eb; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; height: 36px;"><?= icon('graduation-cap', '', 26) ?></div>
                     <strong class="sdg-slot-title" style="color: #0f172a; font-size: 13px; font-weight: 800; display: block; line-height: 1.2;">SDG 4</strong>
                     <span class="sdg-slot-desc" style="color: #64748b; font-size: 11px; font-weight: 600; display: block; margin-top: 4px; line-height: 1.3;">Quality Education</span>
                 </div>
                 <div class="sdg-slot-item" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 10px 6px; border-radius: 12px; transition: transform 0.2s ease;">
-                    <div class="sdg-slot-icon" style="color: #c2410c; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; height: 36px;"><?= icon('target', '', 26) ?></div>
+                    <div class="sdg-slot-icon" style="color: #2563eb; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; height: 36px;"><?= icon('target', '', 26) ?></div>
                     <strong class="sdg-slot-title" style="color: #0f172a; font-size: 13px; font-weight: 800; display: block; line-height: 1.2;">Target 4.4</strong>
                     <span class="sdg-slot-desc" style="color: #64748b; font-size: 11px; font-weight: 600; display: block; margin-top: 4px; line-height: 1.3;">Kesiapan Kerja</span>
                 </div>
                 <div class="sdg-slot-item" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 10px 6px; border-radius: 12px; transition: transform 0.2s ease;">
-                    <div class="sdg-slot-icon" style="color: #c2410c; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; height: 36px;"><?= icon('scale', '', 26) ?></div>
+                    <div class="sdg-slot-icon" style="color: #2563eb; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; height: 36px;"><?= icon('scale', '', 26) ?></div>
                     <strong class="sdg-slot-title" style="color: #0f172a; font-size: 13px; font-weight: 800; display: block; line-height: 1.2;">SDG 10</strong>
                     <span class="sdg-slot-desc" style="color: #64748b; font-size: 11px; font-weight: 600; display: block; margin-top: 4px; line-height: 1.3;">Akses Merata</span>
                 </div>
                 <div class="sdg-slot-item" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 10px 6px; border-radius: 12px; transition: transform 0.2s ease;">
-                    <div class="sdg-slot-icon" style="color: #c2410c; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; height: 36px;"><?= icon('trending-up', '', 26) ?></div>
+                    <div class="sdg-slot-icon" style="color: #2563eb; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; height: 36px;"><?= icon('trending-up', '', 26) ?></div>
                     <strong class="sdg-slot-title" style="color: #0f172a; font-size: 13px; font-weight: 800; display: block; line-height: 1.2;">SDG 8</strong>
                     <span class="sdg-slot-desc" style="color: #64748b; font-size: 11px; font-weight: 600; display: block; margin-top: 4px; line-height: 1.3;">Skill Relevan</span>
                 </div>
                 <div class="sdg-slot-item" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 10px 6px; border-radius: 12px; transition: transform 0.2s ease;">
-                    <div class="sdg-slot-icon" style="color: #c2410c; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; height: 36px;"><?= icon('repeat', '', 26) ?></div>
+                    <div class="sdg-slot-icon" style="color: #2563eb; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; height: 36px;"><?= icon('repeat', '', 26) ?></div>
                     <strong class="sdg-slot-title" style="color: #0f172a; font-size: 13px; font-weight: 800; display: block; line-height: 1.2;">Peer Barter</strong>
                     <span class="sdg-slot-desc" style="color: #64748b; font-size: 11px; font-weight: 600; display: block; margin-top: 4px; line-height: 1.3;">100% Bebas Biaya</span>
                 </div>
                 <div class="sdg-slot-item" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 10px 6px; border-radius: 12px; transition: transform 0.2s ease;">
-                    <div class="sdg-slot-icon" style="color: #c2410c; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; height: 36px;"><?= icon('shield-check', '', 26) ?></div>
+                    <div class="sdg-slot-icon" style="color: #2563eb; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; height: 36px;"><?= icon('shield-check', '', 26) ?></div>
                     <strong class="sdg-slot-title" style="color: #0f172a; font-size: 13px; font-weight: 800; display: block; line-height: 1.2;">Sertifikasi</strong>
                     <span class="sdg-slot-desc" style="color: #64748b; font-size: 11px; font-weight: 600; display: block; margin-top: 4px; line-height: 1.3;">Verifikasi Portofolio</span>
                 </div>
