@@ -1481,15 +1481,20 @@ textarea:focus {
 }
 
 /* Plain border-radius container from user reference */
+.footer-sdg-showcase .sdg-plain-container,
 .sdg-plain-container {
-  background: var(--white);
-  border-radius: 16px;
-  padding: 24px 28px;
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 16px;
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.22);
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  background: var(--white) !important;
+  border-radius: 18px !important;
+  padding: 22px 26px !important;
+  display: grid !important;
+  grid-template-columns: repeat(6, 1fr) !important;
+  gap: 14px !important;
+  box-shadow: 0 14px 34px rgba(0, 0, 0, 0.28) !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+.footer .brand-logo span {
+  color: #ffffff !important;
 }
 
 .sdg-slot-item {

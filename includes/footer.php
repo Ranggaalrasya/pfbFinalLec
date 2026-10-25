@@ -9,45 +9,45 @@
 <footer class="footer">
     <div class="container">
         
-        <!-- Showcase Komitmen SDG: Plain border-radius container (Sesuai Referensi) -->
-        <div class="footer-sdg-showcase">
-            <div class="sdg-showcase-header">
-                <span class="sdg-subheading">Platform Inklusif Mahasiswa Indonesia</span>
-                <h3 class="sdg-main-heading">Komitmen Nyata Sustainable Development Goals</h3>
-                <p class="sdg-caption">TukarSkill dibangun di atas prinsip pemerataan akses pendidikan, menghapus batasan biaya les privat antar mahasiswa.</p>
+        <!-- Showcase Komitmen SDG: Plain border-radius container (Sesuai Referensi Pengguna) -->
+        <div class="footer-sdg-showcase" style="margin-bottom: 48px; padding-bottom: 44px; border-bottom: 1px solid rgba(255, 255, 255, 0.12);">
+            <div class="sdg-showcase-header" style="text-align: center; max-width: 680px; margin: 0 auto 26px;">
+                <span class="sdg-subheading" style="display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #38bdf8; margin-bottom: 8px;">Platform Inklusif Mahasiswa Indonesia</span>
+                <h3 class="sdg-main-heading" style="font-size: 24px; font-weight: 900; color: #ffffff; letter-spacing: -0.5px; margin: 0 0 8px;">Komitmen Nyata Sustainable Development Goals</h3>
+                <p class="sdg-caption" style="font-size: 13px; color: #94a3b8; line-height: 1.6; margin: 0;">TukarSkill dibangun di atas prinsip pemerataan akses pendidikan, menghapus batasan biaya les privat antar mahasiswa.</p>
             </div>
 
-            <!-- Plain border-radius container dengan grid info kotak -->
-            <div class="sdg-plain-container">
-                <div class="sdg-slot-item">
-                    <div class="sdg-slot-icon"><?= icon('graduation-cap', '', 26) ?></div>
-                    <strong class="sdg-slot-title">SDG 4</strong>
-                    <span class="sdg-slot-desc">Quality Education</span>
+            <!-- Plain border-radius container dengan grid info kotak (Clean White Box persis referensi) -->
+            <div class="sdg-plain-container" style="background: #ffffff; border-radius: 18px; padding: 22px 24px; display: grid; grid-template-columns: repeat(6, 1fr); gap: 14px; box-shadow: 0 14px 34px rgba(0, 0, 0, 0.28); border: 1px solid #e2e8f0;">
+                <div class="sdg-slot-item" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 10px 6px; border-radius: 12px; transition: transform 0.2s ease;">
+                    <div class="sdg-slot-icon" style="color: #c2410c; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; height: 36px;"><?= icon('graduation-cap', '', 26) ?></div>
+                    <strong class="sdg-slot-title" style="color: #0f172a; font-size: 13px; font-weight: 800; display: block; line-height: 1.2;">SDG 4</strong>
+                    <span class="sdg-slot-desc" style="color: #64748b; font-size: 11px; font-weight: 600; display: block; margin-top: 4px; line-height: 1.3;">Quality Education</span>
                 </div>
-                <div class="sdg-slot-item">
-                    <div class="sdg-slot-icon"><?= icon('target', '', 26) ?></div>
-                    <strong class="sdg-slot-title">Target 4.4</strong>
-                    <span class="sdg-slot-desc">Kesiapan Kerja</span>
+                <div class="sdg-slot-item" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 10px 6px; border-radius: 12px; transition: transform 0.2s ease;">
+                    <div class="sdg-slot-icon" style="color: #c2410c; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; height: 36px;"><?= icon('target', '', 26) ?></div>
+                    <strong class="sdg-slot-title" style="color: #0f172a; font-size: 13px; font-weight: 800; display: block; line-height: 1.2;">Target 4.4</strong>
+                    <span class="sdg-slot-desc" style="color: #64748b; font-size: 11px; font-weight: 600; display: block; margin-top: 4px; line-height: 1.3;">Kesiapan Kerja</span>
                 </div>
-                <div class="sdg-slot-item">
-                    <div class="sdg-slot-icon"><?= icon('scale', '', 26) ?></div>
-                    <strong class="sdg-slot-title">SDG 10</strong>
-                    <span class="sdg-slot-desc">Reduced Inequalities</span>
+                <div class="sdg-slot-item" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 10px 6px; border-radius: 12px; transition: transform 0.2s ease;">
+                    <div class="sdg-slot-icon" style="color: #c2410c; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; height: 36px;"><?= icon('scale', '', 26) ?></div>
+                    <strong class="sdg-slot-title" style="color: #0f172a; font-size: 13px; font-weight: 800; display: block; line-height: 1.2;">SDG 10</strong>
+                    <span class="sdg-slot-desc" style="color: #64748b; font-size: 11px; font-weight: 600; display: block; margin-top: 4px; line-height: 1.3;">Akses Merata</span>
                 </div>
-                <div class="sdg-slot-item">
-                    <div class="sdg-slot-icon"><?= icon('trending-up', '', 26) ?></div>
-                    <strong class="sdg-slot-title">SDG 8</strong>
-                    <span class="sdg-slot-desc">Pertumbuhan Karir</span>
+                <div class="sdg-slot-item" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 10px 6px; border-radius: 12px; transition: transform 0.2s ease;">
+                    <div class="sdg-slot-icon" style="color: #c2410c; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; height: 36px;"><?= icon('trending-up', '', 26) ?></div>
+                    <strong class="sdg-slot-title" style="color: #0f172a; font-size: 13px; font-weight: 800; display: block; line-height: 1.2;">SDG 8</strong>
+                    <span class="sdg-slot-desc" style="color: #64748b; font-size: 11px; font-weight: 600; display: block; margin-top: 4px; line-height: 1.3;">Skill Relevan</span>
                 </div>
-                <div class="sdg-slot-item">
-                    <div class="sdg-slot-icon"><?= icon('repeat', '', 26) ?></div>
-                    <strong class="sdg-slot-title">Peer-to-Peer</strong>
-                    <span class="sdg-slot-desc">100% Bebas Biaya</span>
+                <div class="sdg-slot-item" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 10px 6px; border-radius: 12px; transition: transform 0.2s ease;">
+                    <div class="sdg-slot-icon" style="color: #c2410c; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; height: 36px;"><?= icon('repeat', '', 26) ?></div>
+                    <strong class="sdg-slot-title" style="color: #0f172a; font-size: 13px; font-weight: 800; display: block; line-height: 1.2;">Peer Barter</strong>
+                    <span class="sdg-slot-desc" style="color: #64748b; font-size: 11px; font-weight: 600; display: block; margin-top: 4px; line-height: 1.3;">100% Bebas Biaya</span>
                 </div>
-                <div class="sdg-slot-item">
-                    <div class="sdg-slot-icon"><?= icon('shield-check', '', 26) ?></div>
-                    <strong class="sdg-slot-title">Verifikasi</strong>
-                    <span class="sdg-slot-desc">Sertifikat Sesi Resmi</span>
+                <div class="sdg-slot-item" style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 10px 6px; border-radius: 12px; transition: transform 0.2s ease;">
+                    <div class="sdg-slot-icon" style="color: #c2410c; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; height: 36px;"><?= icon('shield-check', '', 26) ?></div>
+                    <strong class="sdg-slot-title" style="color: #0f172a; font-size: 13px; font-weight: 800; display: block; line-height: 1.2;">Sertifikasi</strong>
+                    <span class="sdg-slot-desc" style="color: #64748b; font-size: 11px; font-weight: 600; display: block; margin-top: 4px; line-height: 1.3;">Verifikasi Portofolio</span>
                 </div>
             </div>
         </div>
@@ -55,20 +55,20 @@
         <div class="footer-grid">
             <!-- Kolom Brand & Tagline -->
             <div class="footer-brand">
-                <a href="index.php" class="brand-logo" style="color: var(--white); margin-bottom: 14px; display: inline-flex; align-items: center; gap: 10px;">
-                    <div class="logo-icon" style="background: var(--blue-500); width: 38px; height: 38px; border-radius: 10px; display: inline-flex; align-items: center; justify-content: center; color: #fff; box-shadow: 0 4px 14px rgba(37,99,235,0.35);">
+                <a href="index.php" class="brand-logo" style="color: #ffffff; margin-bottom: 14px; display: inline-flex; align-items: center; gap: 10px; text-decoration: none;">
+                    <div class="logo-icon" style="background: var(--blue-500); width: 38px; height: 38px; border-radius: 10px; display: inline-flex; align-items: center; justify-content: center; color: #ffffff; box-shadow: 0 4px 14px rgba(37,99,235,0.35);">
                         <?= icon('handshake', '', 20) ?>
                     </div>
-                    <span>Tukar<strong style="color: #60a5fa;">Skill</strong></span>
+                    <span style="color: #ffffff !important; font-weight: 800; font-size: 20px; letter-spacing: -0.5px;">Tukar<strong style="color: #60a5fa !important;">Skill</strong></span>
                 </a>
-                <p>Platform pertukaran kemampuan antar mahasiswa pertama di Indonesia. Saling mengajar, saling belajar, tanpa biaya kursus.</p>
+                <p style="color: #94a3b8; font-size: 13px; line-height: 1.6; margin: 0 0 16px;">Platform pertukaran kemampuan antar mahasiswa pertama di Indonesia. Saling mengajar, saling belajar, tanpa biaya kursus.</p>
                 
                 <!-- Kotak Info Ringkas SDG (Plain Border-Radius Container) -->
-                <div class="footer-sdg-compact-box">
-                    <div class="compact-box-icon"><?= icon('award', '', 18) ?></div>
+                <div class="footer-sdg-compact-box" style="background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 12px; padding: 12px 14px; display: flex; align-items: center; gap: 12px; max-width: 320px;">
+                    <div class="compact-box-icon" style="width: 34px; height: 34px; border-radius: 8px; background: rgba(56, 189, 248, 0.12); color: #38bdf8; display: flex; align-items: center; justify-content: center; flex-shrink: 0;"><?= icon('award', '', 18) ?></div>
                     <div>
-                        <strong>SDG 4 & 10 Certified Initiative</strong>
-                        <span>Akses pembelajaran setara tanpa komersialisasi</span>
+                        <strong style="color: #ffffff; font-size: 12px; font-weight: 800; display: block; line-height: 1.2;">SDG 4 & 10 Certified Initiative</strong>
+                        <span style="color: #94a3b8; font-size: 11px; display: block; margin-top: 2px; line-height: 1.3;">Akses pembelajaran setara tanpa komersialisasi</span>
                     </div>
                 </div>
             </div>

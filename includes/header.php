@@ -23,7 +23,7 @@ $unread_notifs = $logged_user ? get_unread_notifications_count($logged_user['id'
     <meta name="description" content="TukarSkill adalah platform pertukaran kemampuan antar mahasiswa berbasis peer-to-peer tanpa biaya. Dukung SDG 4 Quality Education!">
     
     <!-- CSS Utama & Font Inter -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css?v=<?= file_exists(__DIR__ . '/../assets/css/style.css') ? filemtime(__DIR__ . '/../assets/css/style.css') : time() ?>">
     
     <!-- Favicon sederhana berbasis icon handshake SVG -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%232563eb%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><path d=%22m11 17 2 2a1 1 0 0 0 1.4 0l4.3-4.3a1 1 0 0 0 0-1.4l-3-3%22/><path d=%22m7 13 4 4%22/><path d=%22M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0%22/><path d=%22M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v2%22/><path d=%22M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8%22/><path d=%22M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15%22/></svg>">
