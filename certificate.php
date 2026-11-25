@@ -236,15 +236,16 @@ $verify_hash = strtoupper(substr(hash('sha256', $cert_number . '|' . $exchange['
         <div class="cert-inner-frame">
             
             <!-- Watermark Lambang TukarSkill di Latar Belakang -->
-            <svg class="cert-watermark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+            <svg class="cert-watermark" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M10 20.5V17.5C10 14.4624 12.4624 12 15.5 12H28.5M24 7.5L29 12L24 16.5M30 19.5V22.5C30 25.5376 27.5376 28 24.5 28H11.5M16 23.5L11 28L16 32.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M20 15.5L21.35 18.65L24.5 20L21.35 21.35L20 24.5L18.65 21.35L15.5 20L18.65 18.65L20 15.5Z"/>
             </svg>
 
             <!-- KOP ATAS: Brand TukarSkill & SDG 4 -->
             <div class="cert-header">
                 <div style="display: flex; align-items: center; gap: 12px;">
-                    <div style="width: 44px; height: 44px; border-radius: 12px; background: #2563eb; color: #fff; display: flex; align-items: center; justify-content: center;">
-                        <?= icon('handshake', '', '26px') ?>
+                    <div style="display: flex; align-items: center; justify-content: center; filter: drop-shadow(0 4px 10px rgba(37, 99, 235, 0.22));">
+                        <?= brand_logo_svg(44) ?>
                     </div>
                     <div>
                         <strong style="font-size: 18px; font-weight: 900; color: #0f172a; display: block; letter-spacing: -0.5px;">

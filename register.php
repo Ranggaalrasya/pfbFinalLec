@@ -137,6 +137,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             <!-- Header Form -->
             <div style="text-align: center; margin-bottom: 32px;">
+                <div style="margin: 0 auto 14px; width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; filter: drop-shadow(0 8px 16px rgba(37, 99, 235, 0.25));">
+                    <?= brand_logo_svg(52) ?>
+                </div>
                 <span class="section-tag" style="background: var(--lime); color: var(--lime-dark); display: inline-flex; align-items: center; gap: 6px;">
                     <?= icon('sparkles', '', '14px') ?> Bonus +20 Poin
                 </span>

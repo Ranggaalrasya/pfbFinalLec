@@ -20,7 +20,7 @@ $current_admin_page = basename($_SERVER['PHP_SELF']);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= isset($page_title) ? e($page_title) . ' — Admin TukarSkill' : 'Admin Panel — TukarSkill' ?></title>
     <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚙️</text></svg>">
+    <link rel="icon" type="image/svg+xml" href="../assets/img/logo.svg"><text y=%22.9em%22 font-size=%2290%22>⚙️</text></svg>">
 </head>
 <body style="background: #f8fafc; min-height: 100vh; display: flex; flex-direction: column;">
 
@@ -48,9 +48,7 @@ $current_admin_page = basename($_SERVER['PHP_SELF']);
         <!-- Logo & Admin Badge -->
         <div style="display: flex; align-items: center; gap: 12px;">
             <a href="index.php" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: white;">
-                <div style="width: 32px; height: 32px; border-radius: 8px; background: #3b82f6; display: flex; align-items: center; justify-content: center; color: white;">
-                    <?= icon('handshake', '', '18px') ?>
-                </div>
+                <?= brand_logo_svg(34) ?>
                 <span style="font-size: 18px; font-weight: 800; color: white;">
                     Tukar<span style="color: #60a5fa;">Skill</span>
                 </span>

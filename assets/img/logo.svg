@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 40 40" fill="none">
+  <defs>
+    <linearGradient id="tsBrandGradMain" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#1e3a8a"/>
+      <stop offset="50%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#0284c7"/>
+    </linearGradient>
+  </defs>
+  <!-- Enterprise Squircle Base -->
+  <rect x="1" y="1" width="38" height="38" rx="11" fill="url(#tsBrandGradMain)"/>
+  <rect x="1.75" y="1.75" width="36.5" height="36.5" rx="10.25" fill="none" stroke="#ffffff" stroke-opacity="0.22" stroke-width="1.5"/>
+  <!-- Upper Skill-Swap Arrow (Outbound / Teach) -->
+  <path d="M10 20.5V17.5C10 14.4624 12.4624 12 15.5 12H28.5" stroke="#ffffff" stroke-width="3.1" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M24 7.5L29 12L24 16.5" stroke="#ffffff" stroke-width="3.1" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Lower Skill-Swap Arrow (Inbound / Learn) -->
+  <path d="M30 19.5V22.5C30 25.5376 27.5376 28 24.5 28H11.5" stroke="#93c5fd" stroke-width="3.1" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M16 23.5L11 28L16 32.5" stroke="#93c5fd" stroke-width="3.1" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Center Knowledge Spark (Skill Mastery Core) -->
+  <path d="M20 15.5L21.35 18.65L24.5 20L21.35 21.35L20 24.5L18.65 21.35L15.5 20L18.65 18.65L20 15.5Z" fill="#fde047"/>
+</svg>

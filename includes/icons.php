@@ -19,7 +19,7 @@ function icon($name, $class = '', $size = 18, $extra_attrs = '') {
 
     $paths = [
         // Brand & Kolaborasi
-        'handshake' => '<path d="m11 17 2 2a1 1 0 0 0 1.4 0l4.3-4.3a1 1 0 0 0 0-1.4l-3-3"/><path d="m7 13 4 4"/><path d="M18 11V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v0"/><path d="M14 10V4a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2v0a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/>',
+        'handshake' => '<path d="M7 10V8a4 4 0 0 1 4-4h8"/><path d="m16 1 3 3-3 3"/><path d="M17 14v2a4 4 0 0 1-4 4H5"/><path d="m8 23-3-3 3-3"/><path d="m12 9.5 1 1.5 1.5 1-1.5 1-1 1.5-1-1.5-1.5-1 1.5-1 1-1.5Z"/>',
         
         // Gamifikasi & Nilai
         'coins' => '<circle cx="8" cy="8" r="6"/><path d="M18.09 10.37A6 6 0 1 1 10.34 18"/><path d="M7 6h1v4"/><path d="m16.71 13.88.7.71-2.82 2.82"/>',
@@ -130,4 +130,28 @@ function badge_icon_svg($badge_name, $size = 20, $class = '') {
         return icon('award', $class, $size);
     }
     return icon('coins', $class, $size);
+}
+
+/**
+ * Render logo enterprise TukarSkill ("The Skill-Swap Nexus")
+ * Simbol pertukaran dua arah (Tukar) yang mengelilingi percikan keahlian (Skill)
+ */
+function brand_logo_svg($size = 36, $class = '') {
+    static $uid = 0;
+    $uid++;
+    $s = (int)$size ?: 36;
+    $grad_id = 'tsBrandGrad_' . $uid;
+    $cls = 'ts-brand-mark' . ($class ? ' ' . htmlspecialchars($class) : '');
+    return '<svg xmlns="http://www.w3.org/2000/svg" width="' . $s . '" height="' . $s . '" viewBox="0 0 40 40" fill="none" class="' . $cls . '" style="flex-shrink: 0; display: block;" aria-hidden="true">'
+        . '<defs><linearGradient id="' . $grad_id . '" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse">'
+        . '<stop offset="0%" stop-color="#1e3a8a"/><stop offset="50%" stop-color="#2563eb"/><stop offset="100%" stop-color="#0284c7"/>'
+        . '</linearGradient></defs>'
+        . '<rect x="1" y="1" width="38" height="38" rx="11" fill="url(#' . $grad_id . ')"/>'
+        . '<rect x="1.75" y="1.75" width="36.5" height="36.5" rx="10.25" fill="none" stroke="#ffffff" stroke-opacity="0.22" stroke-width="1.5"/>'
+        . '<path d="M10 20.5V17.5C10 14.4624 12.4624 12 15.5 12H28.5" stroke="#ffffff" stroke-width="3.1" stroke-linecap="round" stroke-linejoin="round"/>'
+        . '<path d="M24 7.5L29 12L24 16.5" stroke="#ffffff" stroke-width="3.1" stroke-linecap="round" stroke-linejoin="round"/>'
+        . '<path d="M30 19.5V22.5C30 25.5376 27.5376 28 24.5 28H11.5" stroke="#93c5fd" stroke-width="3.1" stroke-linecap="round" stroke-linejoin="round"/>'
+        . '<path d="M16 23.5L11 28L16 32.5" stroke="#93c5fd" stroke-width="3.1" stroke-linecap="round" stroke-linejoin="round"/>'
+        . '<path d="M20 15.5L21.35 18.65L24.5 20L21.35 21.35L20 24.5L18.65 21.35L15.5 20L18.65 18.65L20 15.5Z" fill="#fde047"/>'
+        . '</svg>';
 }

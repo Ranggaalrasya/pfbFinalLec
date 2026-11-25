@@ -103,8 +103,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             
             <!-- Header Form -->
             <div style="text-align: center; margin-bottom: 30px;">
-                <div class="logo-icon" style="margin: 0 auto 14px; width: 48px; height: 48px; border-radius: 16px; display: flex; align-items: center; justify-content: center; background: var(--blue-500); color: #fff;">
-                    <?= icon('handshake', '', '26px') ?>
+                <div style="margin: 0 auto 14px; width: 52px; height: 52px; display: flex; align-items: center; justify-content: center; filter: drop-shadow(0 8px 16px rgba(37, 99, 235, 0.25));">
+                    <?= brand_logo_svg(52) ?>
                 </div>
                 <h1 style="font-size: 26px; font-weight: 800; color: var(--ink);">Masuk ke TukarSkill</h1>
                 <p style="font-size: 14px; color: var(--gray-600); margin-top: 6px;">

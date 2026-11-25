@@ -56,9 +56,7 @@
             <!-- Kolom Brand & Tagline -->
             <div class="footer-brand">
                 <a href="index.php" class="brand-logo" style="color: #ffffff; margin-bottom: 14px; display: inline-flex; align-items: center; gap: 10px; text-decoration: none;">
-                    <div class="logo-icon" style="background: var(--blue-500); width: 38px; height: 38px; border-radius: 10px; display: inline-flex; align-items: center; justify-content: center; color: #ffffff; box-shadow: 0 4px 14px rgba(37,99,235,0.35);">
-                        <?= icon('handshake', '', 20) ?>
-                    </div>
+                    <div class="logo-icon"><?= brand_logo_svg(38) ?></div>
                     <span style="color: #ffffff !important; font-weight: 800; font-size: 20px; letter-spacing: -0.5px;">Tukar<strong style="color: #60a5fa !important;">Skill</strong></span>
                 </a>
                 <p style="color: #94a3b8; font-size: 13px; line-height: 1.6; margin: 0 0 16px;">Platform pertukaran kemampuan antar mahasiswa pertama di Indonesia. Saling mengajar, saling belajar, tanpa biaya kursus.</p>
