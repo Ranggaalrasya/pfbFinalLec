@@ -20,7 +20,7 @@ $current_admin_page = basename($_SERVER['PHP_SELF']);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= isset($page_title) ? e($page_title) . ' — Admin TukarSkill' : 'Admin Panel — TukarSkill' ?></title>
     <link rel="stylesheet" href="../assets/css/style.css">
-    <link rel="icon" type="image/svg+xml" href="../assets/img/logo.svg"><text y=%22.9em%22 font-size=%2290%22>⚙️</text></svg>">
+    <link rel="icon" type="image/svg+xml" href="../assets/img/logo.svg">
 </head>
 <body style="background: #f8fafc; min-height: 100vh; display: flex; flex-direction: column;">
 

@@ -120,7 +120,7 @@ if (is_db_connected()) {
     <div style="text-align: center; max-width: 720px; margin: 0 auto 36px;">
         <span class="section-tag">Eksplorasi Komunitas</span>
         <h1 style="font-size: 32px; font-weight: 800; color: var(--ink); margin-top: 10px;">
-            Cari Partner Barter Skill 🤝
+            Cari Partner Barter Skill
         </h1>
         <p style="font-size: 15px; color: var(--gray-600); margin-top: 8px;">
             Temukan mahasiswa dengan keahlian yang kamu butuhkan, dan ajukan sesi tukar skill sekarang.
@@ -208,7 +208,7 @@ if (is_db_connected()) {
     <!-- HASIL GRID PENAWARAN SKILL (Kartu Modern ala LearnNix) -->
     <?php if (empty($results)): ?>
         <div style="background: var(--white); border-radius: var(--radius-xl); padding: 60px 20px; text-align: center; box-shadow: var(--shadow-sm); border: 1px solid var(--gray-200);">
-            <div style="font-size: 48px; margin-bottom: 12px;">🔍</div>
+            <div style="width: 64px; height: 64px; border-radius: 50%; background: var(--blue-50); color: var(--blue-600); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 16px;"><?= icon('search', '', 28) ?></div>
             <h3 style="font-size: 20px; font-weight: 800; color: var(--ink);">Tidak ditemukan penawaran skill yang cocok</h3>
             <p style="font-size: 14px; color: var(--gray-600); max-width: 460px; margin: 8px auto 20px;">
                 Coba gunakan kata kunci yang lebih umum atau reset filter kategori & level.
@@ -289,11 +289,6 @@ if (is_db_connected()) {
                         <a href="user.php?id=<?= (int)$item['user_id'] ?>" class="btn-swap-cta">
                             <span>Ajak Tukar</span>
                             <span class="cta-arrow"><?= icon('arrow-up-right', '', 13) ?></span>
-                        </a>
-                    </div>
-                </div>
-                            <span>Ajak Tukar</span>
-                            <span class="cta-arrow">↗</span>
                         </a>
                     </div>
                 </div>

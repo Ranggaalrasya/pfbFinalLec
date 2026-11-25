@@ -146,7 +146,7 @@ if (empty($featured_offers)) {
 
             <!-- Tag pill atas -->
             <div class="hero-chip-top">
-                <span>🎓 100% Gratis Antar Mahasiswa • Tanpa Biaya Kursus</span>
+                <span style="display: inline-flex; align-items: center; gap: 6px;"><?= icon('graduation-cap', '', 15) ?> 100% Gratis Antar Mahasiswa • Tanpa Biaya Kursus</span>
             </div>
 
             <!-- Judul utama & slogan -->
@@ -186,15 +186,16 @@ if (empty($featured_offers)) {
                 <!-- Floating card kanan (Komunitas mahasiswa) -->
                 <div class="float-card-right">
                     <div class="avatar-stack">
-                        <div class="mini-avatar" style="background:#2563eb">R</div>
-                        <div class="mini-avatar" style="background:#7c3aed">J</div>
-                        <div class="mini-avatar" style="background:#059669">L</div>
-                        <div class="mini-avatar" style="background:#ea580c">S</div>
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Rangga" class="mini-avatar" style="object-fit:cover;">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Jennifer" class="mini-avatar" style="object-fit:cover;">
+                        <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Liftya" class="mini-avatar" style="object-fit:cover;">
+                        <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Lucky" class="mini-avatar" style="object-fit:cover;">
+                        <div class="mini-avatar" style="background: var(--blue-600); color: #fff; font-size: 10px; font-weight: 800;">+14</div>
                     </div>
-                    <div class="stat-title" style="display: flex; align-items: center; justify-content: center; gap: 6px;">
-                        <?= icon('users', '', 20) ?> 500+
+                    <div class="stat-title" style="display: flex; align-items: center; gap: 6px; color: var(--ink);">
+                        <span style="color: var(--blue-600); display: inline-flex;"><?= icon('users', '', 18) ?></span> <span>500+ Mahasiswa</span>
                     </div>
-                    <p>Mahasiswa aktif saling barter ilmu dari berbagai jurusan.</p>
+                    <p>Aktif saling barter ilmu lintas jurusan setiap minggunya.</p>
                 </div>
 
                 <!-- Chip animasi barter yang berubah kata tiap 3 detik -->
@@ -368,22 +369,26 @@ if (empty($featured_offers)) {
                 </div>
 
                 <!-- Satelit Orbit: Partner yang cocok -->
-                <div class="satellite-node node-1">
+                <div class="satellite-node node-1" style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px;">
+                    <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Jennifer" style="width: 26px; height: 26px; border-radius: 50%; object-fit: cover; border: 1.5px solid #2563eb;">
                     <span>Jennifer L.</span>
                     <span class="node-match-score">95% Match</span>
                 </div>
 
-                <div class="satellite-node node-2">
+                <div class="satellite-node node-2" style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px;">
+                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Rangga" style="width: 26px; height: 26px; border-radius: 50%; object-fit: cover; border: 1.5px solid #2563eb;">
                     <span>Rangga A.</span>
                     <span class="node-match-score">90% Match</span>
                 </div>
 
-                <div class="satellite-node node-3">
+                <div class="satellite-node node-3" style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px;">
+                    <img src="https://randomuser.me/api/portraits/women/33.jpg" alt="Syifa" style="width: 26px; height: 26px; border-radius: 50%; object-fit: cover; border: 1.5px solid #2563eb;">
                     <span>Syifa A.</span>
                     <span class="node-match-score">85% Match</span>
                 </div>
 
-                <div class="satellite-node node-4">
+                <div class="satellite-node node-4" style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px;">
+                    <img src="https://randomuser.me/api/portraits/men/11.jpg" alt="Dimas" style="width: 26px; height: 26px; border-radius: 50%; object-fit: cover; border: 1.5px solid #2563eb;">
                     <span>Dimas P.</span>
                     <span class="node-match-score">80% Match</span>
                 </div>
@@ -525,7 +530,7 @@ if (empty($featured_offers)) {
                     "Awalnya ragu ada yang mau ngajarin Figma gratis. Ternyata dapet partner Kak Jennifer yang telaten banget! Gantinya aku ajarin dasar PHP buat tugas kuliahnya. Barter ilmu yang saling menguntungkan!"
                 </p>
                 <div class="story-author">
-                    <?= render_avatar('rangga.svg', 'Rangga Alrasya', 42) ?>
+                    <?= render_avatar('https://randomuser.me/api/portraits/men/32.jpg', 'Rangga Alrasya', 42) ?>
                     <div class="story-details">
                         <h4>Rangga Alrasya</h4>
                         <span>Teknik Informatika (2025)</span>
@@ -538,7 +543,7 @@ if (empty($featured_offers)) {
                     "Nilai TOEFL-ku naik dari 480 jadi 560 setelah latihan speaking 4 kali bareng Syifa! Dan asiknya aku cuma bayar pake sesi mentoring desain Canva buat dia. Hemat jutaan dibanding les privat."
                 </p>
                 <div class="story-author">
-                    <?= render_avatar('lucky.svg', 'Lucky Fadlan', 42) ?>
+                    <?= render_avatar('https://randomuser.me/api/portraits/men/45.jpg', 'Lucky Fadlan', 42) ?>
                     <div class="story-details">
                         <h4>Lucky Fadlan</h4>
                         <span>Computer Science (2025)</span>
@@ -551,7 +556,7 @@ if (empty($featured_offers)) {
                     "Selain dapet ilmu video editing dari Dimas, aku juga dapet temen networking baru lintas jurusan. Sistem poinnya juga bikin semangat buat terus berkontribusi ngajarin anak-anak lain."
                 </p>
                 <div class="story-author">
-                    <?= render_avatar('', 'Amanda Putri', 42) ?>
+                    <?= render_avatar('https://randomuser.me/api/portraits/women/17.jpg', 'Amanda Putri', 42) ?>
                     <div class="story-details">
                         <h4>Amanda Putri</h4>
                         <span>Marketing Communication (2025)</span>

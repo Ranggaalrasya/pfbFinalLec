@@ -5,6 +5,9 @@
 // ==============================================================
 
 // nyalain session kalo belom nyala, biar ga error notice "session already started"
+if (!ob_get_level()) {
+    ob_start();
+}
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -16,14 +19,25 @@ require_once __DIR__ . '/icons.php';
  * Ambil URL avatar user yang pasti valid dan tidak akan menghasilkan gambar rusak (404)
  */
 function user_avatar_url($photo, $name = '') {
-    if (!empty($photo) && file_exists(__DIR__ . '/../uploads/avatars/' . $photo)) {
-        return 'uploads/avatars/' . htmlspecialchars($photo);
+    $photo_str = trim((string)$photo);
+    // Support URL gambar langsung dari Public API (RandomUser / Pravatar / UI-Avatars)
+    if (strpos($photo_str, 'http://') === 0 || strpos($photo_str, 'https://') === 0) {
+        return $photo_str;
+    }
+
+    if ($photo_str !== '' && file_exists(__DIR__ . '/../uploads/avatars/' . $photo_str)) {
+        return 'uploads/avatars/' . htmlspecialchars($photo_str);
     }
     
     // Cek avatar SVG spesifik nama panggilan (contoh: rangga, jennifer, lucky, dll)
     $first_word = strtolower(explode(' ', trim((string)$name))[0] ?? '');
     if ($first_word && file_exists(__DIR__ . '/../uploads/avatars/' . $first_word . '.svg')) {
         return 'uploads/avatars/' . $first_word . '.svg';
+    }
+
+    // Fallback ke Public API UI-Avatars dengan nama mahasiswa
+    if (trim((string)$name) !== '') {
+        return 'https://ui-avatars.com/api/?name=' . urlencode(trim((string)$name)) . '&background=2563eb&color=ffffff&bold=true&size=128';
     }
 
     if (file_exists(__DIR__ . '/../uploads/avatars/default.svg')) {
@@ -39,9 +53,10 @@ function render_avatar($photo, $name, $size = 40, $extra_class = '') {
     $url = user_avatar_url($photo, $name);
     $initial = strtoupper(substr(trim((string)$name), 0, 1) ?: 'U');
     $size_px = (int)$size;
+    $fallback_api = 'https://ui-avatars.com/api/?name=' . urlencode(trim((string)$name) ?: 'User') . '&background=2563eb&color=ffffff&bold=true&size=128';
 
     if ($url) {
-        return '<img src="' . e($url) . '" alt="' . e($name) . '" class="ts-avatar ' . e($extra_class) . '" style="width:' . $size_px . 'px; height:' . $size_px . 'px; border-radius:50%; object-fit:cover; border:2px solid #ffffff; box-shadow:0 2px 8px rgba(15,23,42,0.06); flex-shrink:0;">';
+        return '<img src="' . e($url) . '" alt="' . e($name) . '" loading="lazy" onerror="this.onerror=null;this.src=\'' . e($fallback_api) . '\';" class="ts-avatar ' . e($extra_class) . '" style="width:' . $size_px . 'px; height:' . $size_px . 'px; border-radius:50%; object-fit:cover; border:2px solid #ffffff; box-shadow:0 2px 8px rgba(15,23,42,0.08); flex-shrink:0; background:#e2e8f0;">';
     }
 
     // Fallback inisial dengan gradien modern
